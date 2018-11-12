@@ -18,21 +18,33 @@
 # Modified...:
 # see git revision history for more information on changes/updates
 # ---------------------------------------------------------------------------
+Get-DnsServerZone
+Test-DnsServer -IPAddress 10.0.0.4
+Test-DnsServer -IPAddress 10.0.0.4 -context DnsServer
+Write-Host 'Wait 300 seconds to get DNS Server ready...'
+Start-Sleep -Seconds 300
+Test-DnsServer -IPAddress 10.0.0.4
+Get-DnsServerZone
+
 # - Variables ---------------------------------------------------------------
 $adDomain = Get-ADDomain
 $domain = $adDomain.DNSRoot
 $domainDn = $adDomain.DistinguishedName
 # - EOF Variables -----------------------------------------------------------
 
-# add DNS Recoreds
+Write-Host 'Create reverse lookup zone...'
+# create reverse lookup zone
+Add-DnsServerPrimaryZone -NetworkID "10.0.0.0/24" -ReplicationScope "Forest"
+
+# add DNS Records
 Write-Host 'Update DNS records...'
 Remove-DnsServerResourceRecord -ZoneName $domain -RRType "A" -Name "ad" -Force
 Add-DnsServerResourceRecordA -Name "ad" -ZoneName $domain -AllowUpdateAny -IPv4Address "10.0.0.4" -TimeToLive 01:00:00
 Add-DnsServerResourceRecordA -Name "db" -ZoneName $domain -AllowUpdateAny -IPv4Address "10.0.0.3" -TimeToLive 01:00:00
 Add-DnsServerResourceRecordA -Name "oud" -ZoneName $domain -AllowUpdateAny -IPv4Address "10.0.0.5" -TimeToLive 01:00:00
 
-# create reverse lookup zone
-Add-DnsServerPrimaryZone -NetworkID "10.0.0.0/24" -ReplicationScope "Forest"
 Add-DnsServerResourceRecordPtr -Name "4" -ZoneName "0.0.10.in-addr.arpa" -AllowUpdateAny -TimeToLive 01:00:00 -AgeRecord -PtrDomainName "ad.$domain"
 Add-DnsServerResourceRecordPtr -Name "5" -ZoneName "0.0.10.in-addr.arpa" -AllowUpdateAny -TimeToLive 01:00:00 -AgeRecord -PtrDomainName "oud.$domain"
 Add-DnsServerResourceRecordPtr -Name "3" -ZoneName "0.0.10.in-addr.arpa" -AllowUpdateAny -TimeToLive 01:00:00 -AgeRecord -PtrDomainName "db.$domain"
+Write-Host 'Done configuring DNS Server'
+# --- EOF --------------------------------------------------------------------

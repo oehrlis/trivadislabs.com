@@ -21,6 +21,7 @@
 # - kerberos und cmu user
 # - ad language setting
 # - ad update
+# - install tools like putty, winscp, oracle client, shortcuts etc
 # - fix dns records config
 # - ad fix ip issue warning
 # - ad fix dns delegation issue

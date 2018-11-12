@@ -1,12 +1,31 @@
+# ---------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ---------------------------------------------------------------------------
+# Name.......: config_ca.ps1
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2018.09.27
+# Revision...: 
+# Purpose....: Script to configure Certification Autority
+# Notes......: ...
+# Reference..: https://github.com/StefanScherer/adfs2
+#              http://technet.microsoft.com/de-de/library/dd378937%28v=ws.10%29.aspx
+#              http://blogs.technet.com/b/heyscriptingguy/archive/2013/10/29/powertip-create-an-organizational-unit-with-powershell.aspx
+# License....: Licensed under the Universal Permissive License v 1.0 as 
+#              shown at http://oss.oracle.com/licenses/upl.
+# ---------------------------------------------------------------------------
+# Modified...:
+# see git revision history for more information on changes/updates
 # install the AD services and administration tools.
 Install-WindowsFeature ADCS-Cert-Authority -IncludeManagementTools
 
 $caCommonName = 'Example Enterprise Root CA'
 
 # configure the CA DN using the default DN suffix (which is based on the
-# current Windows Domain, example.com) to:
+# current Windows Domain, trivadislabs.com) to:
 #
-#   CN=Example Enterprise Root CA,DC=example,DC=com
+#   CN=Example Enterprise Root CA,DC=trivadislabs,DC=com
 #
 # NB to install a EnterpriseRootCa the current user must be on the
 #    Enterprise Admins group. 
@@ -36,7 +55,7 @@ dir Cert:\LocalMachine\My -DnsName $caCommonName `
 #   $domainDn = (Get-ADDomain).DistinguishedName
 #   $certificateTemplatesDn = "CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,$domainDn"
 #   ldifde -f c:/vagrant/rdpauth-certificate-template.ldif -d "CN=RDPAuth,$certificateTemplatesDn"
-(Get-Content c:/vagrant/provision/rdpauth-certificate-template.ldif) `
+(Get-Content c:/vagrant/scripts/rdpauth-certificate-template.ldif) `
     -replace 'when(Created|Changed):.+','' `
     -replace 'uSN(Created|Changed):.+','' `
     -replace 'objectGUID:.+','' `
@@ -50,7 +69,6 @@ Get-Content c:/tmp/machine-certificate-template-sd.ldif `
     | Select -Skip 2 `
     | Add-Content c:/tmp/rdpauth-certificate-template.ldif
 ldifde -f c:/tmp/rdpauth-certificate-template.ldif -i
-
 
 # add the template to the CA.
 #
@@ -73,7 +91,6 @@ while ($true) {
         Sleep 10
     }
 }
-
 
 # save the GPO before we do any changes.
 Get-GPOReport -All -ReportType Xml -Path c:/tmp/gpo-initial.xml
@@ -149,3 +166,4 @@ Set-GPRegistryValue `
 
 # save the GPO after we have changed it.
 Get-GPOReport -All -ReportType Xml -Path c:/tmp/gpo-final.xml
+# --- EOF --------------------------------------------------------------------

@@ -42,7 +42,8 @@ $password = ConvertTo-SecureString -AsPlainText 'LAB01schulung' -Force
 # - Configure Domain --------------------------------------------------------
 Import-Module ActiveDirectory
 
-# add People OU and import users
+# add People OU...
+Write-Host 'Add organizational units for departments...'
 NEW-ADOrganizationalUnit -name "People" -path $domainDn
 NEW-ADOrganizationalUnit -name "Senior Management" -path $usersAdPath
 NEW-ADOrganizationalUnit -name "Human Resources" -path $usersAdPath
@@ -51,14 +52,17 @@ NEW-ADOrganizationalUnit -name "Accounting" -path $usersAdPath
 NEW-ADOrganizationalUnit -name "Research" -path $usersAdPath
 NEW-ADOrganizationalUnit -name "Sales" -path $usersAdPath
 NEW-ADOrganizationalUnit -name "Operations" -path $usersAdPath
+
+#...and import users
+Write-Host 'Import users from CSV ...'
 Import-CSV -delimiter "," c:\vagrant\scripts\users_ad.csv | foreach {
     $Path = "ou=" + $_.Department + "," + $usersAdPath
-    $UserPrincipalName = "$_.SamAccountName" + "@" + $domain
+    $UserPrincipalName = $_.SamAccountName + "@" + $domain
     New-ADUser  -SamAccountName $_.SamAccountName  `
                 -GivenName $_.GivenName `
                 -Surname $_.Surname `
                 -Name $_.Name `
-                -UserPrincipalName "$_.SamAccountName@$domain" `
+                -UserPrincipalName $UserPrincipalName `
                 -DisplayName $_.Name `
                 -EmailAddress $_.mail `
                 -Title $_.Title `
@@ -68,7 +72,8 @@ Import-CSV -delimiter "," c:\vagrant\scripts\users_ad.csv | foreach {
                 -AccountPassword (ConvertTo-SecureString -AsPlainText $_.Password -Force) -Enabled $true
 }
 
-# set OU managedBy
+# Update OU and set managedBy
+Write-Host 'Add managed by to organizational units...'
 Set-ADOrganizationalUnit -Identity "ou=Senior Management,$usersAdPath" -ManagedBy king
 Set-ADOrganizationalUnit -Identity "ou=Human Resources,$usersAdPath" -ManagedBy rider
 Set-ADOrganizationalUnit -Identity "ou=Information Technology,$usersAdPath" -ManagedBy fleming
@@ -78,6 +83,7 @@ Set-ADOrganizationalUnit -Identity "ou=Sales,$usersAdPath" -ManagedBy moneypenny
 Set-ADOrganizationalUnit -Identity "ou=Operations,$usersAdPath" -ManagedBy leitner
 
 # create Trivadis LAB groups
+Write-Host 'Create Trivadis LAB groups...'
 NEW-ADOrganizationalUnit -name "Groups" -path $domainDn
 New-ADGroup -Name "Trivadis LAB Users" -SamAccountName "Trivadis LAB Users" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB Users" -Path $groupAdPath
 Add-ADGroupMember -Identity "Trivadis LAB Users" -Members lynd,rider,tanner,gartner,fleming,bond,walters,renton,leitner,blake,turner,ward,moneypenny,scott,smith,adams,ford,blofeld,miller,clark,king
@@ -95,3 +101,5 @@ New-ADGroup -Name "Trivadis LAB APP Admins" -SamAccountName "Trivadis LAB APP Ad
 
 New-ADGroup -Name "Trivadis LAB Management" -SamAccountName "Trivadis LAB Management" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB Management" -Path $groupAdPath
 Add-ADGroupMember -Identity "Trivadis LAB Management" -Members king,rider,fleming,clark,blofeld,moneypenny,leitner
+Write-Host 'Done configuring AD...'
+# --- EOF --------------------------------------------------------------------

@@ -1,3 +1,22 @@
+# ---------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ---------------------------------------------------------------------------
+# Name.......: install_ad.ps1
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2018.09.27
+# Revision...: 
+# Purpose....: Script to instal Active Directory Role
+# Notes......: ...
+# Reference..: https://github.com/StefanScherer/adfs2
+#              http://technet.microsoft.com/de-de/library/dd378937%28v=ws.10%29.aspx
+#              http://blogs.technet.com/b/heyscriptingguy/archive/2013/10/29/powertip-create-an-organizational-unit-with-powershell.aspx
+# License....: Licensed under the Universal Permissive License v 1.0 as 
+#              shown at http://oss.oracle.com/licenses/upl.
+# ---------------------------------------------------------------------------
+# Modified...:
+# see git revision history for more information on changes/updates
 param ([String] $ip)
 
 $domain = 'trivadislabs.com'
@@ -51,3 +70,4 @@ if ((gwmi win32_computersystem).partofdomain -eq $false) {
     $adapters | ForEach-Object {$_.SetDNSServerSearchOrder($newDNSServers)}
   }
 }
+# --- EOF --------------------------------------------------------------------
