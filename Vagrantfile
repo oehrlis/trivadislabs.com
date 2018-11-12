@@ -23,6 +23,9 @@
 # - kerberos und cmu user
 # - CA setup
 # - system registration DNS
+# - ad language setting
+# - ad update
+# - domain as parameter
 
 # - Customization -----------------------------------------------------------
 # Domain Controller

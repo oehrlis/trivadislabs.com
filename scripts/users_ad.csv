@@ -1,4 +1,4 @@
-GivenName,Surname,Name,SamAccountName,Password,domain,mail,company,title,department,manager,telephoneNumber
+GivenName,Surname,Name,SamAccountName,Password,Domain,Mail,Company,Title,Department,Manager,telephoneNumber
 Andy,Renton,Andy Renton,renton,LAB01schulung,trivadislabs.com,andy.renton@trivadislabs.com,Trivadis LAB,Clerk,Operations,"cn=Felix Leitner,ou=People,dc=trivadislabs,dc=com",
 Ben,King,Ben King,king,LAB01schulung,trivadislabs.com,ben.king@trivadislabs.com,Trivadis LAB,President,Senior Management,,
 Douglas,Adams,Douglas Adams,adams,LAB01schulung,trivadislabs.com,douglas.adams@trivadislabs.com,Trivadis LAB,Clerk,Research,"cn=Ernst Blofeld,ou=People,dc=trivadislabs,dc=com",

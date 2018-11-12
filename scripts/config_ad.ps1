@@ -1,94 +1,51 @@
 # http://technet.microsoft.com/de-de/library/dd378937%28v=ws.10%29.aspx
 # http://blogs.technet.com/b/heyscriptingguy/archive/2013/10/29/powertip-create-an-organizational-unit-with-powershell.aspx
 
+
+$BaseDN = 'dc=trivadislabs,dc=com'
+
 Import-Module ActiveDirectory
-NEW-ADOrganizationalUnit -name "Groups"
 
-NEW-ADOrganizationalUnit -name "People"
-
+# add People OU and import users
+NEW-ADOrganizationalUnit -name "People" -path $BaseDN
+NEW-ADOrganizationalUnit -name "Senior Management" -path "ou=People,dc=trivadislabs,dc=com"
+NEW-ADOrganizationalUnit -name "Human Resources" -path "ou=People,dc=trivadislabs,dc=com"
+NEW-ADOrganizationalUnit -name "Information Technology" -path "ou=People,dc=trivadislabs,dc=com" 
+NEW-ADOrganizationalUnit -name "Accounting" -path "ou=People,dc=trivadislabs,dc=com"
+NEW-ADOrganizationalUnit -name "Research" -path "ou=People,dc=trivadislabs,dc=com"
+NEW-ADOrganizationalUnit -name "Sales" -path "ou=People,dc=trivadislabs,dc=com"
+NEW-ADOrganizationalUnit -name "Operations" -path "ou=People,dc=trivadislabs,dc=com"
 Import-CSV -delimiter "," c:\vagrant\scripts\users_ad.csv | foreach {
-  New-ADUser -SamAccountName $_.SamAccountName -GivenName $_.GivenName -Surname $_.Surname -Name $_.Name -EmailAddress $_.mail -Title $_.title -Company $_.company -Department $_.department `
-             -Path "ou=People,dc=trivadislabs,dc=com" `
+    $Path = "ou=" + $_.Department + ",ou=People,dc=trivadislabs,dc=com"
+    New-ADUser -SamAccountName $_.SamAccountName -GivenName $_.GivenName -Surname $_.Surname -Name $_.Name -EmailAddress $_.mail -Title $_.Title -Company $_.Company -Department $_.Department `
+             -Path $Path `
              -AccountPassword (ConvertTo-SecureString -AsPlainText $_.Password -Force) -Enabled $true
 }
 
-New-ADGroup -Name "Human Resources" -SamAccountName "Human Resources" -GroupCategory Security -GroupScope Global -DisplayName "Human Resources" -Path "OU=Groups,DC=trivadislabs,DC=com"
-Add-ADGroupMember -Identity "Human Resources" -Member lynd
-Add-ADGroupMember -Identity "Human Resources" -Member rider
+# set OU managedBy
+Set-ADOrganizationalUnit -Identity "ou=Senior Management,ou=People,dc=trivadislabs,dc=com" -ManagedBy king
+Set-ADOrganizationalUnit -Identity "ou=Human Resources,ou=People,dc=trivadislabs,dc=com" -ManagedBy rider
+Set-ADOrganizationalUnit -Identity "ou=Information Technology,ou=People,dc=trivadislabs,dc=com" -ManagedBy fleming
+Set-ADOrganizationalUnit -Identity "ou=Accounting,ou=People,dc=trivadislabs,dc=com" -ManagedBy clark
+Set-ADOrganizationalUnit -Identity "ou=Research,ou=People,dc=trivadislabs,dc=com" -ManagedBy blofeld
+Set-ADOrganizationalUnit -Identity "ou=Sales,ou=People,dc=trivadislabs,dc=com" -ManagedBy moneypenny
+Set-ADOrganizationalUnit -Identity "ou=Operations,ou=People,dc=trivadislabs,dc=com" -ManagedBy leitner
 
-New-ADGroup -Name "Information Technology" -SamAccountName "Information Technology" -GroupCategory Security -GroupScope Global -DisplayName "Information Technology" -Path "OU=Groups,DC=trivadislabs,DC=com"
-Add-ADGroupMember -Identity "Information Technology" -Member tanner
-Add-ADGroupMember -Identity "Information Technology" -Member gartner
-Add-ADGroupMember -Identity "Information Technology" -Member fleming
-
+# create Trivadis LAB groups
+NEW-ADOrganizationalUnit -name "Groups" -path "dc=trivadislabs,dc=com"
 New-ADGroup -Name "Trivadis LAB Users" -SamAccountName "Trivadis LAB Users" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB Users" -Path "OU=Groups,DC=trivadislabs,DC=com"
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member lynd
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member rider
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member tanner
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member gartner
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member fleming
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member bond
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member walters
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member renton
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member leitner
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member blake
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member turner
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member ward
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member moneypenny
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member scott
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member smith
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member adams
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member ford
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member blofeld
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member miller
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member clark
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Member king
+Add-ADGroupMember -Identity "Trivadis LAB Users" -Members lynd,rider,tanner,gartner,fleming,bond,walters,renton,leitner,blake,turner,ward,moneypenny,scott,smith,adams,ford,blofeld,miller,clark,king
 
 New-ADGroup -Name "Trivadis LAB DB Admins" -SamAccountName "Trivadis LAB DB Admins" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB DB Admins" -Path "OU=Groups,DC=trivadislabs,DC=com"
-Add-ADGroupMember -Identity "Trivadis LAB DB Admins" -Member gartner
-Add-ADGroupMember -Identity "Trivadis LAB DB Admins" -Member fleming
+Add-ADGroupMember -Identity "Trivadis LAB DB Admins" -Members gartner,fleming
 
 New-ADGroup -Name "Trivadis LAB Developers" -SamAccountName "Trivadis LAB Developers" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB Developers" -Path "OU=Groups,DC=trivadislabs,DC=com"
-Add-ADGroupMember -Identity "Trivadis LAB Developers" -Member scott
-Add-ADGroupMember -Identity "Trivadis LAB Developers" -Member smith
-Add-ADGroupMember -Identity "Trivadis LAB Developers" -Member adams
-Add-ADGroupMember -Identity "Trivadis LAB Developers" -Member ford
-Add-ADGroupMember -Identity "Trivadis LAB Developers" -Member blofeld
+Add-ADGroupMember -Identity "Trivadis LAB Developers" -Members scott,smith,adams,ford,blofeld
 
 New-ADGroup -Name "Trivadis LAB System Admins" -SamAccountName "Trivadis LAB System Admins" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB System Admins" -Path "OU=Groups,DC=trivadislabs,DC=com"
-Add-ADGroupMember -Identity "Trivadis LAB System Admins" -Member tanner
-Add-ADGroupMember -Identity "Trivadis LAB System Admins" -Member fleming
+Add-ADGroupMember -Identity "Trivadis LAB System Admins" -Members tanner,fleming
 
 New-ADGroup -Name "Trivadis LAB APP Admins" -SamAccountName "Trivadis LAB APP Admins" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB APP Admins" -Path "OU=Groups,DC=trivadislabs,DC=com"
 
-New-ADGroup -Name "Accounting" -SamAccountName "Accounting" -GroupCategory Security -GroupScope Global -DisplayName "Accounting" -Path "OU=Groups,DC=trivadislabs,DC=com"
-Add-ADGroupMember -Identity "Accounting" -Member miller
-Add-ADGroupMember -Identity "Accounting" -Member clark
-
-New-ADGroup -Name "Research" -SamAccountName "Research" -GroupCategory Security -GroupScope Global -DisplayName "Research" -Path "OU=Groups,DC=trivadislabs,DC=com"
-Add-ADGroupMember -Identity "Research" -Member scott
-Add-ADGroupMember -Identity "Research" -Member smith
-Add-ADGroupMember -Identity "Research" -Member adams
-Add-ADGroupMember -Identity "Research" -Member ford
-Add-ADGroupMember -Identity "Research" -Member blofeld
-
-New-ADGroup -Name "Sales" -SamAccountName "Sales" -GroupCategory Security -GroupScope Global -DisplayName "Sales" -Path "OU=Groups,DC=trivadislabs,DC=com"
-Add-ADGroupMember -Identity "Sales" -Member blake
-Add-ADGroupMember -Identity "Sales" -Member turner
-Add-ADGroupMember -Identity "Sales" -Member ward
-Add-ADGroupMember -Identity "Sales" -Member moneypenny
-
-New-ADGroup -Name "Operations" -SamAccountName "Operations" -GroupCategory Security -GroupScope Global -DisplayName "Operations" -Path "OU=Groups,DC=trivadislabs,DC=com"
-Add-ADGroupMember -Identity "Operations" -Member bond
-Add-ADGroupMember -Identity "Operations" -Member walters
-Add-ADGroupMember -Identity "Operations" -Member renton
-Add-ADGroupMember -Identity "Operations" -Member leitner
-
-New-ADGroup -Name "Senior Management" -SamAccountName "Senior Management" -GroupCategory Security -GroupScope Global -DisplayName "Senior Management" -Path "OU=Groups,DC=trivadislabs,DC=com"
-Add-ADGroupMember -Identity "Senior Management" -Member king
-Add-ADGroupMember -Identity "Senior Management" -Member rider
-Add-ADGroupMember -Identity "Senior Management" -Member fleming
-Add-ADGroupMember -Identity "Senior Management" -Member clark
-Add-ADGroupMember -Identity "Senior Management" -Member blofeld
-Add-ADGroupMember -Identity "Senior Management" -Member moneypenny
-Add-ADGroupMember -Identity "Senior Management" -Member leitner
+New-ADGroup -Name "Trivadis LAB Management" -SamAccountName "Trivadis LAB Management" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB Management" -Path "OU=Groups,DC=trivadislabs,DC=com"
+Add-ADGroupMember -Identity "Trivadis LAB Management" -Members king,rider,fleming,clark,blofeld,moneypenny,leitner
