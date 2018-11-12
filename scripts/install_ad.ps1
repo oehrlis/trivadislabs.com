@@ -9,7 +9,7 @@ if ((gwmi win32_computersystem).partofdomain -eq $false) {
 
   Write-Host 'Installing RSAT tools'
   Import-Module ServerManager
-  Add-WindowsFeature RSAT-AD-PowerShell,RSAT-AD-AdminCenter
+  Add-WindowsFeature RSAT-AD-PowerShell,RSAT-AD-AdminCenter,RSAT-ADDS-Tools
 
   Write-Host 'Creating domain controller'
   # Disable password complexity policy
@@ -27,7 +27,7 @@ if ((gwmi win32_computersystem).partofdomain -eq $false) {
   $PlainPassword = "LAB01schulung" # "P@ssw0rd"
   $SecurePassword = $PlainPassword | ConvertTo-SecureString -AsPlainText -Force
 
-  # Windows Server 2012 R2
+  # Create AD Forest for Windows Server 2012 R2
   Install-WindowsFeature AD-domain-services
   Import-Module ADDSDeployment
   Install-ADDSForest `

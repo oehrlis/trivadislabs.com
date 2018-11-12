@@ -10,7 +10,7 @@
 # Revision...:  
 # Purpose....: Vagrant file to setup and configure ad.trivadislabs.com
 # Notes......: 
-# Reference..: --
+# Reference..: https://github.com/rgl/windows-domain-controller-vagrant
 # License....: Licensed under the Universal Permissive License v 1.0 as 
 #              shown at http://oss.oracle.com/licenses/upl.
 # ---------------------------------------------------------------------------
@@ -19,13 +19,13 @@
 # ---------------------------------------------------------------------------
 # TODO:
 # - DNS config db,oud, ad
-# - Domain setup
 # - kerberos und cmu user
-# - CA setup
-# - system registration DNS
 # - ad language setting
 # - ad update
+# - ad fix ip issue warning
+# - ad fix dns delegation issue
 # - domain as parameter
+# - AD ssh server https://www.ntweekly.com/2017/12/22/install-openssh-windows-server-2016-1709/
 
 # - Customization -----------------------------------------------------------
 # Domain Controller
@@ -69,6 +69,7 @@ Vagrant.configure("2") do |config|
         cfg.vm.provision "shell", path: "scripts/install_ad.ps1", privileged: false
         cfg.vm.provision "reload"
         cfg.vm.provision "shell", path: "scripts/config_ad.ps1", privileged: false
+        cfg.vm.provision "shell", path: "scripts/config_ca.ps1", privileged: false
         cfg.vm.provision "shell", path: "scripts/sum_ad.ps1", privileged: false
     end
 
