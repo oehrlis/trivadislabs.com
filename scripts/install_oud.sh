@@ -77,7 +77,7 @@ usermod -a -G vagrant oracle
 NAMESERVER=$(grep -i nameserver /etc/resolv.conf|grep -iv 10.0.0.4)
 echo "search trivadislabs.com" >/etc/resolv.conf
 echo "nameserver 10.0.0.4">>/etc/resolv.conf
-echo $NAMESERVER >>>>/etc/resolv.conf
+echo $NAMESERVER >>/etc/resolv.conf
 
 echo "--- Setup Java --------------------------------------------------------"
 # Setup Java
