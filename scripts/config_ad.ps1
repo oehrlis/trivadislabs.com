@@ -25,8 +25,8 @@ while ($true) {
         Get-ADDomain | Out-Null
         break
     } catch {
-        Write-Host 'Wait 20 seconds to get AD Domain ready...'
-        Start-Sleep -Seconds 20
+        Write-Host 'Wait 30 seconds to get AD Domain ready...'
+        Start-Sleep -Seconds 30
     }
 }
 
@@ -95,13 +95,3 @@ New-ADGroup -Name "Trivadis LAB APP Admins" -SamAccountName "Trivadis LAB APP Ad
 
 New-ADGroup -Name "Trivadis LAB Management" -SamAccountName "Trivadis LAB Management" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB Management" -Path $groupAdPath
 Add-ADGroupMember -Identity "Trivadis LAB Management" -Members king,rider,fleming,clark,blofeld,moneypenny,leitner
-
-# add DNS Recoreds
-Add-DnsServerPrimaryZone -NetworkID "10.0.0.0/24" -ReplicationScope "Forest" 
-Add-DnsServerResourceRecordA -Name "db" -ZoneName $domain -AllowUpdateAny -IPv4Address "10.0.0.3" -TimeToLive 01:00:00
-Add-DnsServerResourceRecordA -Name "oud" -ZoneName $domain -AllowUpdateAny -IPv4Address "10.0.0.5" -TimeToLive 01:00:00
-
-Add-DnsServerResourceRecordPtr -Name "4" -ZoneName "0.0.10.in-addr.arpa" -AllowUpdateAny -TimeToLive 01:00:00 -AgeRecord -PtrDomainName "ad.$domain"
-Add-DnsServerResourceRecordPtr -Name "5" -ZoneName "0.0.10.in-addr.arpa" -AllowUpdateAny -TimeToLive 01:00:00 -AgeRecord -PtrDomainName "oud.$domain"
-Add-DnsServerResourceRecordPtr -Name "3" -ZoneName "0.0.10.in-addr.arpa" -AllowUpdateAny -TimeToLive 01:00:00 -AgeRecord -PtrDomainName "db.$domain"
-Add-DnsServerResourceRecordPtr -Name "6" -ZoneName "0.0.10.in-addr.arpa" -AllowUpdateAny -TimeToLive 01:00:00 -AgeRecord -PtrDomainName "db1.$domain"

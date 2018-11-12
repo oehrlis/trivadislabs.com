@@ -75,6 +75,12 @@ echo "--- Configure OS ------------------------------------------------------"
 # add Oracle to vagrant group to allow sudo
 usermod -a -G vagrant oracle
 
+# manual set resolve conf
+NAMESERVER=$(grep -i nameserver /etc/resolv.conf|grep -iv 10.0.0.4)
+echo "search trivadislabs.com" >/etc/resolv.conf
+echo "nameserver 10.0.0.4">>/etc/resolv.conf
+echo $NAMESERVER >>>>/etc/resolv.conf
+
 echo "--- Setup DB ----------------------------------------------------------"
 echo "--- Oracle 18.4.0.0 ---------------------------------------------------"
 # Install DB Software
@@ -113,6 +119,9 @@ echo "--- Configure Oracle Service ------------------------------------------"
 cp ${ORACLE_BASE}/local/dba/etc/oracle.service /usr/lib/systemd/system/
 systemctl --system daemon-reload
 systemctl enable oracle
+
+# change all DB to autostart in oratab
+sed -i "s/N$/Y/" /etc/oratab
 
 echo "--- Done configure db.trivadislabs.com --------------------------------"
 # --- EOF --------------------------------------------------------------------

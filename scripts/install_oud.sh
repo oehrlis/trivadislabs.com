@@ -73,6 +73,12 @@ echo "--- Configure OS ------------------------------------------------------"
 # add Oracle to vagrant group to allow sudo
 usermod -a -G vagrant oracle
 
+# manual set resolve conf
+NAMESERVER=$(grep -i nameserver /etc/resolv.conf|grep -iv 10.0.0.4)
+echo "search trivadislabs.com" >/etc/resolv.conf
+echo "nameserver 10.0.0.4">>/etc/resolv.conf
+echo $NAMESERVER >>>>/etc/resolv.conf
+
 echo "--- Setup Java --------------------------------------------------------"
 # Setup Java
 su -l oracle -c "${ORADBA_BIN}/${SETUP_JAVA}"

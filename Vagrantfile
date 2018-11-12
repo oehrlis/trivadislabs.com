@@ -18,10 +18,10 @@
 # see git revision history for more information on changes/updates
 # ---------------------------------------------------------------------------
 # TODO:
-# - DNS config db,oud, ad
 # - kerberos und cmu user
 # - ad language setting
 # - ad update
+# - fix dns records config
 # - ad fix ip issue warning
 # - ad fix dns delegation issue
 # - domain as parameter
@@ -69,6 +69,7 @@ Vagrant.configure("2") do |config|
         cfg.vm.provision "shell", path: "scripts/install_ad.ps1", privileged: false
         cfg.vm.provision "reload"
         cfg.vm.provision "shell", path: "scripts/config_ad.ps1", privileged: false
+        cfg.vm.provision "shell", path: "scripts/config_dns.ps1", privileged: false
         cfg.vm.provision "shell", path: "scripts/config_ca.ps1", privileged: false
         cfg.vm.provision "shell", path: "scripts/sum_ad.ps1", privileged: false
     end
