@@ -31,8 +31,6 @@ Add-DnsServerResourceRecordA -Name "ad" -ZoneName $domain -AllowUpdateAny -IPv4A
 Add-DnsServerResourceRecordA -Name "db" -ZoneName $domain -AllowUpdateAny -IPv4Address "10.0.0.3" -TimeToLive 01:00:00
 Add-DnsServerResourceRecordA -Name "oud" -ZoneName $domain -AllowUpdateAny -IPv4Address "10.0.0.5" -TimeToLive 01:00:00
 
-Write-Host 'Wait 120 seconds before trying to set reverse lookup zone...'
-Start-Sleep -Seconds 120
 # create reverse lookup zone
 Add-DnsServerPrimaryZone -NetworkID "10.0.0.0/24" -ReplicationScope "Forest"
 Add-DnsServerResourceRecordPtr -Name "4" -ZoneName "0.0.10.in-addr.arpa" -AllowUpdateAny -TimeToLive 01:00:00 -AgeRecord -PtrDomainName "ad.$domain"
