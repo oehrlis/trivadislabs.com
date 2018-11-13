@@ -14,3 +14,8 @@
 /.vscode
 /.vagrant
 **/*.code-workspace
+scripts/opwdintg.exe
+stage/PatchSearch.xml
+scripts/db.trivadislabs.com.keytab
+scripts/opwdintg.exe
+scripts/ad.trivadislabs.com_root_ca.cer

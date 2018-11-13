@@ -22,12 +22,14 @@
 # - ad language setting
 # - ad update
 # - install tools like putty, winscp, oracle client, shortcuts etc
-# - fix dns records config
 # - ad fix ip issue warning
 # - ad fix dns delegation issue
 # - domain as parameter
 # - AD ssh server https://www.ntweekly.com/2017/12/22/install-openssh-windows-server-2016-1709/
-
+# - Finish CA configuration
+# - configure SQLNet (sqlnet.ora, ldap.ora, tnsnames.ora, dsi.ora)
+# - set full qualified domain name for db server
+# - fix db startup
 # - Customization -----------------------------------------------------------
 # Domain Controller
 AD = "ad"
@@ -96,8 +98,8 @@ Vagrant.configure("2") do |config|
         cfg.vm.network :forwarded_port, guest: 22,   host: 2223
         cfg.vm.network :forwarded_port, guest: 1521, host: 1521
         cfg.vm.network :forwarded_port, guest: 5500, host: 5500
-        cfg.vm.network :private_network, ip: "10.0.0.3", auto_config: false
-
+        #cfg.vm.network :private_network, ip: "10.0.0.3", auto_config: false
+        cfg.vm.network :private_network, ip: "10.0.0.3"
         # Provision everything on the first run
         cfg.vm.provision "shell", path: "scripts/install_db.sh", env:
             {
@@ -134,7 +136,8 @@ Vagrant.configure("2") do |config|
         cfg.vm.network :forwarded_port, guest: 8080, host: 8080
         cfg.vm.network :forwarded_port, guest: 10443, host: 10443
         cfg.vm.network :forwarded_port, guest: 8444, host: 8444
-        cfg.vm.network :private_network, ip: "10.0.0.5", auto_config: false
+        #cfg.vm.network :private_network, ip: "10.0.0.5", auto_config: false
+        cfg.vm.network :private_network, ip: "10.0.0.5"
 
         # Provision everything on the first run
         cfg.vm.provision "shell", path: "scripts/install_oud.sh", env:
