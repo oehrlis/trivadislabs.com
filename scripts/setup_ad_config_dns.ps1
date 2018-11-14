@@ -2,7 +2,7 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: config_ad.ps1
+# Name.......: setup_ad_config_ad.ps1
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2018.09.27
@@ -18,13 +18,9 @@
 # Modified...:
 # see git revision history for more information on changes/updates
 # ---------------------------------------------------------------------------
-Get-DnsServerZone
-Test-DnsServer -IPAddress 10.0.0.4
-Test-DnsServer -IPAddress 10.0.0.4 -context DnsServer
-Write-Host 'Wait 300 seconds to get DNS Server ready...'
-Start-Sleep -Seconds 300
-Test-DnsServer -IPAddress 10.0.0.4
-Get-DnsServerZone
+
+Write-Host 'Wait 200 seconds to get DNS Server ready...'
+Start-Sleep -Seconds 200
 
 # - Variables ---------------------------------------------------------------
 $adDomain = Get-ADDomain

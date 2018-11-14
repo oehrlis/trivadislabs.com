@@ -2,7 +2,7 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: config_ad.ps1
+# Name.......: setup_ad_config_ad.ps1
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2018.09.27
@@ -58,18 +58,19 @@ Write-Host 'Import users from CSV ...'
 Import-CSV -delimiter "," c:\vagrant\scripts\users_ad.csv | foreach {
     $Path = "ou=" + $_.Department + "," + $usersAdPath
     $UserPrincipalName = $_.SamAccountName + "@" + $domain
+    $eMail = $_.GivenName + "." + $_.Surname + "@" + $domain
     New-ADUser  -SamAccountName $_.SamAccountName  `
                 -GivenName $_.GivenName `
                 -Surname $_.Surname `
                 -Name $_.Name `
                 -UserPrincipalName $UserPrincipalName `
                 -DisplayName $_.Name `
-                -EmailAddress $_.mail `
+                -EmailAddress $eMail `
                 -Title $_.Title `
                 -Company $_.Company `
                 -Department $_.Department `
                 -Path $Path `
-                -AccountPassword (ConvertTo-SecureString -AsPlainText $_.Password -Force) -Enabled $true
+                -AccountPassword $password -Enabled $true
 }
 
 # Update OU and set managedBy

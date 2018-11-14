@@ -1,0 +1,33 @@
+# ---------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ---------------------------------------------------------------------------
+# Name.......: sqlnet.ora 
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2018.11.14
+# Revision...: 
+# Purpose....: SQLNet configuration file.
+# Notes......: 
+# Reference..: --
+# License....: Licensed under the Universal Permissive License v 1.0 as 
+#              shown at http://oss.oracle.com/licenses/upl.
+# ---------------------------------------------------------------------------
+# Modified...:
+# see git revision history for more information on changes/updates
+# ---------------------------------------------------------------------------
+
+
+
+##########################################################################
+# Kerberos Configuration
+##########################################################################
+# SQLNET.AUTHENTICATION_SERVICES = (BEQ,KERBEROS5)
+# SQLNET.FALLBACK_AUTHENTICATION = TRUE
+# SQLNET.KERBEROS5_KEYTAB = /u00/app/oracle/network/admin/db.trivadislabs.com.keytab
+# SQLNET.KERBEROS5_REALMS = /u00/app/oracle/network/admin/krb.realms
+# SQLNET.KERBEROS5_CC_NAME = /u00/app/oracle/network/admin/krbcache
+# SQLNET.KERBEROS5_CONF = /u00/app/oracle/network/admin/krb5.conf
+# SQLNET.KERBEROS5_CONF_MIT=TRUE
+# SQLNET.AUTHENTICATION_KERBEROS5_SERVICE = oracle
+# --- EOF --------------------------------------------------------------------

@@ -3,7 +3,7 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: install.sh 
+# Name.......: setup_oud_part2.sh 
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2018.09.27
@@ -32,13 +32,10 @@ export ORACLE_SID2=${ORACLE_SID2:-"TDB122A"}
 export ORADBA_TEMPLATE_PREFIX=${ORADBA_TEMPLATE_PREFIX:-"custom_"}
 # - End of Customization ----------------------------------------------------
 # - Environment Variables ---------------------------------------------------
-export OPT_DIR="/opt"
 export ORADBA_BIN="/opt/oradba/bin"
+export VAGRANT_SCRIPTS="/vagrant/scripts"
 # define variables for OS setup
 DOWNLOAD="/tmp/download"
-GITHUB_URL="https://github.com/oehrlis/oradba_init/raw/master/bin"
-SETUP_INIT="00_setup_oradba_init.sh"
-SETUP_OS="01_setup_os_db.sh"
 SETUP_DB_184="10_setup_db_18.4.sh"
 SETUP_DB_122="10_setup_db_12.2.sh"
 SETUP_BASENV="20_setup_basenv.sh"
@@ -51,38 +48,9 @@ TVD_HR="@/vagrant/sql/tvd_hr_main.sql tvd_hr users temp /tmp"
 # - EOF Functions -----------------------------------------------------------
 
 # - Main --------------------------------------------------------------------
-echo "--- Prepare OraDBA init setup -----------------------------------------"
-# prepare a download directory
-mkdir -p ${DOWNLOAD}
 
-# get the latest install script for OraDBA init from GitHub repository
-curl -Lsf ${GITHUB_URL}/${SETUP_INIT} -o ${DOWNLOAD}/${SETUP_INIT}
-
-# install the OraDBA init scripts
-chmod 755 ${DOWNLOAD}/${SETUP_INIT}
-${DOWNLOAD}/${SETUP_INIT}
-
-# link stage to vagrant stage folder
-rm -rf /opt/stage
-ln -s /vagrant/stage /opt/stage
-cd ${DOWNLOAD}
-
-echo "--- Setup OS ----------------------------------------------------------"
-# Setup OS
-${ORADBA_BIN}/${SETUP_OS}
-
-echo "--- Configure OS ------------------------------------------------------"
-# add Oracle to vagrant group to allow sudo
-usermod -a -G vagrant oracle
-
-# manual set resolve conf
-NAMESERVER=$(grep -i nameserver /etc/resolv.conf|grep -iv 10.0.0.4)
-echo "search trivadislabs.com" >/etc/resolv.conf
-echo "nameserver 10.0.0.4">>/etc/resolv.conf
-echo $NAMESERVER >>/etc/resolv.conf
-
-echo "--- Setup DB ----------------------------------------------------------"
-echo "--- Oracle 18.4.0.0 ---------------------------------------------------"
+echo "--- Start DB setup part 2 ---------------------------------------------"
+echo "--- Install Oracle 18.4.0.0 -------------------------------------------"
 # Install DB Software
 su -l oracle -c "${ORADBA_BIN}/${SETUP_DB_184}"
 
@@ -90,25 +58,32 @@ su -l oracle -c "${ORADBA_BIN}/${SETUP_DB_184}"
 /u00/app/oraInventory/orainstRoot.sh
 ${ORACLE_BASE}/product/18.4.0.0/root.sh
 
-echo "--- Oracle 12.2.0.1 ---------------------------------------------------"
+echo "--- Install Oracle 12.2.0.1 -------------------------------------------"
 # Install DB Software
 su -l oracle -c "${ORADBA_BIN}/${SETUP_DB_122}"
 
 # root scripts
 ${ORACLE_BASE}/product/12.2.0.1/root.sh
 
-echo "--- TVD-Basenv --------------------------------------------------------"
+echo "--- Install TVD-Basenv ------------------------------------------------"
 # Install TVD-Basenv
 su -l oracle -c "${ORADBA_BIN}/${SETUP_BASENV}"
 
-echo "--- Create 18.4.0.0 ---------------------------------------------------"
+# copy network files
+for i in sqlnet.ora ldap.ora tnsnames.ora dsi.ora krb5.conf; do
+    if [ -f "${VAGRANT_SCRIPTS}/$i" ]; then
+        su -l oracle -c "cp -v ${VAGRANT_SCRIPTS}/$i ${ORACLE_BASE}/network/admin"
+    fi
+done
+
+echo "--- Create DB TDB184A (18.4.0.0) --------------------------------------"
 # Create DB 18.4.0.0
 su -l oracle -c " . ${ORAENV} rdbms18000; ${ORADBA_BIN}/${CREATE_DB} ${ORACLE_SID1} ${ORACLE_PDB} ${CONTAINER}"
 
 # install the TVD_HR schema
 su -l oracle -c " . ${ORAENV} ${ORACLE_SID1}; sqlplus \"/ as sysdba\" $TVD_HR"
 
-echo "--- Create 12.2.0.1 ---------------------------------------------------"
+echo "--- Create DB TDB224A (12.2.0.1) --------------------------------------"
 # Create DB 12.2.0.1
 su -l oracle -c " . ${ORAENV} rdbms12201; ${ORADBA_BIN}/${CREATE_DB} ${ORACLE_SID2} ${ORACLE_PDB} ${CONTAINER}"
 
@@ -122,6 +97,6 @@ systemctl enable oracle
 
 # change all DB to autostart in oratab
 sed -i "s/N$/Y/" /etc/oratab
-
-echo "--- Done configure db.trivadislabs.com --------------------------------"
+echo "--- Finished OUD setup part 2 -----------------------------------------"
+echo "--- Finished setup VM $(hostname) -------------------------------------"
 # --- EOF --------------------------------------------------------------------

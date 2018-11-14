@@ -1,0 +1,22 @@
+# ---------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ---------------------------------------------------------------------------
+# Name.......: krb5.conf 
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2018.11.14
+# Revision...: 
+# Purpose....: CMU configuration file for SQLNet.
+# Notes......: 
+# Reference..: --
+# License....: Licensed under the Universal Permissive License v 1.0 as 
+#              shown at http://oss.oracle.com/licenses/upl.
+# ---------------------------------------------------------------------------
+# Modified...:
+# see git revision history for more information on changes/updates
+# ---------------------------------------------------------------------------
+#DSI_DIRECTORY_SERVERS = (ad.trivadislabs.com:389:636)
+#DSI_DEFAULT_ADMIN_CONTEXT = "dc=trivadislabs,dc=com"
+#DSI_DIRECTORY_SERVER_TYPE = AD
+# --- EOF --------------------------------------------------------------------

@@ -3,12 +3,12 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: install_oud.sh 
+# Name.......: setup_db_part1.sh
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2018.09.27
 # Revision...: 
-# Purpose....: Script to initialize and install Vagrant box oud.trivadislabs.com.
+# Purpose....: Script to initialize and install Vagrant box db.trivadislabs.com.
 # Notes......: ...
 # Reference..: --
 # License....: Licensed under the Universal Permissive License v 1.0 as 
@@ -19,17 +19,7 @@
 # ---------------------------------------------------------------------------
 # - Customization -----------------------------------------------------------
 # - just add/update any kind of customized environment variable here
-export ORACLE_ROOT=${ORACLE_ROOT:-"/u00"}   # root folder for ORACLE_BASE and binaries
-export ORACLE_DATA=${ORACLE_DATA:-"/u01"}   # Oracle data folder eg volume for docker
-export ORACLE_ARCH=${ORACLE_ARCH:-"/u02"}   # Oracle arch folder eg volume for docker
-export DEFAULT_DOMAIN=${DEFAULT_DOMAIN:-"trivadislabs.com"} 
-export ORACLE_BASE=${ORACLE_BASE:-${ORACLE_ROOT}/app/oracle}
-export ORACLE_INVENTORY=${ORACLE_INVENTORY:-${ORACLE_ROOT}/app/oraInventory}
-export PORT=${PORT:-1521}
-export PORT_CONSOLE=${PORT_CONSOLE:-5500}
-export ORACLE_SID1=${ORACLE_SID1:-"TDB184A"}
-export ORACLE_SID2=${ORACLE_SID2:-"TDB122A"}
-export ORADBA_TEMPLATE_PREFIX=${ORADBA_TEMPLATE_PREFIX:-"custom_"}
+export AD_IP_ADDRESS=${AD_IP_ADDRESS:-"10.0.0.4"} 
 # - End of Customization ----------------------------------------------------
 # - Environment Variables ---------------------------------------------------
 export OPT_DIR="/opt"
@@ -38,17 +28,14 @@ export ORADBA_BIN="/opt/oradba/bin"
 DOWNLOAD="/tmp/download"
 GITHUB_URL="https://github.com/oehrlis/oradba_init/raw/master/bin"
 SETUP_INIT="00_setup_oradba_init.sh"
-SETUP_OS="01_setup_os_oud.sh"
-SETUP_JAVA="01_setup_os_java.sh"
-SETUP_OUD="10_setup_oud_12c.sh"
-SETUP_OUDSM="10_setup_oudsm_12c.sh"
-SETUP_OUDBASE="20_setup_oudbase.sh"
-
+SETUP_OS="01_setup_os_db.sh"
 # - EOF Environment Variables -----------------------------------------------
 # - Functions ---------------------------------------------------------------
 # - EOF Functions -----------------------------------------------------------
 
 # - Main --------------------------------------------------------------------
+echo "--- Start DB setup ----------------------------------------------------"
+echo "--- Start DB setup part 1 ---------------------------------------------"
 echo "--- Prepare OraDBA init setup -----------------------------------------"
 # prepare a download directory
 mkdir -p ${DOWNLOAD}
@@ -63,7 +50,7 @@ ${DOWNLOAD}/${SETUP_INIT}
 # link stage to vagrant stage folder
 rm -rf /opt/stage
 ln -s /vagrant/stage /opt/stage
-cd ${DOWNLOAD}
+cd /tmp
 
 echo "--- Setup OS ----------------------------------------------------------"
 # Setup OS
@@ -73,25 +60,20 @@ echo "--- Configure OS ------------------------------------------------------"
 # add Oracle to vagrant group to allow sudo
 usermod -a -G vagrant oracle
 
-# manual set resolve conf
-NAMESERVER=$(grep -i nameserver /etc/resolv.conf|grep -iv 10.0.0.4)
-echo "search trivadislabs.com" >/etc/resolv.conf
-echo "nameserver 10.0.0.4">>/etc/resolv.conf
-echo $NAMESERVER >>/etc/resolv.conf
+# install dhcp
+yum install dhcp -y
 
-echo "--- Setup Java --------------------------------------------------------"
-# Setup Java
-su -l oracle -c "${ORADBA_BIN}/${SETUP_JAVA}"
+# adjust DHCP config
+echo "supersede domain-name-servers ${AD_IP_ADDRESS}" /etc/dhcp/dhcpd.conf
+# get the default gatway
+IP_ADDRESS=$(ip r|grep -i default|grep -E -o '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')
+HOST_NAME=$(hostname)
+# update /etc/sysconfig/network
+echo "HOSTNAME=${HOST_NAME}"    >>/etc/sysconfig/network
+echo "DNS1=${AD_IP_ADDRESS}"    >>/etc/sysconfig/network
+echo "DNS2=${IP_ADDRESS}"       >>/etc/sysconfig/network
 
-echo "--- Setup OUD ---------------------------------------------------------"
-# Install OUD Software
-su -l oracle -c "${ORADBA_BIN}/${SETUP_OUD}"
-
-echo "--- Setup OUDSM -------------------------------------------------------"
-# Install OUDSM Software
-su -l oracle -c "${ORADBA_BIN}/${SETUP_OUDSM}"
-
-echo "--- OUD Base ---------------------------------------------------------"
-# Install OUD Base
-su -l oracle -c "${ORADBA_BIN}/${SETUP_OUDBASE}"
+# change peer DNS setting
+sed -i "s/^PEERDNS.*/PEERDNS=no/" /etc/sysconfig/network-scripts/ifcfg-eth0
+echo "--- Finished DB setup part 1 ------------------------------------------"
 # --- EOF --------------------------------------------------------------------
