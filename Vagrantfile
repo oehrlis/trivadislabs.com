@@ -18,16 +18,12 @@
 # see git revision history for more information on changes/updates
 # ---------------------------------------------------------------------------
 # TODO:
-# - kerberos und cmu user
-# - ad language setting
-# - ad update
-# - install tools like putty, winscp, oracle client, shortcuts etc
-# - ad fix ip issue warning
-# - ad fix dns delegation issue
+# - AD language setting
+# - AD OS update
+# - Install tools like putty, winscp, oracle client, shortcuts etc
 # - domain as parameter
 # - AD ssh server https://www.ntweekly.com/2017/12/22/install-openssh-windows-server-2016-1709/
 # - Finish CA configuration
-# - configure SQLNet (sqlnet.ora, ldap.ora, tnsnames.ora, dsi.ora)
 # - Customization -----------------------------------------------------------
 # Domain Controller
 DOMAIN_NAME     = "trivadislabs.com"

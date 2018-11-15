@@ -98,5 +98,5 @@ systemctl enable oracle
 # change all DB to autostart in oratab
 sed -i "s/N$/Y/" /etc/oratab
 echo "--- Finished OUD setup part 2 -----------------------------------------"
-echo "--- Finished setup VM $(hostname) -------------------------------------"
+echo "--- Finished setup VM $(hostname) -----------------------------"
 # --- EOF --------------------------------------------------------------------

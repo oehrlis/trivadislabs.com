@@ -35,7 +35,7 @@ $adDomain = Get-ADDomain
 $domain = $adDomain.DNSRoot
 $domainDn = $adDomain.DistinguishedName
 $usersAdPath = "ou=People,$domainDn"
-$groupAdPath = "OU=Groups,$domainDn"
+$groupAdPath = "ou=Groups,$domainDn"
 $password = ConvertTo-SecureString -AsPlainText 'LAB01schulung' -Force
 # - EOF Variables -----------------------------------------------------------
 
@@ -102,5 +102,10 @@ New-ADGroup -Name "Trivadis LAB APP Admins" -SamAccountName "Trivadis LAB APP Ad
 
 New-ADGroup -Name "Trivadis LAB Management" -SamAccountName "Trivadis LAB Management" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB Management" -Path $groupAdPath
 Add-ADGroupMember -Identity "Trivadis LAB Management" -Members king,rider,fleming,clark,blofeld,moneypenny,leitner
+
+# create service principle
+Write-Host 'Create service principles...'
+New-ADUser -SamAccountName "oracle18c" -Name "oracle18c" -UserPrincipalName "oracle18c@trivadislabs.com" -DisplayName "oracle18c" -Path "cn=Users,$domainDn" -AccountPassword $password -Enabled $true
+New-ADUser -SamAccountName "db.trivadislabs.com" -Name "db.trivadislabs.com" -DisplayName "db.trivadislabs.com" -UserPrincipalName "oracle\db.trivadislabs.com@trivadislabs.com" -Path "cn=Users,$domainDn" -AccountPassword $password -Enabled $true
 Write-Host 'Done configuring AD...'
 # --- EOF --------------------------------------------------------------------

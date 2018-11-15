@@ -72,7 +72,7 @@ set termout on;
 DECLARE
 vcount INTEGER :=0;
 BEGIN
-SELECT count(1) INTO vcount FROM dba_users WHERE username = 'HR';
+SELECT count(1) INTO vcount FROM dba_users WHERE username = 'TVD_HR';
 IF vcount != 0 THEN
 EXECUTE IMMEDIATE ('DROP USER tvd_hr CASCADE');
 END IF;
