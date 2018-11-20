@@ -140,11 +140,22 @@ cd
 rm -rf /tmp/28880433
 ```
 
+export ORACLE_HOME=/u00/app/oracle/product/12.2.0.1
+[oracle@db lib]$ cd $ORACLE_HOME/rdbms/lib
+[oracle@db lib]$ make -f ins_rdbms.mk uniaud_on ioracle
+
+
 Installation von Oracle 12c R2 (12.2.0.1)
 
 ```bash
 su -l oracle -c "/opt/oradba/bin/10_setup_db_12.2.sh"
 ```
+
+/u00/app/oracle/product/12.2.0.1/root.sh
+
+export ORACLE_HOME=/u00/app/oracle/product/12.2.0.1
+[oracle@db lib]$ cd $ORACLE_HOME/rdbms/lib
+[oracle@db lib]$ make -f ins_rdbms.mk uniaud_on ioracle
 
 ## Install BasEnv
 
@@ -152,7 +163,21 @@ su -l oracle -c "/opt/oradba/bin/10_setup_db_12.2.sh"
 
 ### Setup TDB184A
 
+```bash
+export ORACLE_SID1=${ORACLE_SID1:-"TDB184A"}
+export ORADBA_TEMPLATE_PREFIX=${ORADBA_TEMPLATE_PREFIX:-"custom_"}
+. ${ORACLE_BASE}/local/dba/bin/oraenv.ksh rdbms18000
+nohup /opt/oradba/bin/52_create_database.sh TDB184A > /tmp/TDB184A.log 2>&1 &
+```
+
 ### Setup TDB122A
+
+```bash
+export ORACLE_SID2=${ORACLE_SID2:-"TDB122A"}
+export ORADBA_TEMPLATE_PREFIX=${ORADBA_TEMPLATE_PREFIX:-"custom_"}
+. ${ORACLE_BASE}/local/dba/bin/oraenv.ksh rdbms18000
+nohup /opt/oradba/bin/52_create_database.sh TDB122A > /tmp/TDB122A.log 2>&1 &
+```
 
 # Setup Oracle Unified Directory Server
 

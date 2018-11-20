@@ -55,7 +55,7 @@ NEW-ADOrganizationalUnit -name "Operations" -path $usersAdPath
 
 #...and import users
 Write-Host 'Import users from CSV ...'
-Import-CSV -delimiter "," c:\vagrant\scripts\users_ad.csv | foreach {
+Import-CSV -delimiter "," users_ad.csv | foreach {
     $Path = "ou=" + $_.Department + "," + $usersAdPath
     $UserPrincipalName = $_.SamAccountName + "@" + $domain
     $eMail = $_.GivenName + "." + $_.Surname + "@" + $domain
