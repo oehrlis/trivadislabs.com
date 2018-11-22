@@ -107,7 +107,7 @@ Configure Firewall Ports
 ```bash
 firewall-cmd --list-ports
 iptables -L -n 
-firewall-cmd --zone=public --add-port=1521/tcp
+firewall-cmd --zone=public --add-port=1521/tcp --permanent
 firewall-cmd --list-ports
 iptables -L -n 
 ```
@@ -175,7 +175,7 @@ nohup /opt/oradba/bin/52_create_database.sh TDB184A > /tmp/TDB184A.log 2>&1 &
 ```bash
 export ORACLE_SID2=${ORACLE_SID2:-"TDB122A"}
 export ORADBA_TEMPLATE_PREFIX=${ORADBA_TEMPLATE_PREFIX:-"custom_"}
-. ${ORACLE_BASE}/local/dba/bin/oraenv.ksh rdbms18000
+. ${ORACLE_BASE}/local/dba/bin/oraenv.ksh rdbms12201
 nohup /opt/oradba/bin/52_create_database.sh TDB122A > /tmp/TDB122A.log 2>&1 &
 ```
 
@@ -290,11 +290,14 @@ Configure Firewall Ports
 ```bash
 firewall-cmd --list-ports
 iptables -L -n 
-firewall-cmd --zone=public --add-port=7001/tcp
-firewall-cmd --zone=public --add-port=7002/tcp
-firewall-cmd --zone=public --add-port=1389/tcp
-firewall-cmd --zone=public --add-port=1636/tcp
-firewall-cmd --zone=public --add-port=4444/tcp
+firewall-cmd --zone=public --add-port=7001/tcp --permanent
+firewall-cmd --zone=public --add-port=7002/tcp --permanent
+firewall-cmd --zone=public --add-port=1389/tcp --permanent
+firewall-cmd --zone=public --add-port=1636/tcp --permanent
+firewall-cmd --zone=public --add-port=4444/tcp --permanent
+firewall-cmd --zone=public --add-port=2389/tcp --permanent
+firewall-cmd --zone=public --add-port=3636/tcp --permanent
+firewall-cmd --zone=public --add-port=5444/tcp --permanent
 firewall-cmd --list-ports
 iptables -L -n 
 ```
@@ -319,4 +322,43 @@ Installation von Oracle Unified Directory Services Manager 12c (12.2.1.3.0)
 
 ```bash
 su -l oracle -c "/opt/oradba/bin/10_setup_oudsm_12c.sh"
+```
+
+# Windows Server 2016
+
+* Install Windows Server 2016
+* Install Window Server Update
+* Install Putty
+* Install WinSCP
+* Install Github Desktop
+* Install Directory Studio
+* Install Visual Source Code
+* Install SQL Developer
+* Konfigure Wallpaper
+
+
+https://support.jumpdesktop.com/hc/en-us/articles/216424183-General-RDP-You-must-be-granted-the-Allow-log-on-through-the-Terminal-or-Remote-Desktop-Services-Right-
+
+Alias für Githup Repo updates
+
+```bash
+vi $etc/oudenv_custom.conf
+alias git_lab='cd $cdl/trivadislabs.com;git pull; cd -'
+alias git_doag='cd $cdl/doag2018;git pull; cd -'
+```
+
+Alias für Githup Repo updates
+
+```bash
+vi $etc/basenv.conf
+alias git_lab='cd $cdl/trivadislabs.com;git pull; cd -'
+alias git_doag='cd $cdl/doag2018;git pull; cd -'
+```
+
+OUD Env Homes
+
+```bash
+vi $cdl/oudbase/etc/oudenv_core.conf
+ORACLE_HOME=/u00/app/oracle/product/oud12.2.1.3.0
+ORACLE_FMW_HOME=/u00/app/oracle/product/fmw12.2.1.3.0
 ```

@@ -59,8 +59,8 @@ echo "--- Configure OS ------------------------------------------------------"
 # add Oracle to vagrant group to allow sudo
 usermod -a -G vagrant oracle
 
-# install dhcp
-yum install dhcp -y
+# install dhcp and git
+yum install dhcp git -y
 
 # adjust DHCP config
 echo "supersede domain-name-servers ${AD_IP_ADDRESS}" /etc/dhcp/dhcpd.conf
