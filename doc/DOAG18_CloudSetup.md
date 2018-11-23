@@ -219,7 +219,7 @@ scp *.zip root@130.61.65.229:/opt/stage/
 
 ssh root@130.61.65.229
 
-echo "machine login.oracle.com login cpureport@trivadis.com password tr1vad1$" >/opt/stage/.netrc
+echo "machine login.oracle.com login  " >/opt/stage/.netrc
 
 
 
