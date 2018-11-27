@@ -4,7 +4,8 @@
 **/*.zip
 **/*.tar.gz
 **/*.tgz
-
+eus/eusdb
+eus/eusoud
 # ignore mac OS resource forks
 **/*.DS_Store
 
