@@ -66,12 +66,13 @@ yum install dhcp git -y
 # adjust DHCP config
 echo "supersede domain-name-servers ${AD_IP_ADDRESS}" /etc/dhcp/dhcpd.conf
 # get the default gatway
-IP_ADDRESS=$(ip r|grep -i default|grep -E -o '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')
+GATEWAY_ADDRESS=$(ip r|grep -i default|grep -E -o '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')
+GOOGLE_DNS="8.8.8.8"
 HOST_NAME=$(hostname)
 # update /etc/sysconfig/network
 echo "HOSTNAME=${HOST_NAME}"    >>/etc/sysconfig/network
 echo "DNS1=${AD_IP_ADDRESS}"    >>/etc/sysconfig/network
-echo "DNS2=${IP_ADDRESS}"       >>/etc/sysconfig/network
+echo "DNS2=${GOOGLE_DNS}"       >>/etc/sysconfig/network
 
 # change peer DNS setting
 sed -i "s/^PEERDNS.*/PEERDNS=no/" /etc/sysconfig/network-scripts/ifcfg-eth0

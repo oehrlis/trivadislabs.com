@@ -67,8 +67,8 @@ su -l oracle -c "${ORADBA_BIN}/${SETUP_OUDBASE}"
 echo "--- Get git stuff -----------------------------------------------------"
 su -l oracle -c "cd ${ORACLE_BASE}/local;git clone https://github.com/oehrlis/doag2018 doag2018"
 su -l oracle -c "cd ${ORACLE_BASE}/local;git clone https://github.com/oehrlis/trivadislabs.com trivadislabs.com"
-echo "alias git_lab='cd $cdl/trivadislabs.com;git pull; cd -'" >>$etc/oudenv_custom.conf
-echo "alias git_doag='cd $cdl/doag2018;git pull; cd -'" >>$etc/oudenv_custom.conf
+su -l oracle -c "echo \"alias git_lab='cd $cdl/trivadislabs.com;git pull; cd -'\" >>$etc/oudenv_custom.conf"
+su -l oracle -c "echo \"alias git_doag='cd $cdl/doag2018;git pull; cd -'\" >>$etc/oudenv_custom.conf"
 
 echo "--- Finished OUD setup part 2 -----------------------------------------"
 echo "--- Finished setup VM $(hostname) ----------------------------"

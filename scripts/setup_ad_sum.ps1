@@ -24,6 +24,7 @@ New-Object -TypeName PSObject -Property @{
 } | Format-Table -AutoSize
 [Environment]::OSVersion | Format-Table -AutoSize
 
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 # list all the installed Windows features.
 echo 'Installed Windows Features:'
