@@ -39,6 +39,12 @@ OUD_ADDRESS     = "10.0.0.5"
 OUD_HOST_FQDN   = OUD_HOST_NAME + "." + DOMAIN_NAME
 # - End of Customization ----------------------------------------------------
 
+# install missing vagrant plugin
+unless Vagrant.has_plugin?("vagrant-reload")
+    puts 'Installing vagrant-reload Plugin...'
+    system('vagrant plugin install vagrant-reload')
+end
+
 Vagrant.configure("2") do |config|
 # - Domain controller -------------------------------------------------------
     config.vm.define AD_HOST_NAME do |cfg|
@@ -117,13 +123,13 @@ Vagrant.configure("2") do |config|
         cfg.vm.box      = "ol7-latest"
         cfg.vm.box_url  = "https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box"
         cfg.vm.define   OUD_HOST_FQDN
-        
+
         cfg.vm.box_check_update = false
         
         # change memory size
         cfg.vm.provider "virtualbox" do |v|
-            v.memory    = 1024
-            v.name      = OUD_HOST_FQDN
+            v.memory            = 1024
+            v.name              = OUD_HOST_FQDN
         end
         
         # VM hostname
