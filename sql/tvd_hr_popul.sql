@@ -134,13 +134,13 @@ INSERT INTO employees VALUES ( 100, 'Ben',      'King',         'ben.king@trivad
 INSERT INTO employees VALUES ( 200, 'Jim',      'Clark',        'jim.clark@trivadislabs.com',           '515.123.4568', TO_DATE('21.09.05', 'dd-MM-yyyy'),      'AC_MGR',       17000, NULL, 100, 20);
 INSERT INTO employees VALUES ( 201, 'John',     'Miller',       'john.miller@trivadislabs.com',         '515.123.4569', TO_DATE('13.01.01', 'dd-MM-yyyy'),      'AC_CLERK',     17000, NULL, 200, 20);
 INSERT INTO employees VALUES ( 300, 'Ernst',    'Blofeld',      'ernst.blofeld@trivadislabs.com',       '590.423.4567', TO_DATE('03.01.06', 'dd-MM-yyyy'),      'RD_MGR',       9000, NULL, 100, 30);
-INSERT INTO employees VALUES ( 301, 'Henry',    'Ford',         'henry.ford@trivadislabs.com',          '590.423.4568', TO_DATE('21.05.07', 'dd-MM-yyyy'),      'RD_CLERK',     6000, NULL, 300, 30);
+INSERT INTO employees VALUES ( 301, 'Ford',     'Prefect',      'ford.prefect@trivadislabs.com',          '590.423.4568', TO_DATE('21.05.07', 'dd-MM-yyyy'),      'RD_CLERK',     6000, NULL, 300, 30);
 INSERT INTO employees VALUES ( 302, 'Douglas',  'Adams',        'douglas.adams@trivadislabs.com',       '590.423.4569', TO_DATE('25.06.05', 'dd-MM-yyyy'),      'RD_CLERK',     4800, NULL, 300, 30);
 INSERT INTO employees VALUES ( 303, 'Paul',     'Smith',        'paul.smith@trivadislabs.com',          '590.423.4560', TO_DATE('05.02.06', 'dd-MM-yyyy'),      'RD_ENG',       4800, NULL, 300, 30);
 INSERT INTO employees VALUES ( 304, 'James',    'Scott',        'james.scott@trivadislabs.com',         '590.423.5567', TO_DATE('07.02.07', 'dd-MM-yyyy'),      'RD_ENG',       4200, NULL, 300, 30);
 INSERT INTO employees VALUES ( 400, 'Eve',      'Moneypenny',   'eve.moneypenny@trivadislabs.com',      '515.124.4569', TO_DATE('17.08.02', 'dd-MM-yyyy'),      'SA_MGR',       12008, 0.3, 100, 40);
 INSERT INTO employees VALUES ( 401, 'Paul',     'Ward',         'paul.ward@trivadislabs.com',           '515.124.4169', TO_DATE('16.08.02', 'dd-MM-yyyy'),      'SA_REP',       9000, 0.3, 400, 40);
-INSERT INTO employees VALUES ( 402, 'Tina',     'Turner',       'tina.turner@trivadislabs.com',         '515.124.4269', TO_DATE('28.09.05', 'dd-MM-yyyy'),      'SA_REP',       8200, 0.3, 400, 40);
+INSERT INTO employees VALUES ( 402, 'Arthur',   'Dent',         'arthur.dent@trivadislabs.com',         '515.124.4269', TO_DATE('28.09.05', 'dd-MM-yyyy'),      'SA_REP',       8200, 0.3, 400, 40);
 INSERT INTO employees VALUES ( 403, 'Monica',   'Blake',        'monica.blake@trivadislabs.com',        '515.124.4369', TO_DATE('30.09.05', 'dd-MM-yyyy'),      'SA_REP',       7700, 0.2, 400, 40);
 INSERT INTO employees VALUES ( 500, 'Felix',    'Leitner',      'felix.leitner@trivadislabs.com',       '515.124.4567', TO_DATE('07.12.07', 'dd-MM-yyyy'),      'OP_MGR',       6900, NULL, 100, 50);
 INSERT INTO employees VALUES ( 501, 'Andy',     'Renton',       'andy.renton@trivadislabs.com',         '515.127.4561', TO_DATE('07.12.02', 'dd-MM-yyyy'),      'OP_AGENT',     11000, NULL, 500, 50);
