@@ -6,7 +6,6 @@
 **/*.tgz
 eus/db
 eus/oud
-eus/config
 
 # ignore mac OS resource forks
 **/*.DS_Store
