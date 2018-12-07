@@ -33,7 +33,7 @@ services:
         aliases:
           - db.trivadislabs.com
     ports:
-      - "1521"
+      - "1521:1521"
     environment:
       ORADBA_TEMPLATE_PREFIX: custom_
       ORACLE_SID: TEUS01
@@ -49,8 +49,9 @@ services:
     volumes:
       - ./oud:/u01
       - ./config/:/u01/config
+      - ./config/oud_setup:/u01/scripts/setup
     ports:
-      - "1389"
+      - "1389:1389"
       - "1636"
       - "4444"
     environment:
