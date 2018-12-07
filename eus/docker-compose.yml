@@ -22,15 +22,18 @@ services:
   db:
     image: oracle/database:18.4.0.0
     container_name: eusdb
-    hostname: eusdb.trivadislabs.com
+    hostname: db
     depends_on:
       - oud
     volumes:
-      - ./eusdb:/u01
+      - ./db:/u01
+      - ./config/:/u01/config
     networks:
-      - oranet
+      trivadislabs.com:
+        aliases:
+          - db.trivadislabs.com
     ports:
-      - "1521:1521"
+      - "1521"
     environment:
       ORADBA_TEMPLATE_PREFIX: custom_
       ORACLE_SID: TEUS01
@@ -38,23 +41,24 @@ services:
   oud:
     image: oracle/oud:12.2.1.3.180829
     container_name: eusoud
-    hostname: eusoud.trivadislabs.com
+    hostname: oud
     networks:
-      - oranet
+      trivadislabs.com:
+        aliases:
+          - oud.trivadislabs.com
     volumes:
-      - ./eusoud:/u01
+      - ./oud:/u01
+      - ./config/:/u01/config
     ports:
-      - "1389:1389"
-      - "1636:1636"
-      - "4444:4444"
+      - "1389"
+      - "1636"
+      - "4444"
     environment:
       OUD_CUSTOM: 'TRUE'
       BASEDN: dc=trivadislabs,dc=com
       OUD_INSTANCE: oud_eus
 
 networks:
-  oranet:
+  trivadislabs.com:
     driver: bridge
 # - EOF -----------------------------------------------------------------
-#    depends_on:
-#       - db

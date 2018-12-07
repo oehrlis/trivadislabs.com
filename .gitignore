@@ -4,8 +4,10 @@
 **/*.zip
 **/*.tar.gz
 **/*.tgz
-eus/eusdb
-eus/eusoud
+eus/db
+eus/oud
+eus/config
+
 # ignore mac OS resource forks
 **/*.DS_Store
 
