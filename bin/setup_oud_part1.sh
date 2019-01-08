@@ -71,7 +71,7 @@ HOST_NAME=$(hostname)
 # update /etc/sysconfig/network
 echo "HOSTNAME=${HOST_NAME}"    >>/etc/sysconfig/network
 echo "DNS1=${AD_IP_ADDRESS}"    >>/etc/sysconfig/network
-echo "DNS2=${GATEWAY_ADDRESS}"  >>/etc/sysconfig/network
+echo "DNS2=${GOOGLE_DNS}"       >>/etc/sysconfig/network
 
 # change peer DNS setting
 sed -i "s/^PEERDNS.*/PEERDNS=no/" /etc/sysconfig/network-scripts/ifcfg-eth0

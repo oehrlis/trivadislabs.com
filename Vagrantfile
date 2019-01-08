@@ -70,12 +70,13 @@ Vagrant.configure("2") do |config|
         cfg.vm.network :private_network, ip: AD_ADDRESS, gateway: GATEWAY_ADDRESS, dns: AD_ADDRESS
 
         # Provision everything on the first run
-        cfg.vm.provision "shell", path: "scripts/setup_ad_install_ad.ps1",  privileged: false
+        cfg.vm.provision "shell", path: "bin/setup_ad_install_ad.ps1",      privileged: false
         cfg.vm.provision :reload
-        cfg.vm.provision "shell", path: "scripts/setup_ad_config_ad.ps1",   privileged: false
-        cfg.vm.provision "shell", path: "scripts/setup_ad_config_dns.ps1",  privileged: false
-        cfg.vm.provision "shell", path: "scripts/setup_ad_config_ca.ps1",   privileged: false
-        cfg.vm.provision "shell", path: "scripts/setup_ad_sum.ps1",         privileged: false
+        cfg.vm.provision "shell", path: "bin/setup_ad_config_ad.ps1",       privileged: false
+        cfg.vm.provision "shell", path: "bin/setup_ad_config_dns.ps1",      privileged: false
+        cfg.vm.provision "shell", path: "bin/setup_ad_config_ca.ps1",       privileged: false
+        cfg.vm.provision "shell", path: "bin/setup_ad_choco_install.ps1",   privileged: false
+        cfg.vm.provision "shell", path: "bin/setup_ad_sum.ps1",             privileged: false
     end
 
 # - DB server ---------------------------------------------------------------
@@ -103,14 +104,14 @@ Vagrant.configure("2") do |config|
 
         # Provision everything on the first run 
         # start part 1 of the setup
-        cfg.vm.provision "shell", path: "scripts/setup_db_part1.sh", env:
+        cfg.vm.provision "shell", path: "bin/setup_db_part1.sh", env:
         {
             "AD_IP_ADDRESS"         => AD_ADDRESS
         }
         # reload the VM
         cfg.vm.provision :reload
         # start part 2 of the setup
-        cfg.vm.provision "shell", path: "scripts/setup_db_part2.sh", env:
+        cfg.vm.provision "shell", path: "bin/setup_db_part2.sh", env:
         {
             "DEFAULT_DOMAIN"        => DOMAIN_NAME,            
             "ORACLE_SID1"           => "TDB184A",
@@ -149,14 +150,14 @@ Vagrant.configure("2") do |config|
 
         # Provision everything on the first run 
         # start part 1 of the setup
-        cfg.vm.provision "shell", path: "scripts/setup_oud_part1.sh", env:
+        cfg.vm.provision "shell", path: "bin/setup_oud_part1.sh", env:
         {
             "AD_IP_ADDRESS"        => AD_ADDRESS
         }
         # reload the VM
         cfg.vm.provision :reload
         # start part 2 of the setup
-        cfg.vm.provision "shell", path: "scripts/setup_oud_part2.sh", env:
+        cfg.vm.provision "shell", path: "bin/setup_oud_part2.sh", env:
         {
             "DEFAULT_DOMAIN"       => DOMAIN_NAME
         }

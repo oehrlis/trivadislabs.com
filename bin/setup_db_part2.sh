@@ -33,7 +33,8 @@ export ORADBA_TEMPLATE_PREFIX=${ORADBA_TEMPLATE_PREFIX:-"custom_"}
 # - End of Customization ----------------------------------------------------
 # - Environment Variables ---------------------------------------------------
 export ORADBA_BIN="/opt/oradba/bin"
-export VAGRANT_SCRIPTS="/vagrant/scripts"
+export VAGRANT_BIN="/vagrant/bin"
+export VAGRANT_ETC="/vagrant/etc"
 # define variables for OS setup
 DOWNLOAD="/tmp/download"
 SETUP_DB_184="10_setup_db_18.4.sh"
@@ -42,13 +43,12 @@ SETUP_BASENV="20_setup_basenv.sh"
 ORAENV="${ORACLE_BASE}/local/dba/bin/oraenv.ksh"
 CREATE_DB="52_create_database.sh"
 # Demo Schema
-TVD_HR="@/vagrant/sql/tvd_hr_main.sql tvd_hr users temp /tmp"
+TVD_HR="@/vagrant/conf/db/setup/02_create_tvd_hr.sql"
 # - EOF Environment Variables -----------------------------------------------
 # - Functions ---------------------------------------------------------------
 # - EOF Functions -----------------------------------------------------------
 
 # - Main --------------------------------------------------------------------
-
 echo "--- Start DB setup part 2 ---------------------------------------------"
 echo "--- Install Oracle 18.4.0.0 -------------------------------------------"
 # Install DB Software
@@ -71,8 +71,8 @@ su -l oracle -c "${ORADBA_BIN}/${SETUP_BASENV}"
 
 # copy network files
 for i in sqlnet.ora ldap.ora tnsnames.ora dsi.ora krb5.conf; do
-    if [ -f "${VAGRANT_SCRIPTS}/$i" ]; then
-        su -l oracle -c "cp -v ${VAGRANT_SCRIPTS}/$i ${ORACLE_BASE}/network/admin"
+    if [ -f "${VAGRANT_ETC}/$i" ]; then
+        su -l oracle -c "cp -v ${VAGRANT_ETC}/$i ${ORACLE_BASE}/network/admin"
     fi
 done
 
@@ -102,9 +102,8 @@ sed -i "s/N$/Y/" /etc/oratab
 echo "--- Get git stuff -----------------------------------------------------"
 su -l oracle -c "cd ${ORACLE_BASE}/local;git clone https://github.com/oehrlis/doag2018 doag2018"
 su -l oracle -c "cd ${ORACLE_BASE}/local;git clone https://github.com/oehrlis/trivadislabs.com trivadislabs.com"
-su -l oracle -c "echo \"alias git_lab='cd $cdl/trivadislabs.com;git pull; cd -'\" >>$etc/basenv.conf"
-su -l oracle -c "echo \"alias git_doag='cd $cdl/doag2018;git pull; cd -'\" >>$etc/basenv.conf"
-
+su -l oracle -c "echo \"alias git_lab='cd $cdl/trivadislabs.com;git pull; cd -'\" >>${ORACLE_BASE}/local/oudbase/etc/basenv.conf"
+su -l oracle -c "echo \"alias git_doag='cd $cdl/doag2018;git pull; cd -'\" >>${ORACLE_BASE}/local/oudbase/etc/basenv.conf"
 
 echo "--- Finished OUD setup part 2 -----------------------------------------"
 echo "--- Finished setup VM $(hostname) -----------------------------"

@@ -55,7 +55,7 @@ NEW-ADOrganizationalUnit -name "Operations" -path $usersAdPath
 
 #...and import users
 Write-Host 'Import users from CSV ...'
-Import-CSV -delimiter "," users_ad.csv | foreach {
+Import-CSV -delimiter "," C:\vagrant\etc\users_ad.csv | foreach {
     $Path = "ou=" + $_.Department + "," + $usersAdPath
     $UserPrincipalName = $_.SamAccountName + "@" + $domain
     $eMail = $_.GivenName + "." + $_.Surname + "@" + $domain
@@ -87,13 +87,13 @@ Set-ADOrganizationalUnit -Identity "ou=Operations,$usersAdPath" -ManagedBy leitn
 Write-Host 'Create Trivadis LAB groups...'
 NEW-ADOrganizationalUnit -name "Groups" -path $domainDn
 New-ADGroup -Name "Trivadis LAB Users" -SamAccountName "Trivadis LAB Users" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB Users" -Path $groupAdPath
-Add-ADGroupMember -Identity "Trivadis LAB Users" -Members lynd,rider,tanner,gartner,fleming,bond,walters,renton,leitner,blake,turner,ward,moneypenny,scott,smith,adams,ford,blofeld,miller,clark,king
+Add-ADGroupMember -Identity "Trivadis LAB Users" -Members lynd,rider,tanner,gartner,fleming,bond,walters,renton,leitner,blake,dent,ward,moneypenny,scott,smith,adams,prefect,blofeld,miller,clark,king
 
 New-ADGroup -Name "Trivadis LAB DB Admins" -SamAccountName "Trivadis LAB DB Admins" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB DB Admins" -Path $groupAdPath
 Add-ADGroupMember -Identity "Trivadis LAB DB Admins" -Members gartner,fleming
 
 New-ADGroup -Name "Trivadis LAB Developers" -SamAccountName "Trivadis LAB Developers" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB Developers" -Path $groupAdPath
-Add-ADGroupMember -Identity "Trivadis LAB Developers" -Members scott,smith,adams,ford,blofeld
+Add-ADGroupMember -Identity "Trivadis LAB Developers" -Members scott,smith,adams,prefect,blofeld
 
 New-ADGroup -Name "Trivadis LAB System Admins" -SamAccountName "Trivadis LAB System Admins" -GroupCategory Security -GroupScope Global -DisplayName "Trivadis LAB System Admins" -Path $groupAdPath
 Add-ADGroupMember -Identity "Trivadis LAB System Admins" -Members tanner,fleming
