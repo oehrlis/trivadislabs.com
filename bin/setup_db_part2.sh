@@ -27,7 +27,7 @@ export ORACLE_BASE=${ORACLE_BASE:-${ORACLE_ROOT}/app/oracle}
 export ORACLE_INVENTORY=${ORACLE_INVENTORY:-${ORACLE_ROOT}/app/oraInventory}
 export PORT=${PORT:-1521}
 export PORT_CONSOLE=${PORT_CONSOLE:-5500}
-export ORACLE_SID1=${ORACLE_SID1:-"TDB184A"}
+export ORACLE_SID1=${ORACLE_SID1:-"TDB185A"}
 export ORACLE_SID2=${ORACLE_SID2:-"TDB122A"}
 export ORADBA_TEMPLATE_PREFIX=${ORADBA_TEMPLATE_PREFIX:-"custom_"}
 # - End of Customization ----------------------------------------------------
@@ -37,7 +37,7 @@ export VAGRANT_BIN="/vagrant/bin"
 export VAGRANT_ETC="/vagrant/etc"
 # define variables for OS setup
 DOWNLOAD="/tmp/download"
-SETUP_DB_184="10_setup_db_18.4.sh"
+SETUP_DB_185="10_setup_db_18.5.sh"
 SETUP_DB_122="10_setup_db_12.2.sh"
 SETUP_BASENV="20_setup_basenv.sh"
 ORAENV="${ORACLE_BASE}/local/dba/bin/oraenv.ksh"
@@ -50,13 +50,13 @@ TVD_HR="@/vagrant/conf/db/setup/02_create_tvd_hr.sql"
 
 # - Main --------------------------------------------------------------------
 echo "--- Start DB setup part 2 ---------------------------------------------"
-echo "--- Install Oracle 18.4.0.0 -------------------------------------------"
+echo "--- Install Oracle 18.5.0.0 -------------------------------------------"
 # Install DB Software
-su -l oracle -c "${ORADBA_BIN}/${SETUP_DB_184}"
+su -l oracle -c "${ORADBA_BIN}/${SETUP_DB_185}"
 
 # root scripts
 /u00/app/oraInventory/orainstRoot.sh
-${ORACLE_BASE}/product/18.4.0.0/root.sh
+${ORACLE_BASE}/product/18.5.0.0/root.sh
 
 echo "--- Install Oracle 12.2.0.1 -------------------------------------------"
 # Install DB Software
@@ -76,8 +76,8 @@ for i in sqlnet.ora ldap.ora tnsnames.ora dsi.ora krb5.conf; do
     fi
 done
 
-echo "--- Create DB TDB184A (18.4.0.0) --------------------------------------"
-# Create DB 18.4.0.0
+echo "--- Create DB TDB185A (18.5.0.0) --------------------------------------"
+# Create DB 18.5.0.0
 su -l oracle -c " . ${ORAENV} rdbms18000; ${ORADBA_BIN}/${CREATE_DB} ${ORACLE_SID1} ${ORACLE_PDB} ${CONTAINER}"
 
 # install the TVD_HR schema
