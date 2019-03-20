@@ -7,7 +7,7 @@
 # Editor.....: Stefan Oehrli
 # Date.......: 2018.12.11
 # Revision...: --
-# Purpose....: Docker compose file to create a 18.4 database and a OUD 
+# Purpose....: Docker compose file to create a 18.5 database and a OUD 
 #              directory server to configure enterprise user security
 # Notes......: --
 # Reference..: https://github.com/oehrlis/oudbase
@@ -19,35 +19,43 @@
 
 version: '3'
 services:
+# Database service
   db:
-    image: oracle/database:18.4.0.0
-    container_name: tvddb
+    image: ${DOCKER_USER}/${DOCKER_REPO}:${DOCKER_DB_VERSION}
+    container_name: tvdlab_db
     hostname: db
     restart: unless-stopped
     depends_on:
       - oud
+    cap_add:
+      - SYS_PTRACE
+      - SYS_ADMIN
     volumes:
-      - ${DOCKER_VOLUME_BASE}/tvddb:/u01
-      - ./conf/db:/u01/config
-      - ./conf/oud:/u01/oud
+      - ${DOCKER_VOLUME_BASE}/tvdlab/db:/u01
+      - ./db:/u01/config
+      - ./oud:/u01/oud
     ports:
-      - "7521:1521"
+      - 1521
     environment:
       INSTANCE_INIT: /u01/config
       ORACLE_SID: TEUS01
 
+# OUD LDAP service
   oud:
-    image: oracle/oud:12.2.1.3.180829
-    container_name: tvdoud
+    image: oracle/oud:${DOCKER_OUD_VERSION}
+    container_name: tvdlab_oud
     hostname: oud
+    cap_add:
+      - SYS_PTRACE
+      - SYS_ADMIN
     restart: unless-stopped
     volumes:
-      - ${DOCKER_VOLUME_BASE}/tvdoud:/u01
-      - ./conf/oud:/u01/config
+      - ${DOCKER_VOLUME_BASE}/tvdlab/oud:/u01
+      - ./oud:/u01/config
     ports:
-      - "7389:1389"
-      - "7636:1636"
-      - "7444:4444"
+      - 1389
+      - 1636
+      - 4444
     environment:
       OUD_CUSTOM: 'TRUE'
       INSTANCE_INIT: /u01/config
