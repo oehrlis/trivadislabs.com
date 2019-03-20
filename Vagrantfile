@@ -114,7 +114,7 @@ Vagrant.configure("2") do |config|
         cfg.vm.provision "shell", path: "bin/setup_db_part2.sh", env:
         {
             "DEFAULT_DOMAIN"        => DOMAIN_NAME,            
-            "ORACLE_SID1"           => "TDB184A",
+            "ORACLE_SID1"           => "TDB185A",
             "ORACLE_SID2"           => "TDB122A",
             "ORACLE_CHARACTERSET"   => "AL32UTF8",
         }

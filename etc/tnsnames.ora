@@ -16,12 +16,12 @@
 # Modified...:
 # see git revision history for more information on changes/updates
 # ---------------------------------------------------------------------------
-TDB184A.trivadislabs.com= 
+TDB185A.trivadislabs.com= 
     (DESCRIPTION = 
         (ADDRESS = (PROTOCOL = TCP)(HOST=db.trivadislabs.com)(PORT = 1521))
             (CONNECT_DATA =
                 (SERVER = DEDICATED)
-            (SERVICE_NAME = TDB184A)
+            (SERVICE_NAME = TDB185A)
         )
     )
 TDB122A.trivadislabs.com= 
