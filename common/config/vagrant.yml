@@ -1,0 +1,101 @@
+# ---------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ---------------------------------------------------------------------------
+# Name.......: vagrant.yml
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2019.05.09
+# Revision...:  
+# Purpose....: YAML file to configure the vagrant files for trivadislabs.com
+# Notes......: 
+# Reference..: https://github.com/rgl/windows-domain-controller-vagrant
+# License....: Licensed under the Universal Permissive License v 1.0 as 
+#              shown at http://oss.oracle.com/licenses/upl.
+# ---------------------------------------------------------------------------
+common:
+  #default_password: ''
+  default_password: LAB01schulung
+  domain_name: trivadislabs.com
+  #domain_name: example.com
+  gateway: 10.0.0.1
+  dns: 10.0.0.4
+  public_dns1: 8.8.8.8
+  public_dns2: 4.4.4.4
+
+# AD server settings
+win2016ad:
+  box: StefanScherer/windows_2016
+  vm_name: win2016ad
+  domain_mode: Win2012R2
+  people_ou_name: People
+  groups_ou_name: Groups
+  mem_size: 1024
+  cpus: 1
+  public_ip: 10.0.0.4
+
+# OUD server settings
+ol7oud12:
+  box: ol7-latest
+  box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
+  vm_name: ol7oud12
+  mem_size: 1024
+  cpus: 1
+  public_ip: 10.0.0.5
+
+# Oracle 19c database server settings
+ol7db19:
+  box: ol7-latest
+  box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
+  vm_name: ol7db19
+  mem_size: 4096
+  cpus: 2
+  public_ip: 10.0.0.19
+  ssh_port: 19022
+  tns_port: 19521
+  console_port: 19500
+  oracle_sid_cdb: TDB190C
+  oracle_sid_sdb: TDB190S
+
+  # Oracle 18c database server settings
+ol7db18:
+  box: ol7-latest
+  box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
+  vm_name: ol7db18
+  mem_size: 4096
+  cpus: 2
+  public_ip: 10.0.0.18
+  ssh_port: 18022
+  tns_port: 18521
+  console_port: 18500
+  oracle_sid_cdb: TDB180C
+  oracle_sid_sdb: TDB180S
+
+# Oracle 12c release 2 database server settings
+ol7db122:
+  box: ol7-latest
+  box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
+  vm_name: ol7db122
+  mem_size: 4096
+  cpus: 2
+  public_ip: 10.0.0.12  
+  ssh_port: 12022
+  tns_port: 12521
+  console_port: 12500
+  oracle_sid_cdb: TDB122C
+  oracle_sid_sdb: TDB122S
+
+# Oracle 11g release 2 database server settings
+ol7db112:
+  box: ol7-latest
+  box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
+  vm_name: ol7db112
+  mem_size: 4096
+  cpus: 2
+  public_ip: 10.0.0.11
+  ssh_port: 11022
+  tns_port: 11521
+  console_port: 11500
+  oracle_sid_cdb: ''
+  oracle_sid_sdb: TDB112S
+# --- EOF -------------------------------------------------------------------
