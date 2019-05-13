@@ -1,0 +1,95 @@
+# ---------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ---------------------------------------------------------------------------
+# Name.......: Vagrantfile
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2019.05.09
+# Revision...:  
+# Purpose....: Vagrant file to setup and configure oud.trivadislabs.com
+# Notes......: 
+# Reference..: https://github.com/rgl/windows-domain-controller-vagrant
+# License....: Licensed under the Universal Permissive License v 1.0 as 
+#              shown at http://oss.oracle.com/licenses/upl.
+# ---------------------------------------------------------------------------
+# Modified...:
+# see git revision history for more information on changes/updates
+# ---------------------------------------------------------------------------
+require 'yaml'
+
+# install missing vagrant plugin
+unless Vagrant.has_plugin?("vagrant-reload")
+  puts 'Installing vagrant-reload Plugin...'
+  system('vagrant plugin install vagrant-reload')
+end
+
+# - Configuration -----------------------------------------------------------
+params          = YAML.load_file '../common/config/vagrant.yml'
+
+# shared configuration
+var_domain_name = params['shared']['domain_name']
+var_gateway     = params['shared']['gateway']
+var_public_dns  = params['shared']['public_dns']
+var_dns         = params['shared']['dns']
+var_box_url     = params['shared']['ol_box_url']
+var_ad_ip       = params['ad']['public_ip']
+
+# ad box configuration
+var_box             = params['oud']['box']
+var_vm_name         = params['oud']['vm_name']
+var_host_fqdn       = var_vm_name + "." + var_domain_name
+var_mem_size        = params['oud']['mem_size']
+var_cpus            = params['oud']['cpus']
+var_public_ip       = params['oud']['public_ip']
+# - End of Configuration ----------------------------------------------------
+
+Vagrant.configure("2") do |config|
+# - Domain controller -------------------------------------------------------
+  config.vm.define var_vm_name do |cfg|
+    cfg.vm.box      = var_box
+    cfg.vm.box_url  = var_box_url
+    cfg.vm.define   var_host_fqdn
+    cfg.vm.hostname = var_vm_name
+
+    cfg.vm.box_check_update = false
+
+    # Share an additional common folder to the guest VM
+    cfg.vm.synced_folder "../common", "/vagrant_common"
+
+    # Oracle port forwarding
+    cfg.vm.network :forwarded_port, guest: 22,      host: 2225
+    cfg.vm.network :forwarded_port, guest: 1389,    host: 1389
+    cfg.vm.network :forwarded_port, guest: 1636,    host: 1636
+    cfg.vm.network :forwarded_port, guest: 4444,    host: 4444
+    cfg.vm.network :forwarded_port, guest: 7001,    host: 7001
+    cfg.vm.network :forwarded_port, guest: 7002,    host: 7002
+    cfg.vm.network :forwarded_port, guest: 8080,    host: 8080
+    cfg.vm.network :forwarded_port, guest: 10443,   host: 10443
+    cfg.vm.network :forwarded_port, guest: 8444,    host: 8444
+    cfg.vm.network :private_network, ip: var_public_ip
+    #cfg.vm.network :private_network, ip: var_public_ip, gateway: var_gateway, dns: var_dns
+  
+    # change memory size, cpus etc
+    cfg.vm.provider "virtualbox" do |v|
+      v.memory    = var_mem_size
+      v.cpus      = var_cpus
+      v.name      = var_host_fqdn
+    end
+
+    # Provision everything on the first run 
+    # start part 1 of the setup
+    cfg.vm.provision "shell", path: "scripts/setup_oud_part1.sh", env:
+    {
+        "AD_IP_ADDRESS"        => var_ad_ip
+    }
+    # reload the VM
+    cfg.vm.provision :reload
+    # start part 2 of the setup
+    cfg.vm.provision "shell", path: "scripts/setup_oud_part2.sh", env:
+    {
+        "DEFAULT_DOMAIN"       => var_domain_name
+    }
+  end
+end
+# --- EOF -------------------------------------------------------------------

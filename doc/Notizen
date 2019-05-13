@@ -1,0 +1,11 @@
+vagrant wie tim https://github.com/oraclebase/vagrant/tree/master/rac/ol7_19
+
+ps
+ps variable null https://www.thomasmaurer.ch/2010/07/powershell-check-variable-for-null/
+ps test variable https://mcpmag.com/articles/2015/12/14/test-variables-in-powershell.aspx
+https://ss64.com/ps/replace.html
+https://www.undocumented-features.com/2016/09/20/powershell-random-password-generator/
+
+
+ad ca setup https://github.com/awcoleman/vagrant_win_ad_dc_ca_test
+ad ca setuip https://github.com/rgl/windows-domain-controller-vagrant/blob/master/provision/ca.ps1

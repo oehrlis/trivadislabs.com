@@ -7,6 +7,8 @@
 eus/db
 eus/oud
 zzzz
+**/*.vagrant
+
 # ignore mac OS resource forks
 **/*.DS_Store
 
@@ -21,3 +23,5 @@ stage/PatchSearch.xml
 scripts/db.trivadislabs.com.keytab
 scripts/opwdintg.exe
 scripts/ad.trivadislabs.com_root_ca.cer
+common/*/*/*.keytab
+common/*/*/*.cer
