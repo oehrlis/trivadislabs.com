@@ -3,12 +3,12 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: 01_common_setup_os_db.sh
+# Name.......: 01_common_setup_os_oud.sh
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2019.05.13
 # Revision...: 
-# Purpose....: Script to initialize and install Vagrant box DB.
+# Purpose....: Script to initialize and install Vagrant box OUD.
 # Notes......: ...
 # Reference..: --
 # License....: Licensed under the Universal Permissive License v 1.0 as 
@@ -28,7 +28,7 @@ export DEFAULT_DOMAIN=${domain_name:-"trivadislabs.com"}
 export IP=${public_ip:-"127.0.0.1"}
 # define variables for OS setup
 SETUP_INIT="00_setup_oradba_init.sh"
-SETUP_OS="01_setup_os_db.sh"
+SETUP_OS="01_setup_os_oud.sh"
 # - EOF Environment Variables -----------------------------------------------
 
 # - Main --------------------------------------------------------------------
