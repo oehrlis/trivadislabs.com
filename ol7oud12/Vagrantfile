@@ -28,20 +28,25 @@ end
 params          = YAML.load_file '../common/config/vagrant.yml'
 
 # shared configuration
-var_domain_name = params['shared']['domain_name']
-var_gateway     = params['shared']['gateway']
-var_public_dns  = params['shared']['public_dns']
-var_dns         = params['shared']['dns']
-var_box_url     = params['shared']['ol_box_url']
-var_ad_ip       = params['ad']['public_ip']
+var_default_password= params['common']['default_password']
+var_domain_name     = params['common']['domain_name']
+var_gateway_address = params['common']['gateway_address']
+var_public_dns1     = params['common']['public_dns1']
+var_public_dns2     = params['common']['public_dns2']
+var_dns             = params['common']['dns']
 
-# ad box configuration
-var_box             = params['oud']['box']
-var_vm_name         = params['oud']['vm_name']
+# oud box configuration
+var_box             = params['ol7oud12']['box']
+var_box_url         = params['ol7oud12']['box_url']
+var_vm_name         = params['ol7oud12']['vm_name']
 var_host_fqdn       = var_vm_name + "." + var_domain_name
-var_mem_size        = params['oud']['mem_size']
-var_cpus            = params['oud']['cpus']
-var_public_ip       = params['oud']['public_ip']
+var_mem_size        = params['ol7oud12']['mem_size']
+var_cpus            = params['ol7oud12']['cpus']
+var_public_ip       = params['ol7oud12']['public_ip']
+var_ssh_port        = params['ol7oud12']['ssh_port']
+var_ldap_port       = params['ol7oud12']['ldap_port']
+var_ldaps_port      = params['ol7oud12']['ldaps_port']
+var_admin_port      = params['ol7oud12']['admin_port']
 # - End of Configuration ----------------------------------------------------
 
 Vagrant.configure("2") do |config|
@@ -57,18 +62,18 @@ Vagrant.configure("2") do |config|
     # Share an additional common folder to the guest VM
     cfg.vm.synced_folder "../common", "/vagrant_common"
 
-    # Oracle port forwarding
-    cfg.vm.network :forwarded_port, guest: 22,      host: 2225
-    cfg.vm.network :forwarded_port, guest: 1389,    host: 1389
-    cfg.vm.network :forwarded_port, guest: 1636,    host: 1636
-    cfg.vm.network :forwarded_port, guest: 4444,    host: 4444
+    # Oracle port forwarding  
+    cfg.vm.network :forwarded_port, guest: 22,      host: var_ssh_port
+    cfg.vm.network :forwarded_port, guest: 1389,    host: var_ldap_port
+    cfg.vm.network :forwarded_port, guest: 1636,    host: var_ldaps_port
+    cfg.vm.network :forwarded_port, guest: 4444,    host: var_admin_port
     cfg.vm.network :forwarded_port, guest: 7001,    host: 7001
     cfg.vm.network :forwarded_port, guest: 7002,    host: 7002
     cfg.vm.network :forwarded_port, guest: 8080,    host: 8080
     cfg.vm.network :forwarded_port, guest: 10443,   host: 10443
     cfg.vm.network :forwarded_port, guest: 8444,    host: 8444
     cfg.vm.network :private_network, ip: var_public_ip
-    #cfg.vm.network :private_network, ip: var_public_ip, gateway: var_gateway, dns: var_dns
+    #cfg.vm.network :private_network, ip: var_public_ip, gateway: var_gateway_address, dns: var_dns
   
     # change memory size, cpus etc
     cfg.vm.provider "virtualbox" do |v|
@@ -79,17 +84,13 @@ Vagrant.configure("2") do |config|
 
     # Provision everything on the first run 
     # start part 1 of the setup
-    cfg.vm.provision "shell", path: "scripts/setup_oud_part1.sh", env:
-    {
-        "AD_IP_ADDRESS"        => var_ad_ip
-    }
+    cfg.vm.provision "shell", path: "../common/scripts/01_common_setup_os_oud.sh"
+
     # reload the VM
     cfg.vm.provision :reload
     # start part 2 of the setup
-    cfg.vm.provision "shell", path: "scripts/setup_oud_part2.sh", env:
-    {
-        "DEFAULT_DOMAIN"       => var_domain_name
-    }
+    # install DB binaries
+    cfg.vm.provision "shell", path: "scripts/10_install_binaries.sh"
   end
 end
 # --- EOF -------------------------------------------------------------------

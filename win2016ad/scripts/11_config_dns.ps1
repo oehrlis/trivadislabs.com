@@ -98,5 +98,23 @@ foreach ($HostRecord in $HostList)
 Add-DnsServerResourceRecordCName -Name "ad" -HostNameAlias "win2016ad.$domain" -ZoneName $domain
 Add-DnsServerResourceRecordCName -Name "oud" -HostNameAlias "ol7oud12.$domain" -ZoneName $domain
 Add-DnsServerResourceRecordCName -Name "db" -HostNameAlias "ol7db19.$domain" -ZoneName $domain
+
+# get the IP Address of the NAT Network
+$NAT_IP=(Get-WmiObject -Class Win32_NetworkAdapterConfiguration | where {$_.DefaultIPGateway -ne $null}).IPAddress | select-object -first 1
+$NAT_HOSTNAME=hostname
+
+# get DNS Server Records
+Get-DnsServerResourceRecord -ZoneName $domain -Name $NAT_HOSTNAME
+if ($NAT_IP) { 
+    # remove the DNS Record for the NAT Network
+    Write-Host " remove DNS record $NAT_IP for host $NAT_HOSTNAME in zone $domain"
+    Remove-DnsServerResourceRecord -ZoneName $domain -RRType "A" -Name $NAT_HOSTNAME -RecordData $NAT_IP -force
+} else {
+    Write-Host " NAT DNS record could not be found"
+}
+
+# get DNS Server Records
+Get-DnsServerResourceRecord -ZoneName $domain -Name $NAT_HOSTNAME
+
 Write-Host '= Finish part 11 ==========================================='
 # --- EOF --------------------------------------------------------------------
