@@ -82,7 +82,7 @@ ol7db122:
   vm_name: ol7db122
   mem_size: 4096
   cpus: 2
-  public_ip: 10.0.0.12  
+  public_ip: 10.0.0.12
   ssh_port: 12022
   tns_port: 12521
   console_port: 12500
@@ -99,7 +99,6 @@ ol7db112:
   public_ip: 10.0.0.11
   ssh_port: 11022
   tns_port: 11521
-  console_port: 11500
   oracle_sid_cdb: ''
   oracle_sid_sdb: TDB112S
 # --- EOF -------------------------------------------------------------------
