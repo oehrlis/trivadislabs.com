@@ -42,7 +42,7 @@ if [ -n "${ORACLE_SID1}" ]; then
     su -l oracle -c "${ORADBA_BIN}/${CREATE_DB} ${ORACLE_SID1} PDB1 TRUE"
 
     # install the TVD_HR schema
-    su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; ${ORACLE_SID1}; sqlplus \"/ as sysdba\" $TVD_HR_CONTAINER"
+    su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; sqlplus /nolog @$TVD_HR_CONTAINER"
 fi
 
 if [ -n "${ORACLE_SID2}" ]; then
@@ -51,7 +51,7 @@ if [ -n "${ORACLE_SID2}" ]; then
     su -l oracle -c "${ORADBA_BIN}/${CREATE_DB} ${ORACLE_SID2} PDB1 FALSE"
 
     # install the TVD_HR schema
-    su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; sqlplus \"/ as sysdba\" $TVD_HR"
+    su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; sqlplus /nolog @$TVD_HR"
 fi
 echo "--- Configure Oracle Service ------------------------------------------"
 cp ${ORACLE_BASE}/local/dba/etc/oracle.service /usr/lib/systemd/system/
