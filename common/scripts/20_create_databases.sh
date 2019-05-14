@@ -20,7 +20,6 @@
 # - Customization -----------------------------------------------------------
 # - just add/update any kind of customized environment variable here
 CREATE_DB="52_create_database.sh"
-ORAENV="${ORACLE_BASE}/local/dba/bin/oraenv.ksh"
 TVD_HR_CONTAINER="/vagrant_common/scripts/80_create_tvd_hr_pdb1.sql"
 TVD_HR="/vagrant_common/scripts/81_create_tvd_hr.sql"
 # - End of Customization ----------------------------------------------------
@@ -31,6 +30,7 @@ TVD_HR="/vagrant_common/scripts/81_create_tvd_hr.sql"
 export DEFAULT_DOMAIN=${domain_name:-"trivadislabs.com"}
 export ORACLE_SID1=${oracle_sid_cdb} 
 export ORACLE_SID2=${oracle_sid_sdb}
+ORAENV="${ORACLE_BASE}/local/dba/bin/oraenv.ksh"
 # - EOF Environment Variables -----------------------------------------------
 
 # - Main --------------------------------------------------------------------

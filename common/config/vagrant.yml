@@ -42,6 +42,10 @@ ol7oud12:
   mem_size: 1024
   cpus: 1
   public_ip: 10.0.0.5
+  ssh_port: 8022
+  ldap_port: 8389
+  ldaps_port: 8636
+  admin_port: 8444
 
 # Oracle 19c database server settings
 ol7db19:
