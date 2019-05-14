@@ -52,6 +52,7 @@ if [ -n "${ORACLE_SID2}" ]; then
 
     # install the TVD_HR schema
     su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; sqlplus /nolog @$TVD_HR"
+    su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; sqlplus / as sysdba @?/rdbms/admin/utlsampl.sql"
 fi
 echo "--- Configure Oracle Service ------------------------------------------"
 cp ${ORACLE_BASE}/local/dba/etc/oracle.service /usr/lib/systemd/system/

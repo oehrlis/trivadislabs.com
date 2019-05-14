@@ -774,14 +774,22 @@ COMMIT;
 
 ----------------------------------------------------------------------------
 -- grant ro/rw on TVD_HR to TVD_HR role 
-GRANT READ ON tvd_hr.employees TO tvd_hr_ro;
-GRANT READ ON tvd_hr.jobs TO tvd_hr_ro;
-GRANT READ ON tvd_hr.job_history TO tvd_hr_ro;
-GRANT READ ON tvd_hr.locations TO tvd_hr_ro;
-GRANT READ ON tvd_hr.departments TO tvd_hr_ro;
+-- GRANT READ ON tvd_hr.employees TO tvd_hr_ro;
+-- GRANT READ ON tvd_hr.jobs TO tvd_hr_ro;
+-- GRANT READ ON tvd_hr.job_history TO tvd_hr_ro;
+-- GRANT READ ON tvd_hr.locations TO tvd_hr_ro;
+-- GRANT READ ON tvd_hr.departments TO tvd_hr_ro;
+-- GRANT READ ON tvd_hr.regions TO tvd_hr_ro;
+-- GRANT READ ON tvd_hr.countries TO tvd_hr_ro;
 
-GRANT READ ON tvd_hr.regions TO tvd_hr_ro;
-GRANT READ ON tvd_hr.countries TO tvd_hr_ro;
+-- workaround for 11g
+GRANT SELECT ON tvd_hr.employees TO tvd_hr_ro;
+GRANT SELECT ON tvd_hr.jobs TO tvd_hr_ro;
+GRANT SELECT ON tvd_hr.job_history TO tvd_hr_ro;
+GRANT SELECT ON tvd_hr.locations TO tvd_hr_ro;
+GRANT SELECT ON tvd_hr.departments TO tvd_hr_ro;
+GRANT SELECT ON tvd_hr.regions TO tvd_hr_ro;
+GRANT SELECT ON tvd_hr.countries TO tvd_hr_ro;
 
 GRANT SELECT,INSERT,UPDATE,DELETE ON tvd_hr.employees TO tvd_hr_rw;
 GRANT SELECT,INSERT,UPDATE,DELETE ON tvd_hr.jobs TO tvd_hr_rw;
