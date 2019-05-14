@@ -19,8 +19,8 @@
 # ---------------------------------------------------------------------------
 # - Customization -----------------------------------------------------------
 # - just add/update any kind of customized environment variable here
-export ORACLE_HOME_NAME="11.2.0.4"
-SETUP_DB="10_setup_db_11.2.sh"
+export ORACLE_HOME_NAME="12.2.0.1"
+SETUP_DB="10_setup_db_12.2.sh"
 # - End of Customization ----------------------------------------------------
 
 # - Environment Variables ---------------------------------------------------
