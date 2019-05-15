@@ -25,3 +25,5 @@ scripts/opwdintg.exe
 scripts/ad.trivadislabs.com_root_ca.cer
 common/*/*/*.keytab
 common/*/*/*.cer
+common/opwdintg.exe
+common/config/tnsadmin/opwdintg.exe
