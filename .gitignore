@@ -27,3 +27,12 @@ common/*/*/*.keytab
 common/*/*/*.cer
 common/opwdintg.exe
 common/config/tnsadmin/opwdintg.exe
+common/config/tnsadmin/cwallet.sso
+common/config/tnsadmin/cwallet.sso.lck
+common/config/tnsadmin/ewallet.p12
+common/config/tnsadmin/ewallet.p12.lck
+common/config/tnsadmin/wallet.tar
+common/config/tnsadmin/wallet/cwallet.sso
+common/config/tnsadmin/wallet/cwallet.sso.lck
+common/config/tnsadmin/wallet/ewallet.p12
+common/config/tnsadmin/wallet/ewallet.p12.lck
