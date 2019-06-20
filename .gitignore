@@ -36,3 +36,4 @@ common/config/tnsadmin/wallet/cwallet.sso
 common/config/tnsadmin/wallet/cwallet.sso.lck
 common/config/tnsadmin/wallet/ewallet.p12
 common/config/tnsadmin/wallet/ewallet.p12.lck
+common/work/*
