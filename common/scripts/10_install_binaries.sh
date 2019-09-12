@@ -17,12 +17,6 @@
 # Modified...:
 # see git revision history for more information on changes/updates
 # ---------------------------------------------------------------------------
-# - Customization -----------------------------------------------------------
-# - just add/update any kind of customized environment variable here
-export ORACLE_HOME_NAME="11.2.0.4"
-SETUP_DB="10_setup_db_11.2.sh"
-# - End of Customization ----------------------------------------------------
-
 # - Environment Variables ---------------------------------------------------
 # source values from vagrant YAML file
 . /vagrant_common/scripts/00_init_environment.sh
@@ -31,9 +25,8 @@ SETUP_DB="10_setup_db_11.2.sh"
 # - Main --------------------------------------------------------------------
 echo "= Start part 10 ======================================================="
 echo "- Install Oracle Binaries -------------------------------------------"
-# Install DB Software
-su -l oracle -c "export ORACLE_HOME_NAME=${ORACLE_HOME_NAME}; \
-${ORADBA_BIN}/${SETUP_DB}"
+# Install DB Software as user oracle and source 00_init_environment.sh
+su -l oracle -c ". /vagrant_common/scripts/00_init_environment.sh; ${ORADBA_BIN}/${SETUP_DB}"
 
 # root scripts
 /u00/app/oraInventory/orainstRoot.sh

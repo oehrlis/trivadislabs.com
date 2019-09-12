@@ -58,8 +58,12 @@ ol7db19:
   ssh_port: 19022
   tns_port: 19521
   console_port: 19500
-  oracle_sid_cdb: TDB190C
-  oracle_sid_sdb: TDB190S
+  oracle_sid_cdb: TDB190C                         # Container DB to be created
+  oracle_sid_sdb: TDB190S                         # none container DB to be created
+  ORACLE_HOME_NAME: 19.0.0.0                      # Name of the oracle home directory
+  SETUP_DB: 10_setup_db_19.4.sh                   # oradba_init setup script used to install the binaries
+  DB_PATCH_PKG: ''                                # Oracle RU patch file to be installed. If not specified it takes the patch defined in the SETUP_DB script.
+  DB_OJVM_PKG: ''                                 # Oracle OJVM RU patch file to be installed. If not specified it takes the patch defined in the SETUP_DB script.
 
   # Oracle 18c database server settings
 ol7db18:
@@ -72,8 +76,12 @@ ol7db18:
   ssh_port: 18022
   tns_port: 18521
   console_port: 18500
-  oracle_sid_cdb: TDB180C
-  oracle_sid_sdb: TDB180S
+  oracle_sid_cdb: TDB180C                         # Container DB to be created
+  oracle_sid_sdb: TDB180S                         # none container DB to be created
+  ORACLE_HOME_NAME: 18.0.0.0                      # Name of the oracle home directory
+  SETUP_DB: 10_setup_db_18.7.sh                   # oradba_init setup script used to install the binaries
+  DB_PATCH_PKG: ''                                # Oracle RU patch file to be installed. If not specified it takes the patch defined in the SETUP_DB script.
+  DB_OJVM_PKG: ''                                 # Oracle OJVM RU patch file to be installed. If not specified it takes the patch defined in the SETUP_DB script.
 
 # Oracle 12c release 2 database server settings
 ol7db122:
@@ -86,8 +94,12 @@ ol7db122:
   ssh_port: 12022
   tns_port: 12521
   console_port: 12500
-  oracle_sid_cdb: TDB122C
-  oracle_sid_sdb: TDB122S
+  oracle_sid_cdb: TDB122C                         # Container DB to be created
+  oracle_sid_sdb: TDB122S                         # none container DB to be created
+  ORACLE_HOME_NAME: 12.2.0.1                      # Name of the oracle home directory
+  SETUP_DB: 10_setup_db_12.2.sh                   # oradba_init setup script used to install the binaries
+  DB_PATCH_PKG: ''                                # Oracle RU patch file to be installed. If not specified it takes the patch defined in the SETUP_DB script.
+  DB_OJVM_PKG: ''                                 # Oracle OJVM RU patch file to be installed. If not specified it takes the patch defined in the SETUP_DB script.
 
 # Oracle 11g release 2 database server settings
 ol7db112:
@@ -100,5 +112,10 @@ ol7db112:
   ssh_port: 11022
   tns_port: 11521
   oracle_sid_cdb: ''
-  oracle_sid_sdb: TDB112S
+  oracle_sid_sdb: TDB112S                         # none container DB to be created
+  ORACLE_HOME_NAME: 11.2.0.4                      # Name of the oracle home directory
+  SETUP_DB: 10_setup_db_11.2.sh                   # oradba_init setup script used to install the binaries
+  DB_PATCH_PKG: ''                                # Oracle RU patch file to be installed. If not specified it takes the patch defined in the SETUP_DB script.
+  DB_OJVM_PKG: ''                                 # Oracle OJVM RU patch file to be installed. If not specified it takes the patch defined in the SETUP_DB script.
+
 # --- EOF -------------------------------------------------------------------
