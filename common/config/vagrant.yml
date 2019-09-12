@@ -19,17 +19,21 @@
 # DB_PATCH_PKG:     = Oracle RU patch file to be installed. If not specified it takes the patch defined in the SETUP_DB script.
 # DB_OJVM_PKG       = Oracle OJVM RU patch file to be installed. If not specified it takes the patch defined in the SETUP_DB script.
 
+# - Common Config -----------------------------------------------------------
+# Configuration valid for all VM's
 common:
   #default_password: ''
   default_password: LAB01schulung
   domain_name: trivadislabs.com
-  #domain_name: example.com
+  #domain_name: postgasse.org
   gateway: 10.0.0.1
   dns: 10.0.0.4
   public_dns1: 8.8.8.8
   public_dns2: 4.4.4.4
+# - EOF Common Config --------------------------------------------------------
 
-# AD server settings
+# - AD Config ----------------------------------------------------------------
+# Configuration valid for AD server
 win2016ad:
   box: StefanScherer/windows_2016
   vm_name: win2016ad
@@ -40,7 +44,10 @@ win2016ad:
   cpus: 1
   public_ip: 10.0.0.4
 
-# OUD server settings
+# - EOF AD Config -------------------------------------------------------------
+
+# - OUD Config ----------------------------------------------------------------
+# Configuration valid for OUD server
 ol7oud12:
   box: ol7-latest
   box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
@@ -52,8 +59,10 @@ ol7oud12:
   ldap_port: 8389
   ldaps_port: 8636
   admin_port: 8444
+# - EOF OUD Config ------------------------------------------------------------
 
-# Oracle 19c database server settings
+# - 19c DB Config -------------------------------------------------------------
+# Configuration valid for Oracle 19c database server
 ol7db19:
   box: ol7-latest
   box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
@@ -70,8 +79,10 @@ ol7db19:
   SETUP_DB: 10_setup_db_19.4.sh
   DB_PATCH_PKG: ''
   DB_OJVM_PKG: ''
+# - EOF 19c DB Config ---------------------------------------------------------
 
-  # Oracle 18c database server settings
+# - 18c DB Config -------------------------------------------------------------
+# Configuration valid for Oracle 18c database server
 ol7db18:
   box: ol7-latest
   box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
@@ -88,8 +99,10 @@ ol7db18:
   SETUP_DB: 10_setup_db_18.7.sh
   DB_PATCH_PKG: ''
   DB_OJVM_PKG: ''
+# - EOF 18c DB Config ---------------------------------------------------------
 
-# Oracle 12c release 2 database server settings
+# - 12c DB Config -------------------------------------------------------------
+# Configuration valid for Oracle 12c database server
 ol7db122:
   box: ol7-latest
   box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
@@ -106,8 +119,10 @@ ol7db122:
   SETUP_DB: 10_setup_db_12.2.sh
   DB_PATCH_PKG: ''
   DB_OJVM_PKG: ''
+# - EOF 12c DB Config ---------------------------------------------------------
 
-# Oracle 11g release 2 database server settings
+# - 11g DB Config -------------------------------------------------------------
+# Configuration valid for Oracle 11c database server
 ol7db112:
   box: ol7-latest
   box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
@@ -123,5 +138,6 @@ ol7db112:
   SETUP_DB: 10_setup_db_11.2.sh
   DB_PATCH_PKG: ''
   DB_OJVM_PKG: ''
+# - EOF 11g DB Config ---------------------------------------------------------
 
 # --- EOF -------------------------------------------------------------------
