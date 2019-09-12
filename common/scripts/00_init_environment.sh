@@ -97,7 +97,7 @@ if [ "${BASH_SOURCE[0]}" != "${0}" ]; then
         j=${i##${HOSTNAME}_}
         VARIABLE=$(echo $j|cut -d= -f1)
         VALUE=$(echo $j|cut -d= -f2|sed 's/"//g')
-        eval ${VARIABLE}=$VALUE
+        eval export ${VARIABLE}=$VALUE
     done
 else
     echo "Script ${BASH_SOURCE[0]} is executed. No action is performed"
