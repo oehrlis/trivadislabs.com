@@ -16,7 +16,7 @@
 --  Modified..:
 --  see git revision history for more information on changes/updates
 ----------------------------------------------------------------------------
-connect / as sysdba
+--connect / as sysdba
 
 SET ECHO OFF
 SET VERIFY OFF
@@ -807,33 +807,3 @@ EXECUTE dbms_stats.gather_schema_stats( -
 
 ----------------------------------------------------------------------------
 -- create VPD stuff
-CONNECT tvd_hr_sec/tvd_hr_sec
-CREATE OR REPLACE FUNCTION EMPLOYEE_RESTRICT (
-   SCHEMA   IN   VARCHAR2,
-   tab      IN   VARCHAR2
-)
- RETURN VARCHAR2
- IS
-  return_val VARCHAR2 (2000);
-BEGIN
-    return_val :=  '(department_id = sys_context(''SYS_LDAP_USER_DEFAULT'', ''DEPARTMENTNUMBER'') ) AND ( upper(last_name) = upper(sys_context(''SYS_LDAP_USER_DEFAULT'', ''UID'')) OR upper(sys_context(''SYS_LDAP_USER_DEFAULT'', ''TITLE'')) = ''MANAGER'') or (sys_context(''SYS_LDAP_USER_DEFAULT'', ''DEPARTMENTNUMBER'') = 70) or (sys_context(''SYS_LDAP_USER_DEFAULT'', ''DEPARTMENTNUMBER'') = 10)';
-    RETURN return_val;
-END employee_restrict;
-/
-
-BEGIN 
-  dbms_rls.add_policy
-   (
-    object_schema    =>'TVD_HR',
-    object_name      =>'EMPLOYEES',
-    policy_name      =>'EMPLOYEE_POLICY',
-    function_schema  =>'TVD_HR_SEC',
-    policy_function  =>'EMPLOYEE_RESTRICT'
-   );
-END;
-/
-
-
-spool off
-exit
--- EOF ---------------------------------------------------------------------
