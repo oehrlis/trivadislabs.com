@@ -22,7 +22,6 @@
 # - Common Config -----------------------------------------------------------
 # Configuration valid for all VM's
 common:
-  #default_password: ''
   default_password: LAB01schulung
   domain_name: trivadislabs.com
   #domain_name: postgasse.org
