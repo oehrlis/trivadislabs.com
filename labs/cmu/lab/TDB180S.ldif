@@ -1,0 +1,98 @@
+# ---------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ---------------------------------------------------------------------------
+# Name.......: TDB180S.ldif 
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2018.11.14
+# Revision...: 
+# Purpose....: ldif file to add the TDB180S DB.
+# Notes......: 
+# Reference..: --
+# License....: Licensed under the Universal Permissive License v 1.0 as 
+#              shown at http://oss.oracle.com/licenses/upl.
+# ---------------------------------------------------------------------------
+# Modified...:
+# see git revision history for more information on changes/updates
+# ---------------------------------------------------------------------------
+
+version: 1
+
+dn: cn=TDB180S,cn=OracleContext,dc=trivadislabs,dc=com
+objectClass: top
+objectClass: orclDBServer
+objectClass: orclService
+objectClass: orclDBServer_92
+objectClass: orclApplicationEntity
+cn: TDB180S
+orclcommonrpwdattribute: {SASL-MD5}+85RX30YrUJ9+qka6Nji3g==
+orclDBGlobalName: TDB180S
+orclNetDescName: 000:cn=DESCRIPTION_0
+orclNetDescString: (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=ol7db18)(PORT=152
+ 1))(CONNECT_DATA=(SERVICE_NAME=TDB180S)))
+orclOracleHome: /u00/app/oracle/product/18.0.0.0
+orclServiceType: DB
+orclSid: TDB180S
+orclSystemName: ol7db18
+orclVersion: 121000
+userPassword: {SSHA}wzv8DkT/3l93liJhHZTaYi3iE7hxLk+u6UZR6g==
+
+dn: cn=DESCRIPTION_0,cn=TDB180S,cn=OracleContext,dc=trivadislabs,dc=com
+objectClass: orclNetDescriptionAux1
+objectClass: orclNetDescription
+objectClass: top
+cn: DESCRIPTION_0
+orclNetAddrList: 000:cn=ADDRESS_0
+orclNetLoadBalance;binary: NO
+orclNetServiceName: TDB180S
+orclNetShared: NO
+orclVersion: v0.0
+
+dn: cn=ADDRESS_0,cn=DESCRIPTION_0,cn=TDB180S,cn=OracleContext,dc=trivadislab
+ s,dc=com
+objectClass: orclNetAddress
+objectClass: top
+cn: ADDRESS_0
+orclNetAddressString: (ADDRESS=(PROTOCOL=TCP)(HOST=db192)(PORT=1521))
+orclNetProtocol: TCP
+orclNetShared: NO
+orclVersion: v0.0
+
+dn: cn=OracleDBAdmins,cn=TDB180S,cn=OracleContext,dc=trivadislabs,dc=com
+objectClass: top
+objectClass: orclprivilegegroup
+objectClass: groupofuniquenames
+cn: OracleDBAdmins
+owner: cn=OracleDBAdmins,cn=TDB180S,cn=OracleContext,dc=trivadislabs,dc=com
+uniquemember: cn=eusadmin,cn=oraclecontext
+
+dn: cn=OracleDBAgents,cn=TDB180S,cn=OracleContext,dc=trivadislabs,dc=com
+objectClass: orclContainer
+objectClass: top
+cn: OracleDBAgents
+
+dn: cn=OracleDBQueues,cn=TDB180S,cn=OracleContext,dc=trivadislabs,dc=com
+objectClass: orclContainer
+objectClass: top
+cn: OracleDBQueues
+
+dn: cn=OracleDBQueueTables,cn=TDB180S,cn=OracleContext,dc=trivadislabs,dc=co
+ m
+objectClass: orclContainer
+objectClass: top
+cn: OracleDBQueueTables
+
+dn: cn=OracleDBConnections,cn=TDB180S,cn=OracleContext,dc=trivadislabs,dc=co
+ m
+objectClass: orclContainer
+objectClass: top
+cn: OracleDBConnections
+
+dn: cn=OracleDBJMSSubscribers,cn=TDB180S,cn=OracleContext,dc=trivadislabs,dc
+ =com
+objectClass: orclContainer
+objectClass: top
+cn: OracleDBJMSSubscribers
+
+# --- EOF --------------------------------------------------------------------

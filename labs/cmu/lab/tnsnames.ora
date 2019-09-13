@@ -1,0 +1,63 @@
+# ---------------------------------------------------------------------------
+# Trivadis AG, Infrastructure Managed Services
+# Saegereistrasse 29, 8152 Glattbrugg, Switzerland
+# ---------------------------------------------------------------------------
+# Name.......: tnsnames.ora 
+# Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
+# Editor.....: Stefan Oehrli
+# Date.......: 2018.11.14
+# Revision...: 
+# Purpose....: TNSNames configuration file for SQLNet.
+# Notes......: 
+# Reference..: --
+# License....: Licensed under the Universal Permissive License v 1.0 as 
+#              shown at http://oss.oracle.com/licenses/upl.
+# ---------------------------------------------------------------------------
+# Modified...:
+# see git revision history for more information on changes/updates
+# ---------------------------------------------------------------------------
+
+TDB180C =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = ol7db18)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = TDB180C)
+    )
+  )
+
+LISTENER_TDB180C.TRIVADISLABS.COM =
+  (ADDRESS = (PROTOCOL = TCP)(HOST = ol7db18)(PORT = 1521))
+
+
+LISTENER_TDB180S.TRIVADISLABS.COM =
+  (ADDRESS = (PROTOCOL = TCP)(HOST = ol7db18)(PORT = 1521))
+
+
+TDB180C.TRIVADISLABS.COM =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = ol7db18)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = TDB180C)
+    )
+  )
+
+TDB180S.TRIVADISLABS.COM =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = ol7db18)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = TDB180S)
+    )
+  )
+
+TDB180S= 
+    (DESCRIPTION = 
+        (ADDRESS = (PROTOCOL = TCP)(HOST=ol7db18)(PORT = 1521))
+            (CONNECT_DATA =
+                (SERVER = DEDICATED)
+            (SERVICE_NAME = TDB180S)
+        )
+    )
+# --- EOF --------------------------------------------------------------------
