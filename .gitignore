@@ -38,3 +38,4 @@ common/config/tnsadmin/wallet/ewallet.p12
 common/config/tnsadmin/wallet/ewallet.p12.lck
 common/work/*
 common/scripts/81_create_tvd_hr.log
+win2016ad/config/opwdintg.exe
