@@ -20,7 +20,7 @@
 # - Customization -----------------------------------------------------------
 # - just add/update any kind of customized environment variable here
 CREATE_DB="52_create_database.sh"
-TVD_HR_CONTAINER="/vagrant_common/scripts/80_create_tvd_hr_pdb1.sql"
+TVD_HR_CONTAINER="/vagrant_common/scripts/80_create_tvd_hr_pdbhr.sql"
 TVD_HR="/vagrant_common/scripts/81_create_tvd_hr.sql"
 # - End of Customization ----------------------------------------------------
 
@@ -30,30 +30,43 @@ TVD_HR="/vagrant_common/scripts/81_create_tvd_hr.sql"
 export DEFAULT_DOMAIN=${domain_name:-"trivadislabs.com"}
 export ORACLE_SID1=${oracle_sid_cdb} 
 export ORACLE_SID2=${oracle_sid_sdb}
+export ORACLE_PDB=${ORACLE_PDB:-"PDBHR"}
 ORAENV="${ORACLE_BASE}/local/dba/bin/oraenv.ksh"
+
 # - EOF Environment Variables -----------------------------------------------
 
 # - Main --------------------------------------------------------------------
 echo "= Start part 20 ======================================================="
-
-if [ -n "${ORACLE_SID1}" ]; then
-    echo "- Create DB CDB ${ORACLE_SID1} ----------------------------------------"
-    # Create DB container DB
-    su -l oracle -c "${ORADBA_BIN}/${CREATE_DB} ${ORACLE_SID1} PDB1 TRUE"
-
-    # install the TVD_HR schema
-    su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; sqlplus /nolog @$TVD_HR_CONTAINER"
-fi
-
 if [ -n "${ORACLE_SID2}" ]; then
     echo "- Create DB 2DB ${ORACLE_SID2} ----------------------------------------"
     # Create DB single tenant DB
-    su -l oracle -c "${ORADBA_BIN}/${CREATE_DB} ${ORACLE_SID2} PDB1 FALSE"
-
+    su -l oracle -c "ORACLE_SID=${ORACLE_SID2} \
+CUSTOM_RSP=${CUSTOM_RSP} \
+ORADBA_DBC_FILE=${ORADBA_DBC_FILE} \
+ORADBA_RSP_FILE=${ORADBA_RSP_FILE} \
+CONTAINER=FALSE \
+${ORADBA_BIN}/${CREATE_DB}"
+  
     # install the TVD_HR schema
     su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; sqlplus /nolog @$TVD_HR"
     su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; sqlplus / as sysdba @?/rdbms/admin/utlsampl.sql"
 fi
+
+if [ -n "${ORACLE_SID1}" ]; then
+    echo "- Create DB CDB ${ORACLE_SID1} ----------------------------------------"
+    # Create DB container DB
+    su -l oracle -c "ORACLE_SID=${ORACLE_SID1} \
+CUSTOM_RSP=${CUSTOM_RSP} \
+ORADBA_DBC_FILE=${ORADBA_DBC_FILE} \
+ORADBA_RSP_FILE=${ORADBA_RSP_FILE} \
+ORACLE_PDB=${ORACLE_PDB} \
+CONTAINER=TRUE \
+${ORADBA_BIN}/${CREATE_DB}"
+
+    # install the TVD_HR schema
+    su -l oracle -c " . ${ORAENV} ${ORACLE_SID1}; sqlplus /nolog @$TVD_HR_CONTAINER"
+fi
+
 echo "--- Configure Oracle Service ------------------------------------------"
 cp ${ORACLE_BASE}/local/dba/etc/oracle.service /usr/lib/systemd/system/
 systemctl --system daemon-reload

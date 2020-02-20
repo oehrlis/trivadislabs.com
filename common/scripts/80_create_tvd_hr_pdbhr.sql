@@ -2,7 +2,7 @@
 --  Trivadis AG, Infrastructure Managed Services
 --  Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 ----------------------------------------------------------------------------
---  Name......: 80_create_tvd_hr_pdb1.sql
+--  Name......: 80_create_tvd_hr_pdbhr.sql
 --  Author....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 --  Editor....: Stefan Oehrli
 --  Date......: 2019.03.18
@@ -16,7 +16,6 @@
 --  Modified..:
 --  see git revision history for more information on changes/updates
 ----------------------------------------------------------------------------
-
 connect / as sysdba
 
 SET ECHO OFF
@@ -33,9 +32,9 @@ DEFINE pass=tvd_hr
 DEFINE pass_sec=tvd_hr_sec;
 DEFINE tbs=USERS
 DEFINE ttbs=TEMP
-DEFINE pdb=pdb1
+DEFINE pdb=pdbhr
 
-SPOOL 80_create_tvd_hr_pdb1.log
+SPOOL 80_create_tvd_hr_pdbhr.log
 
 -- set the current
 alter session set container=&pdb;

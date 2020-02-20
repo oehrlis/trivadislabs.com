@@ -16,7 +16,7 @@
 --  Modified..:
 --  see git revision history for more information on changes/updates
 ----------------------------------------------------------------------------
---connect / as sysdba
+connect / as sysdba
 
 SET ECHO OFF
 SET VERIFY OFF
