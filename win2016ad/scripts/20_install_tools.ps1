@@ -21,21 +21,21 @@
 Write-Host '= Start setup part 20 ======================================'
 # - Install tools --------------------------------------------------
 Write-Host '- Installing putty, winscp and other tools -----------------'
-choco install --yes --limitoutput winscp putty putty.install
-choco install --yes --limitoutput totalcommander
+choco install --yes --no-progress --limitoutput winscp putty putty.install
+choco install --yes --no-progress --limitoutput totalcommander
 #choco install -y wsl
 
 # development
 Write-Host '- Installing DEV tools -------------------------------------'
-choco install --yes --limitoutput git github-desktop vscode
+choco install --yes --no-progress --limitoutput git github-desktop vscode
 
 # Google chrome
 Write-Host '- Installing Google Chrome ----------------------------------'
-choco install --yes --limitoutput googlechrome
+choco install --yes --no-progress --limitoutput googlechrome
 
 # LDAP Utilities
 Write-Host '- Installing LDAP utilities --------------------------------'
-choco install --yes --limitoutput softerraldapbrowser ldapadmin ldapexplorer
+choco install --yes --no-progress --limitoutput softerraldapbrowser ldapadmin ldapexplorer
 
 # Oracle stuff
 #choco install -y oracle-sql-developer
