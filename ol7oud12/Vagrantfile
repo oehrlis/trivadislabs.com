@@ -85,14 +85,22 @@ Vagrant.configure("2") do |config|
     end
 
     # Provision everything on the first run 
-    # start part 1 of the setup
+    # start part 01 of the setup
     cfg.vm.provision "shell", path: "../common/scripts/01_common_setup_os_oud.sh"
 
     # reload the VM
     cfg.vm.provision :reload
-    # start part 2 of the setup
-    # install DB binaries
+    # start part 10 of the setup
+    # install OUD binaries
     cfg.vm.provision "shell", path: "scripts/10_install_binaries.sh"
+
+    # create OUD instance
+    #cfg.vm.provision "shell", path: "scripts/20_create_oud_instance.sh"
+    # create OUDSM domain
+    #cfg.vm.provision "shell", path: "scripts/30_create_oudsm_domain.sh"
+    # config environment (backup,export, logrotate, startup etc)
+    #cfg.vm.provision "shell", path: "scripts/40_config_oudbase.sh"
+
   end
 end
 # --- EOF -------------------------------------------------------------------
