@@ -58,6 +58,7 @@ ol7oud12:
   ldap_port: 8389
   ldaps_port: 8636
   admin_port: 8444
+  JAVA_PKG: p30425892_180241_Linux-x86-64.zip
 # - EOF OUD Config ------------------------------------------------------------
 
 # - 19c DB Config -------------------------------------------------------------
@@ -74,10 +75,15 @@ ol7db19:
   console_port: 19500
   oracle_sid_cdb: TDB190C
   oracle_sid_sdb: TDB190S
+  CUSTOM_RSP: /vagrant/config
+  ORADBA_DBC_FILE: dbca19.0.0_custom.dbc.tmpl
+  ORADBA_RSP_FILE: dbca19.0.0_custom.rsp.tmpl
   ORACLE_HOME_NAME: 19.0.0.0
-  SETUP_DB: 10_setup_db_19.4.sh
-  DB_PATCH_PKG: ''
-  DB_OJVM_PKG: ''
+  SETUP_DB: 10_setup_db.sh
+  DB_BASE_PKG: 'LINUX.X64_193000_db_home.zip'
+  DB_PATCH_PKG: 'p30557433_190000_Linux-x86-64.zip'
+  DB_OJVM_PKG: 'p30484981_190000_Linux-x86-64.zip'
+  DB_OPATCH_PKG: 'p6880880_190000_Linux-x86-64.zip'
 # - EOF 19c DB Config ---------------------------------------------------------
 
 # - 18c DB Config -------------------------------------------------------------
