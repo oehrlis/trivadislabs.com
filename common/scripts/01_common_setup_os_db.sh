@@ -64,6 +64,9 @@ YUM="yum --disablerepo=ol7_developer"
 # install dhcp and git
 ${YUM} install dhcp git -y
 
+# install UEK kernel devel/headers
+${YUM} install kernel-uek-devel kernel-headers kernel-devel -y
+
 # adjust DHCP config
 echo "supersede domain-name-servers ${dns}" /etc/dhcp/dhcpd.conf
 # get the default gatway
