@@ -61,6 +61,31 @@ ol7oud12:
   JAVA_PKG: p30425892_180241_Linux-x86-64.zip
 # - EOF OUD Config ------------------------------------------------------------
 
+# - DB Eng Config -------------------------------------------------------------
+# Configuration valid for Oracle 19c database server
+ol7dbeng:
+  box: ol7-latest
+  box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
+  vm_name: ol7dbeng
+  mem_size: 4096
+  cpus: 2
+  public_ip: 10.0.0.10
+  ssh_port: 10022
+  tns_port: 10521
+  console_port: 10500
+  # oracle_sid_cdb: TDB190C
+  # oracle_sid_sdb: TDB190S
+  # CUSTOM_RSP: /vagrant/config
+  # ORADBA_DBC_FILE: dbca19.0.0_custom.dbc.tmpl
+  # ORADBA_RSP_FILE: dbca19.0.0_custom.rsp.tmpl
+  ORACLE_HOME_NAME: 19.0.0.0
+  # SETUP_DB: 10_setup_db.sh
+  # DB_BASE_PKG: 'LINUX.X64_193000_db_home.zip'
+  # DB_PATCH_PKG: 'p30557433_190000_Linux-x86-64.zip'
+  # DB_OJVM_PKG: 'p30484981_190000_Linux-x86-64.zip'
+  # DB_OPATCH_PKG: 'p6880880_190000_Linux-x86-64.zip'
+# - EOF DB Eng Config ---------------------------------------------------------
+
 # - 19c DB Config -------------------------------------------------------------
 # Configuration valid for Oracle 19c database server
 ol7db19:
