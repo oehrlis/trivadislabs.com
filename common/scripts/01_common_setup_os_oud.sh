@@ -62,7 +62,7 @@ usermod -a -G vagrant oracle
 # workaround for issue #131 https://github.com/oracle/vagrant-boxes/issues/131
 YUM="yum --disablerepo=ol7_developer"
 # install dhcp and git
-${YUM} install dhcp git -y
+${YUM} install dhcp xauth libXrender libXtst git -y
 
 # install UEK kernel devel/headers
 ${YUM} install kernel-uek-devel kernel-headers kernel-devel -y
