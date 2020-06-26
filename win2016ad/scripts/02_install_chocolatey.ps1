@@ -23,11 +23,8 @@ Write-Host '= Start setup part 02 ======================================'
 # install chocolatey
 Write-Host '- Install chocolatey ---------------------------------------'
 
-$ChocoInstallPath = "$env:SystemDrive\ProgramData\Chocolatey\bin"
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-if (!(Test-Path $ChocoInstallPath)) {
-    iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
-}
 # Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 Write-Host '= Finish part 02 ==========================================='
 # --- EOF --------------------------------------------------------------------
