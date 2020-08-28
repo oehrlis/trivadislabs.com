@@ -20,7 +20,8 @@
 # processing commandline parameter
 param (
     [string]$People = "People",
-    [string]$Groups = "Groups"
+    [string]$Groups = "Groups",
+    [string]$company = "Trivadis LAB"
 )
 
 # - Main --------------------------------------------------------------------
@@ -55,7 +56,7 @@ $domainDn   = $adDomain.DistinguishedName
 $PeopleDN   = "ou=$People,$domainDn"
 $UsersDN    = "cn=Users,$domainDn"
 $GroupDN    = "ou=$Groups,$domainDn"
-$company    = (Get-Culture).textinfo.totitlecase($adDomain.Name)
+#$company    = (Get-Culture).textinfo.totitlecase($adDomain.Name)
 $SecurePassword = ConvertTo-SecureString -AsPlainText $PlainPassword -Force
 # - EOF Variables -----------------------------------------------------------
 
@@ -129,6 +130,9 @@ New-ADGroup -Name "$company System Admins" -SamAccountName "$company System Admi
 Add-ADGroupMember -Identity "$company System Admins" -Members tanner,fleming
 
 New-ADGroup -Name "$company APP Admins" -SamAccountName "$company APP Admins" -GroupCategory Security -GroupScope Global -DisplayName "$company APP Admins" -Path $GroupDN
+
+New-ADGroup -Name "$company HR" -SamAccountName "$company HR" -GroupCategory Security -GroupScope Global -DisplayName "$company Management" -Path $GroupDN
+Add-ADGroupMember -Identity "$company HR" -Members rider,lynd
 
 New-ADGroup -Name "$company Management" -SamAccountName "$company Management" -GroupCategory Security -GroupScope Global -DisplayName "$company Management" -Path $GroupDN
 Add-ADGroupMember -Identity "$company Management" -Members king,rider,fleming,clark,blofeld,moneypenny,leitner

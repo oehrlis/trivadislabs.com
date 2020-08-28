@@ -24,6 +24,7 @@
 common:
   default_password: LAB01schulung
   domain_name: trivadislabs.com
+  company_name: Trivadis LAB
   #domain_name: postgasse.org
   gateway: 10.0.0.1
   dns: 10.0.0.4
@@ -39,7 +40,7 @@ win2016ad:
   domain_mode: Win2012R2
   people_ou_name: People
   groups_ou_name: Groups
-  mem_size: 1024
+  mem_size: 2048
   cpus: 1
   public_ip: 10.0.0.4
 

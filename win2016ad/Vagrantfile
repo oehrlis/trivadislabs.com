@@ -97,7 +97,7 @@ Vagrant.configure("2") do |config|
     cfg.vm.provision "shell" do |s|
       s.path        = "scripts/10_config_ad.ps1"
       s.privileged  = false
-      s.args        = [var_people_ou_name, var_groups_ou_name]
+      s.args        = [var_people_ou_name, var_groups_ou_name, var_company_name]
     end
 
     cfg.vm.provision "shell", path: "scripts/11_config_dns.ps1", privileged: false
