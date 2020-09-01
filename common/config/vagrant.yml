@@ -44,13 +44,24 @@ win2016ad:
   cpus: 1
   public_ip: 10.0.0.4
 
+win2019ad:
+  box: StefanScherer/windows_2019
+  vm_name: win2019ad
+  domain_mode: WinThreshold
+  people_ou_name: People
+  groups_ou_name: Groups
+  mem_size: 2048
+  cpus: 1
+  public_ip: 10.0.0.40
 # - EOF AD Config -------------------------------------------------------------
 
 # - OUD Config ----------------------------------------------------------------
 # Configuration valid for OUD server
 ol7oud12:
-  box: ol7-latest
-  box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
+  #box: ol7-latest
+  box: oraclelinux/7
+  #box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
+  box_url: https://oracle.github.io/vagrant-projects/boxes/oraclelinux/7.json
   vm_name: ol7oud12
   mem_size: 1024
   cpus: 1
