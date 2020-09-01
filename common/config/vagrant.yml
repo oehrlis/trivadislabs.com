@@ -25,7 +25,6 @@ common:
   default_password: LAB01schulung
   domain_name: trivadislabs.com
   company_name: Trivadis LAB
-  #domain_name: postgasse.org
   gateway: 10.0.0.1
   dns: 10.0.0.4
   public_dns1: 8.8.8.8
@@ -33,7 +32,7 @@ common:
 # - EOF Common Config --------------------------------------------------------
 
 # - AD Config ----------------------------------------------------------------
-# Configuration valid for AD server
+# Configuration valid for Windows 2016 AD server
 win2016ad:
   box: StefanScherer/windows_2016
   vm_name: win2016ad
@@ -44,6 +43,7 @@ win2016ad:
   cpus: 1
   public_ip: 10.0.0.4
 
+# Configuration valid for Windows 2019 AD server
 win2019ad:
   box: StefanScherer/windows_2019
   vm_name: win2019ad
@@ -52,7 +52,7 @@ win2019ad:
   groups_ou_name: Groups
   mem_size: 2048
   cpus: 1
-  public_ip: 10.0.0.40
+  public_ip: 10.0.0.4
 # - EOF AD Config -------------------------------------------------------------
 
 # - OUD Config ----------------------------------------------------------------
