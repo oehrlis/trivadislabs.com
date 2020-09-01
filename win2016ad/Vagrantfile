@@ -30,6 +30,7 @@ params              = YAML.load_file '../common/config/vagrant.yml'
 # shared configuration
 var_default_password= params['common']['default_password']
 var_domain_name     = params['common']['domain_name']
+var_company_name    = params['common']['company_name']
 var_gateway_address = params['common']['gateway_address']
 var_public_dns1     = params['common']['public_dns1']
 var_public_dns2     = params['common']['public_dns2']
