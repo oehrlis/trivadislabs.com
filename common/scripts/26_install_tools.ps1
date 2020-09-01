@@ -2,7 +2,7 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: 20_install_tools.ps1
+# Name.......: 26_install_tools.ps1
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2019.05.13
@@ -18,7 +18,7 @@
 # ---------------------------------------------------------------------------
 
 # - Main --------------------------------------------------------------------
-Write-Host '= Start setup part 20 ======================================'
+Write-Host '= Start setup part 6 ======================================='
 # - Install tools --------------------------------------------------
 Write-Host '- Installing putty, winscp and other tools -----------------'
 choco install --yes --no-progress --limitoutput winscp putty putty.install
@@ -39,5 +39,5 @@ choco install --yes --no-progress --limitoutput softerraldapbrowser ldapadmin ld
 
 # Oracle stuff
 #choco install -y oracle-sql-developer
-Write-Host '= Finish part 20 ==========================================='
+Write-Host '= Finish part 6 ============================================'
 # --- EOF --------------------------------------------------------------------

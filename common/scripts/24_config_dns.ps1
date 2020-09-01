@@ -2,7 +2,7 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: 11_config_dns.ps1
+# Name.......: 24_config_dns.ps1
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2019.05.13
@@ -42,17 +42,19 @@ if ((Test-Path $DefaultPWDFile)) {
 }
 
 # - Variables ---------------------------------------------------------------
-$adDomain   = Get-ADDomain
-$domain     = $adDomain.DNSRoot
-$REALM      = $adDomain.DNSRoot.ToUpper()
-$domainDn   = $adDomain.DistinguishedName
-$hostfile   = "C:\vagrant_common\config\hosts.csv"
+$adDomain       = Get-ADDomain
+$domain         = $adDomain.DNSRoot
+$REALM          = $adDomain.DNSRoot.ToUpper()
+$domainDn       = $adDomain.DistinguishedName
+$NAT_HOSTNAME   = hostname
+$hostfile       = "C:\vagrant_common\config\hosts.csv"
 # - EOF Variables -----------------------------------------------------------
 
 # - Configure Domain --------------------------------------------------------
 # - Main --------------------------------------------------------------------
-Write-Host '= Start setup part 11 ======================================'
+Write-Host '= Start setup part 4 ======================================='
 Write-Host '- Configure active directory -------------------------------'
+Write-Host "Host                : $NAT_HOSTNAME"
 Write-Host "Domain              : $domain"
 Write-Host "REALM               : $REALM"
 Write-Host "Base DN             : $domainDn"
@@ -63,7 +65,7 @@ Write-Host 'Create reverse lookup zone...'
 Add-DnsServerPrimaryZone -NetworkID "10.0.0.0/24" -ReplicationScope "Forest"
 
 # temporary remove AD server record
-Remove-DnsServerResourceRecord -ZoneName $domain -RRType "A" -Name "win2016ad" -Force
+#Remove-DnsServerResourceRecord -ZoneName $domain -RRType "A" -Name $NAT_HOSTNAME -Force
 
 #...and import hosts
 Write-Host 'Process hosts from CSV ...'
@@ -106,5 +108,5 @@ $NAT_HOSTNAME=hostname
 # get DNS Server Records
 Get-DnsServerResourceRecord -ZoneName $domain -Name $NAT_HOSTNAME
 
-Write-Host '= Finish part 11 ==========================================='
+Write-Host '= Finish part 4 ============================================'
 # --- EOF --------------------------------------------------------------------

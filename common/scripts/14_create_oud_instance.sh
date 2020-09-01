@@ -3,12 +3,12 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: 30_create_oudsm_domain.sh 
+# Name.......: 14_create_oud_instance.sh 
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2018.09.27
 # Revision...: 
-# Purpose....: Wrapper script to create oudsm instance.
+# Purpose....: Wrapper script to create oud instance.
 # Notes......: ...
 # Reference..: --
 # License....: Licensed under the Universal Permissive License v 1.0 as 

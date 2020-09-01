@@ -2,7 +2,7 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: 10_config_ad.ps1
+# Name.......: 23_config_ad.ps1
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2019.05.13
@@ -25,7 +25,7 @@ param (
 )
 
 # - Main --------------------------------------------------------------------
-Write-Host '= Start setup part 10 ======================================'
+Write-Host '= Start setup part 3 ======================================='
 # wait until we can access the AD. this is needed to prevent errors like:
 #   Unable to find a default server with Active Directory Web Services running.
 while ($true) {
@@ -150,5 +150,5 @@ Add-ADGroupMember -Identity "Domain Admins" -Members vagrant
 Add-ADGroupMember -Identity "Enterprise Admins" -Members vagrant
 
 Write-Host 'Done configuring AD...'
-Write-Host '= Finish part 10 ==========================================='
+Write-Host '= Finish part 3 ============================================'
 # --- EOF --------------------------------------------------------------------

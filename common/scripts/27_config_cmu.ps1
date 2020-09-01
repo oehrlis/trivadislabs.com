@@ -2,7 +2,7 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: 30_config_cmu.ps1
+# Name.......: 27_config_cmu.ps1
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2019.05.13
@@ -18,7 +18,7 @@
 # ---------------------------------------------------------------------------
 
 # - Main --------------------------------------------------------------------
-Write-Host '= Start setup part 30 ======================================='
+Write-Host '= Start setup part 7 ========================================'
 
 # - Variables ---------------------------------------------------------------
 $adDomain   = Get-ADDomain
@@ -28,5 +28,5 @@ $adDomain   = Get-ADDomain
 Write-Host '- Configure AD password filter -----------------------------'
 Write-Host " not yet implemented"
 
-Write-Host '= Finish part 30 ============================================'
+Write-Host '= Finish part 7 ============================================='
 # --- EOF --------------------------------------------------------------------

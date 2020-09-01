@@ -3,12 +3,12 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: 10_install_binaries.sh 
+# Name.......: 15_create_oudsm_domain.sh 
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2018.09.27
 # Revision...: 
-# Purpose....: Script to install DB binaries in Vagrant box db.trivadislabs.com.
+# Purpose....: Wrapper script to create oudsm instance.
 # Notes......: ...
 # Reference..: --
 # License....: Licensed under the Universal Permissive License v 1.0 as 
@@ -19,20 +19,43 @@
 # ---------------------------------------------------------------------------
 # - Customization -----------------------------------------------------------
 # - just add/update any kind of customized environment variable here
-SETUP_BASENV="20_setup_basenv.sh"
+CREATE_DB="52_create_database.sh"
 # - End of Customization ----------------------------------------------------
 
 # - Environment Variables ---------------------------------------------------
 # source values from vagrant YAML file
 . /vagrant_common/scripts/00_init_environment.sh
-export DEFAULT_DOMAIN=${domain_name:-"trivadislabs.com"} 
+export DEFAULT_DOMAIN=${domain_name:-"trivadislabs.com"}
 # - EOF Environment Variables -----------------------------------------------
 
 # - Main --------------------------------------------------------------------
-echo "= Start part 11 ======================================================="
-echo "- Install TVD-Basenv --------------------------------------------------"
-# Install TVD-Basenv
-su -l oracle -c "export DEFAULT_DOMAIN=${DEFAULT_DOMAIN}; \
-${ORADBA_BIN}/${SETUP_BASENV}"
-echo "= Finish part 11 ======================================================"
+echo "= Start part 20 ======================================================="
+
+if [ -n "${ORACLE_SID1}" ]; then
+    echo "- Create DB CDB ${ORACLE_SID1} ----------------------------------------"
+    # Create DB container DB
+    su -l oracle -c "${ORADBA_BIN}/${CREATE_DB} ${ORACLE_SID1} PDB1 TRUE"
+
+    # install the TVD_HR schema
+    su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; sqlplus /nolog @$TVD_HR_CONTAINER"
+fi
+
+if [ -n "${ORACLE_SID2}" ]; then
+    echo "- Create DB 2DB ${ORACLE_SID2} ----------------------------------------"
+    # Create DB single tenant DB
+    su -l oracle -c "${ORADBA_BIN}/${CREATE_DB} ${ORACLE_SID2} PDB1 FALSE"
+
+    # install the TVD_HR schema
+    su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; sqlplus /nolog @$TVD_HR"
+    su -l oracle -c " . ${ORAENV} ${ORACLE_SID2}; sqlplus / as sysdba @?/rdbms/admin/utlsampl.sql"
+fi
+echo "--- Configure Oracle Service ------------------------------------------"
+cp ${ORACLE_BASE}/local/dba/etc/oracle.service /usr/lib/systemd/system/
+systemctl --system daemon-reload
+systemctl enable oracle
+
+# change all DB to autostart in oratab
+sed -i "s/N$/Y/" /etc/oratab
+
+echo "= Finish part 20 ======================================================"
 # --- EOF --------------------------------------------------------------------

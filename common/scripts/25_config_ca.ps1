@@ -2,7 +2,7 @@
 # Trivadis AG, Infrastructure Managed Services
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
-# Name.......: 12_config_ca.ps1
+# Name.......: 25_config_ca.ps1
 # Author.....: Stefan Oehrli (oes) stefan.oehrli@trivadis.com
 # Editor.....: Stefan Oehrli
 # Date.......: 2018.05.13
@@ -39,7 +39,7 @@ $RootCAFile = "C:\vagrant_common\config\tnsadmin\RootCA_" + $domain + ".cer"
 
 # - Configure Domain --------------------------------------------------------
 # - Main --------------------------------------------------------------------
-Write-Host '= Start setup part 12 ======================================'
+Write-Host '= Start setup part 5 ======================================='
 Write-Host '- Configure Cert-Authority ---------------------------------'
 Write-Host "Domain              : $domain"
 Write-Host "Base DN             : $domainDn"
@@ -77,5 +77,5 @@ Write-Host $cmd
 # print output off command
 Write-Host $output
 
-Write-Host '= Finish part 12 ==========================================='
+Write-Host '= Finish part 5 ============================================'
 # --- EOF --------------------------------------------------------------------
