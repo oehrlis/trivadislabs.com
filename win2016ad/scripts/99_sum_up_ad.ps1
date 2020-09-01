@@ -49,13 +49,17 @@ Write-Host "NAT HOSTNAME    => $NAT_HOSTNAME"
 Get-DnsServerResourceRecord -ZoneName $domain -Name $NAT_HOSTNAME -RRType "A" 
 
 $NAT_RECORD = Get-DnsServerResourceRecord -ZoneName $domain -Name $NAT_HOSTNAME -RRType "A" | where {$_.RecordData.IPv4Address -EQ $NAT_IP}
-
+$IP_RECORD  = Get-DnsServerResourceRecord -ZoneName $domain -Name $NAT_HOSTNAME -RRType "A" | where {$_.RecordData.IPv4Address -EQ $ip}
 if($NAT_RECORD -eq $null){
     Write-Host "No NAT DNS record found"
 } else {
-    # remove the DNS Record for the NAT Network
-    Write-Host " remove DNS record $NAT_IP for host $NAT_HOSTNAME in zone $domain"
-    Remove-DnsServerResourceRecord -ZoneName $domain -RRType "A" -Name $NAT_HOSTNAME -RecordData $NAT_IP -force
+    if($IP_RECORD -ne $null){
+        # remove the DNS Record for the NAT Network
+        Write-Host " remove DNS record $NAT_IP for host $NAT_HOSTNAME in zone $domain"
+        Remove-DnsServerResourceRecord -ZoneName $domain -RRType "A" -Name $NAT_HOSTNAME -RecordData $NAT_IP -force
+    } else {
+        Write-Host "NAT DNS record not removed"
+    }
 }
 
 Get-DnsServerResourceRecord -ZoneName $domain -Name $NAT_HOSTNAME
