@@ -20,7 +20,7 @@ All projects in this repository require Vagrant and Oracle VM VirtualBox or Wind
 
 Depending on the VM environment it may be necessary to download additional Oracle software or Vagrant boxes.
 
-## Trivadis LAB VM Enviroment
+## Trivadis LAB VM Environment
 
 Trivadis LAB currently contains the configuration for the following VM environments:
 
@@ -35,7 +35,7 @@ Trivadis LAB currently contains the configuration for the following VM environme
 | [win2016ad](win2016ad) | Windows AD VM | Windows Server 2016 Active Directory VM         |
 | [win2019ad](win2019ad) | Windows AD VM | Windows Server 2019 Active Directory VM         |
 
-## Feedback and Issues
+## Feedback and Issues
 
 Please file your bug reports, enhancement requests, questions and other support requests within Github's issue tracker:
 
