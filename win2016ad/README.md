@@ -18,7 +18,8 @@ vagrant box add StefanScherer/windows_2016 --provider virtualbox
    1. The first time you run this it will provision everything and may take a while (20-40min). Ensure you have a good internet connection as the scripts will download a couple of tools via `Chocolatey`.
    2. The installation can be customized, if desired (see [Configuration](#configuration)).
 4. Connect to the VM using `vagrant rdp` as *vagrant* or *administrator* user. Default password is either store in [vagrant.yml](common/config/vagrant.yml) or [default_pwd_windows.txt](../common/config/default_pwd_windows.txt).
-5. You can shut down the VM via the usual `vagrant halt` and then start it up again via `vagrant up`
+5. If necessary, run the Windows Update manually.
+6. You can shut down the VM via the usual `vagrant halt` and then start it up again via `vagrant up`
 
 ## Configuration
 
@@ -29,4 +30,4 @@ The different VMs respectively `Vagrantfile` can be used _as-is_, without any ad
 - If you need to, you can connect to the virtual machine via `vagrant rdp`.
 - On the guest OS, the directory `C:\vagrant`, `C:\vagrant_common` and `C:\vagrant_labs` are a shared folder and maps to wherever you have this file checked out.
 
-**HINT:** The Active Directory configuration for [win2016ad](./README.md) and [win2019ad](../win2019ad/README.md) and are identically in term of IP address and AD domain name. Therefor you can not run both VMs at the same time. Either run the Windows Server 2019 AD or Windows Server 2016 AD VM.
+**HINT:** The Active Directory configuration for [win2016ad](./README.md) and [win2019ad](../win2019ad/README.md) are identically in term of IP address and AD domain name. Therefor you can not run both VMs at the same time. Either run the Windows Server 2019 AD or Windows Server 2016 AD VM.
