@@ -1,6 +1,6 @@
 # Trivadis LAB Environment
 
-This repository contains *Trivadis LAB* a VM based environment for testing and engineering various Oracle features and use cases. The various environments are based on Oracle VM VirtualBox and are provisioned with Vagrant. The Oracle VM VirtualBox images themselves are based on Oracle's [Oracle Linux Box](https://yum.oracle.com/boxes/) or [Stefan Scherrer's Windows Box](https://app.vagrantup.com/StefanScherer) from the Vagrant Cloud. As shown in the figure below, Trivadis LAB was initially set up for engineering in the context of Oracle Enterprise User Security, Centrally Managed Users and Kerberos. However, the corresponding VMs can also be used individually or in combination for all kind of use- and test cases. More detailed information on Trivadis LAB is available in the [doc](doc) folder.
+This repository contains *Trivadis LAB* a VM based environment for testing and engineering various Oracle features and use cases. The various environments are based on Oracle VM VirtualBox and are provisioned with Vagrant. The Oracle VM VirtualBox images themselves are based on Oracle's [Oracle Linux Box](https://yum.oracle.com/boxes/) or [Stefan Scherrer's Windows Box](https://app.vagrantup.com/StefanScherer) from the Vagrant Cloud. As shown in the figure below, Trivadis LAB was initially set up for engineering in the context of Oracle Enterprise User Security, Centrally Managed Users and Kerberos. However, the corresponding VMs can also be used individually or in combination for all kind of use- and test cases. More detailed information on Trivadis LAB is available in the [doc](doc) folder or in the [LAB and Example](labs) folder.
 
 ![Trivadis LAB Environment](./doc/images/LabEnvironment.png)
 *Figure. 1: Trivadis LAB Environment*
@@ -18,23 +18,22 @@ All projects in this repository require Vagrant and Oracle VM VirtualBox or Wind
 2. Change into the desired folder for the VM environment.
 3. Follow the README.md instructions inside the folder.
 
-Depending on the VM environment it may be necessary to download additional Oracle software.
+Depending on the VM environment it may be necessary to download additional Oracle software or Vagrant boxes.
 
 ## Trivadis LAB VM Enviroment
 
 Trivadis LAB currently contains the configuration for the following VM environments:
 
-+-----------+------------+------+------------------------------------------------+
-| Version   | Date       | Visa | Comment                                        |
-+===========+============+======+================================================+
-| 0.1       | 2020.07.25 | soe  | Initialer Release                              |
-+-----------+------------+------+------------------------------------------------+
-| 0.2       | 2020.08.26 | soe  | Update PoC Informationen und Anhang            |
-+-----------+------------+------+------------------------------------------------+
-| 0.3       | 2020.08.27 | soe  | Installationsdokumentation hinzufügen          |
-+-----------+------------+------+------------------------------------------------+
-| 0.4       | 2020.08.28 | soe  | Ergänzung der OUD Konfiguration                |
-+-----------+------------+------+------------------------------------------------+
+| VM                     | Type          | Description                                     |
+|------------------------|---------------|-------------------------------------------------|
+| [ol7db112](ol7db112)   | Linux DB VM   | Linux VM with Oracle 11.2.0.4                   |
+| [ol7db122](ol7db122)   | Linux DB VM   | Linux VM with Oracle Database 12.2.0.2          |
+| [ol7db18](ol7db18)     | Linux DB VM   | Linux VM with Oracle Database 18c (18.11.0.0)   |
+| [ol7db19](ol7db19)     | Linux DB VM   | Linux VM with Oracle Database 19c (19.8.0.0)    |
+| [ol7db112](ol7db112)   | Linux DB VM   | Linux VM with Oracle Database 11.2.0.4          |
+| [ol7oud12](ol7oud12)   | Linux OUD VM  | Linux VM with Oracle Unified Directory 12.2.1.4 |
+| [win2016ad](win2016ad) | Windows AD VM | Windows Server 2016 Active Directory VM         |
+| [win2019ad](win2019ad) | Windows AD VM | Windows Server 2019 Active Directory VM         |
 
 ## Feedback and Issues
 
