@@ -24,15 +24,15 @@ param (
  )
 
 # - Main --------------------------------------------------------------------
-Write-Host '= Start setup part 8 ======================================='
-Write-Host "Domain              : $domain"
-Write-Host "IP                  : $ip"
-
 # get the IP Address of the NAT Network
 $NAT_IP=(Get-WmiObject -Class Win32_NetworkAdapterConfiguration | where {$_.DefaultIPGateway -ne $null}).IPAddress | select-object -first 1
 $NAT_HOSTNAME=hostname
-Write-Host "NAT IP          => $NAT_IP"
-Write-Host "NAT HOSTNAME    => $NAT_HOSTNAME"
+
+Write-Host '= Start setup part 8 ======================================='
+Write-Host "Domain              : $domain"
+Write-Host "IP                  : $ip"
+Write-Host "NAT IP              : $NAT_IP"
+Write-Host "NAT Hostname        : $NAT_HOSTNAME"
 
 # get DNS Server Records
 Get-DnsServerResourceRecord -ZoneName $domain -Name $NAT_HOSTNAME -RRType "A" 
@@ -52,5 +52,13 @@ if($NAT_RECORD -eq $null){
 }
 
 Get-DnsServerResourceRecord -ZoneName $domain -Name $NAT_HOSTNAME
+
+Write-Host '- Configure Windows Update -------------------------------------'
+Install-PackageProvider -Name NuGet -Force
+Install-Module -Name PSWindowsUpdate -Force
+Get-Package -Name PSWindowsUpdate
+# Install windows updates currently does not work
+# Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot
+
 Write-Host '= Finish part 8 ============================================='
 # --- EOF --------------------------------------------------------------------

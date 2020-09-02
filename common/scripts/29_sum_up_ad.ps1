@@ -21,6 +21,7 @@
 param (
     [string]$domain = "trivadislabs.com"
  )
+
 $NAT_HOSTNAME=hostname
 
 Get-DnsServerResourceRecord -ZoneName $domain -Name $NAT_HOSTNAME
@@ -60,15 +61,11 @@ function Get-MachineSID {
     }
 }
 
-Write-Host '- Start Windows Update -------------------------------------'
-Install-PackageProvider -Name NuGet -Force
-Install-Module -Name PSWindowsUpdate –Force
-Get-Package -Name PSWindowsUpdate
-Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot
-
 echo "This Computer SID is $(Get-MachineSID)"
 Write-Host ''
 Write-Host '============================================================'
-Write-Host "  Successfully finish setup AD VM ($NAT_HOSTNAME.$domain)"
+Write-Host ' Successfully finish setup AD VM '
+Write-Host "  Host      : $NAT_HOSTNAME"
+Write-Host "  Domain    : $domain"
 Write-Host '============================================================'
 # --- EOF --------------------------------------------------------------------
