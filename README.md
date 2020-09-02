@@ -5,23 +5,6 @@ This repository contains *Trivadis LAB* a VM based environment for testing and e
 ![Trivadis LAB Environment](./doc/images/LabEnvironment.png)
 *Figure. 1: Trivadis LAB Environment*
 
-## Prerequisites
-
-All projects in this repository require Vagrant and Oracle VM VirtualBox or Window Server Virtualbox with the vagrant-libvirt plugin.
-
-1. Install Oracle VM VirtualBox
-2. Install Vagrant
-
-## Getting started
-
-1. Clone this repository `git clone https://github.com/oehrlis/trivadislabs.com`.
-2. Change into the desired folder for the VM environment.
-3. Follow the README.md instructions inside the folder.
-
-Depending on the VM environment it may be necessary to download additional Oracle software or Vagrant boxes.
-
-## Trivadis LAB VM Environment
-
 Trivadis LAB currently contains the configuration for the following VM environments:
 
 | VM                     | Type          | Description                                     |
@@ -37,9 +20,33 @@ Trivadis LAB currently contains the configuration for the following VM environme
 
 Table: Trivadis LAB environments
 
+## Prerequisites
+
+All projects in this repository require Vagrant and Oracle VM VirtualBox or Window Server Virtualbox with the vagrant-libvirt plugin.
+
+1. Install [Oracle VM VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+2. Install [Vagrant](https://vagrantup.com/)
+
+## Getting started
+
+1. Clone this repository `git clone https://github.com/oehrlis/trivadislabs.com`.
+2. Change into the desired folder for the VM environment.
+3. Follow the README.md instructions inside the folder.
+
+Depending on the VM environment it may be necessary to download additional Oracle software or Vagrant boxes.
+
+## Configuration
+
+The different VMs respectively `Vagrantfile` can be used _as-is_, without any additional configuration. However, there are several parameters you can set to tailor the installation to your needs. All `Vagrantfile` are configured to use a common YAML file ([vagrant.yml](common/config/vagrant.yml)) within this file you can configure VM specific parameter like IP addresses, domain names, software packages etc. Either update the corresponding `Vagrantfile` or the section in the common YAML file.
+
 ## Feedback and Issues
 
 Please file your bug reports, enhancement requests, questions and other support requests within Github's issue tracker:
 
 * [Existing issues](https://github.com/oehrlis/trivadislabs.com/issues)
 * [submit new issue](https://github.com/oehrlis/trivadislabs.com/issues/new)
+
+## License
+
+To download and run Oracle Database, Oracle Unified Directory, Oracle Directory Server Enterprise Edition and Oracle JDK, regardless whether inside or outside a Docker container, you must download the binaries from the Oracle website and accept the license indicated at that page.
+
