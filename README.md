@@ -35,6 +35,11 @@ Trivadis LAB currently contains the configuration for the following VM environme
 | [win2016ad](win2016ad) | Windows AD VM | Windows Server 2016 Active Directory VM         |
 | [win2019ad](win2019ad) | Windows AD VM | Windows Server 2019 Active Directory VM         |
 
+<<<<<<< HEAD
+=======
+Table: Trivadis LAB environments
+
+>>>>>>> 71148701c8b4243de4653a96a3a349341de5664d
 ## Feedback and Issues
 
 Please file your bug reports, enhancement requests, questions and other support requests within Github's issue tracker:
