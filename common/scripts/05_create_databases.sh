@@ -38,7 +38,7 @@ ORAENV="${ORACLE_BASE}/local/dba/bin/oraenv.ksh"
 # - Main --------------------------------------------------------------------
 echo "= Start part 20 ======================================================="
 if [ -n "${ORACLE_SID2}" ]; then
-    echo "- Create DB 2DB ${ORACLE_SID2} ----------------------------------------"
+    echo "- Create DB SDB ${ORACLE_SID2} ----------------------------------------"
     # Create DB single tenant DB
     su -l oracle -c "ORACLE_SID=${ORACLE_SID2} \
 CUSTOM_RSP=${CUSTOM_RSP} \
