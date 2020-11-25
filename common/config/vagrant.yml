@@ -24,7 +24,7 @@
 common:
   default_password: LAB01schulung
   domain_name: trivadislabs.com
-  company_name: Trivadis LAB
+  company_name: 'Trivadis-LAB' 
   gateway: 10.0.0.1
   dns: 10.0.0.4
   public_dns1: 8.8.8.8
@@ -98,11 +98,35 @@ ol7dbeng:
   # DB_OPATCH_PKG: 'p6880880_190000_Linux-x86-64.zip'
 # - EOF DB Eng Config ---------------------------------------------------------
 
+# - 20c DB Config -------------------------------------------------------------
+# Configuration valid for Oracle 19c database server
+ol7db20:
+  box: oraclelinux/7
+  box_url: https://oracle.github.io/vagrant-projects/boxes/oraclelinux/7.json
+  vm_name: ol7db20
+  mem_size: 4096
+  cpus: 2
+  public_ip: 10.0.0.20
+  ssh_port: 20022
+  tns_port: 20521
+  console_port: 20500
+  oracle_sid_cdb: TDB200C
+  CUSTOM_RSP: /vagrant/config
+  ORADBA_DBC_FILE: dbca20.0.0_custom.dbc.tmpl
+  ORADBA_RSP_FILE: dbca20.0.0_custom.rsp.tmpl
+  ORACLE_HOME_NAME: 20.0.0.0
+  SETUP_DB: 10_setup_db.sh
+  DB_BASE_PKG: 'LINUX.X64_202000_db_home.zip'
+  DB_PATCH_PKG: ''
+  DB_OJVM_PKG: ''
+  DB_OPATCH_PKG: 'p6880880_200000_Linux-x86-64.zip'
+# - EOF 20c DB Config ---------------------------------------------------------
+
 # - 19c DB Config -------------------------------------------------------------
 # Configuration valid for Oracle 19c database server
 ol7db19:
-  box: ol7-latest
-  box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
+  box: oraclelinux/7
+  box_url: https://oracle.github.io/vagrant-projects/boxes/oraclelinux/7.json
   vm_name: ol7db19
   mem_size: 4096
   cpus: 2
@@ -118,9 +142,12 @@ ol7db19:
   ORACLE_HOME_NAME: 19.0.0.0
   SETUP_DB: 10_setup_db.sh
   DB_BASE_PKG: 'LINUX.X64_193000_db_home.zip'
-  DB_PATCH_PKG: 'p30557433_190000_Linux-x86-64.zip'
-  DB_OJVM_PKG: 'p30484981_190000_Linux-x86-64.zip'
+  DB_PATCH_PKG: 'p31771877_190000_Linux-x86-64.zip'
+  DB_OJVM_PKG: 'p31668882_190000_Linux-x86-64.zip'
   DB_OPATCH_PKG: 'p6880880_190000_Linux-x86-64.zip'
+  DB_JDKPATCH_PKG: 'p31743771_190000_Linux-x86-64.zip'
+  DB_PERLPATCH_PKG: 'p29511771_190000_Linux-x86-64.zip'
+
 # - EOF 19c DB Config ---------------------------------------------------------
 
 # - 18c DB Config -------------------------------------------------------------
