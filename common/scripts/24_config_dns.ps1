@@ -79,8 +79,12 @@ foreach ($HostRecord in $HostList)
     $Keytabfile = 'C:\vagrant_common\config\tnsadmin\' + $FQDN + '.keytab'
     $Zone       = "0.0.10.in-addr.arpa"
 
-    Write-Host "Add DNS Resource Record A for Host $Hostname with IP $IP ..."
-    Add-DnsServerResourceRecordA -Name $Hostname -ZoneName $domain -AllowUpdateAny -IPv4Address $IP -TimeToLive 01:00:00
+    # Write-Host "Add DNS Resource Record A for Host $Hostname with IP $IP ..."
+    # Try {
+    #     Add-DnsServerResourceRecordA -Name $Hostname -ZoneName $domain -AllowUpdateAny -IPv4Address $IP -TimeToLive 01:00:00
+    # } Catch {
+    #     Write-Host "Error while adding Resource Record A for Host:`n$($Error[0].Exception.Message)"
+    # }
     Write-Host "Add DNS PTR resource record for Host $Hostname for $FQDN"
     Add-DnsServerResourceRecordPtr -Name $IPv4Name -ZoneName $Zone -AllowUpdateAny -TimeToLive 01:00:00 -AgeRecord -PtrDomainName $FQDN
     if ( $Hostname -Match "db") {

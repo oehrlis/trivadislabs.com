@@ -1,6 +1,7 @@
 # Windows Server 2016
 
-This Vagrant project provisions Windows 2016 Server with Active Directory automatically, using Vagrant, a Windows 2016 Server box and several powershell scripts.
+This Vagrant project provisions Windows 2016 Server with Active Directory automatically, using Vagrant, a Windows 2016 Server box and several powershell scripts. This VM can also be used in conjunction with Docker based Oracle Engineering ([oehrlis/doe](https://github.com/oehrlis/doe)). A perfect companion when you plan to test *Oracle Centrally Managed Users* with your Docker based Oracle database.
+
 
 ## Prerequisites
 
