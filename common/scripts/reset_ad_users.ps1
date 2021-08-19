@@ -28,7 +28,7 @@ Import-Module ActiveDirectory
 
 # Update group membership of Trivadis LAB Users
 Write-Host 'Add group Trivadis LAB Users to ORA_VFR_11G...'
-Add-ADPrincipalGroupMembership -Identity "Trivadislabs Users" -MemberOf ORA_VFR_11G
+Add-ADPrincipalGroupMembership -Identity "Trivadis LAB Users" -MemberOf ORA_VFR_11G
 # ORA_VFR_12C should yet not been used for EUS. Make sure you clarify the SHA512 issues on the DB first.
 #Add-ADPrincipalGroupMembership -Identity "Trivadis LAB Users" -MemberOf ORA_VFR_12C
 

@@ -23,8 +23,8 @@
 # Configuration valid for all VM's
 common:
   default_password: LAB01schulung
-  domain_name: trivadislabs.com
-  company_name: 'Trivadis-LAB' 
+  domain_name: example.com
+  company_name: 'Example-LAB' 
   gateway: 10.0.0.1
   dns: 10.0.0.4
   public_dns1: 8.8.8.8
@@ -47,12 +47,23 @@ win2016ad:
 win2019ad:
   box: StefanScherer/windows_2019
   vm_name: win2019ad
-  domain_mode: WinThreshold
+  domain_mode: default
   people_ou_name: People
   groups_ou_name: Groups
   mem_size: 2048
   cpus: 1
   public_ip: 10.0.0.4
+
+# Configuration valid for Windows 2019 AD server
+win2019adtest:
+  box: StefanScherer/windows_2019
+  vm_name: win2019ad
+  domain_mode: default
+  people_ou_name: People
+  groups_ou_name: Groups
+  mem_size: 2048
+  cpus: 1
+  public_ip: 10.0.0.99
 # - EOF AD Config -------------------------------------------------------------
 
 # - OUD Config ----------------------------------------------------------------
@@ -73,54 +84,31 @@ ol7oud12:
   JAVA_PKG: p30425892_180241_Linux-x86-64.zip
 # - EOF OUD Config ------------------------------------------------------------
 
-# - DB Eng Config -------------------------------------------------------------
-# Configuration valid for Oracle 19c database server
-ol7dbeng:
-  box: ol7-latest
-  box_url: https://yum.oracle.com/boxes/oraclelinux/latest/ol7-latest.box
-  vm_name: ol7dbeng
-  mem_size: 4096
-  cpus: 2
-  public_ip: 10.0.0.10
-  ssh_port: 10022
-  tns_port: 10521
-  console_port: 10500
-  # oracle_sid_cdb: TDB190C
-  # oracle_sid_sdb: TDB190S
-  # CUSTOM_RSP: /vagrant/config
-  # ORADBA_DBC_FILE: dbca19.0.0_custom.dbc.tmpl
-  # ORADBA_RSP_FILE: dbca19.0.0_custom.rsp.tmpl
-  ORACLE_HOME_NAME: 19.0.0.0
-  # SETUP_DB: 10_setup_db.sh
-  # DB_BASE_PKG: 'LINUX.X64_193000_db_home.zip'
-  # DB_PATCH_PKG: 'p30557433_190000_Linux-x86-64.zip'
-  # DB_OJVM_PKG: 'p30484981_190000_Linux-x86-64.zip'
-  # DB_OPATCH_PKG: 'p6880880_190000_Linux-x86-64.zip'
-# - EOF DB Eng Config ---------------------------------------------------------
-
 # - 20c DB Config -------------------------------------------------------------
 # Configuration valid for Oracle 19c database server
-ol7db20:
+ol7db21:
   box: oraclelinux/7
   box_url: https://oracle.github.io/vagrant-projects/boxes/oraclelinux/7.json
-  vm_name: ol7db20
+  vm_name: ol7db21
   mem_size: 4096
   cpus: 2
-  public_ip: 10.0.0.20
-  ssh_port: 20022
-  tns_port: 20521
+  public_ip: 10.0.0.21
+  ssh_port: 21022
+  tns_port: 21521
   console_port: 20500
-  oracle_sid_cdb: TDB200C
+  oracle_sid_cdb: TDB210C
   CUSTOM_RSP: /vagrant/config
-  ORADBA_DBC_FILE: dbca20.0.0_custom.dbc.tmpl
-  ORADBA_RSP_FILE: dbca20.0.0_custom.rsp.tmpl
-  ORACLE_HOME_NAME: 20.0.0.0
+  ORADBA_DBC_FILE: dbca21.0.0.dbc.tmpl
+  ORADBA_RSP_FILE: dbca21.0.0.rsp.tmpl
+  ORACLE_HOME_NAME: 21.0.0.0
   SETUP_DB: 10_setup_db.sh
-  DB_BASE_PKG: 'LINUX.X64_202000_db_home.zip'
+  DB_BASE_PKG: 'LINUX.X64_213000_db_home.zip'
   DB_PATCH_PKG: ''
   DB_OJVM_PKG: ''
-  DB_OPATCH_PKG: 'p6880880_200000_Linux-x86-64.zip'
-# - EOF 20c DB Config ---------------------------------------------------------
+  DB_OPATCH_PKG: 'p6880880_210000_Linux-x86-64.zip'
+  DB_JDKPATCH_PKG: ''
+  DB_PERLPATCH_PKG: ''
+# - EOF 21c DB Config ---------------------------------------------------------
 
 # - 19c DB Config -------------------------------------------------------------
 # Configuration valid for Oracle 19c database server
@@ -142,12 +130,11 @@ ol7db19:
   ORACLE_HOME_NAME: 19.0.0.0
   SETUP_DB: 10_setup_db.sh
   DB_BASE_PKG: 'LINUX.X64_193000_db_home.zip'
-  DB_PATCH_PKG: 'p31771877_190000_Linux-x86-64.zip'
-  DB_OJVM_PKG: 'p31668882_190000_Linux-x86-64.zip'
+  DB_PATCH_PKG: 'p32904851_190000_Linux-x86-64.zip'
+  DB_OJVM_PKG: 'p32876380_190000_Linux-x86-64.zip'
   DB_OPATCH_PKG: 'p6880880_190000_Linux-x86-64.zip'
-  DB_JDKPATCH_PKG: 'p31743771_190000_Linux-x86-64.zip'
-  DB_PERLPATCH_PKG: 'p29511771_190000_Linux-x86-64.zip'
-
+  DB_JDKPATCH_PKG: 'p32918394_190000_Linux-x86-64.zip'
+  DB_PERLPATCH_PKG: 'p31732095_190000_Linux-x86-64.zip'
 # - EOF 19c DB Config ---------------------------------------------------------
 
 # - 18c DB Config -------------------------------------------------------------

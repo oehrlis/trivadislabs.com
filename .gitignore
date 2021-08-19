@@ -39,3 +39,16 @@ common/config/tnsadmin/wallet/ewallet.p12.lck
 common/work/*
 common/scripts/81_create_tvd_hr.log
 win2016ad/config/opwdintg.exe
+**/*.exe
+win2019ad/opwdint*/*
+win2019ad/opwdintg_sr.cab
+win2019ad/opwdintg.txt
+common/scripts/28_config_misc.ps1
+labs/opwdintg.exe.txt
+ol7db20/oracle-epel-ol7.repo
+ol7db20/oracle-linux-ol7.repo
+ol7db20/oracle-softwarecollection-ol7.repo
+ol7db20/oraclelinux-developer-ol7.repo
+ol7db20/uek-ol7.repo
+ol7db20/virt-ol7.repo
+win2019ad/legacy/*
