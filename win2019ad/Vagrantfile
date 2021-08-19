@@ -79,33 +79,21 @@ Vagrant.configure("2") do |config|
     cfg.winrm.basic_auth_only = true
     cfg.vm.communicator       = "winrm"
 
-    # Provision everything on the first run
+    # initialize AD-Lab scripts
     cfg.vm.provision "shell" do |s|
-      s.path        = "../common/scripts/21_install_ad.ps1"
+      s.path        = "scripts/00_init_ad-lab.ps1"
       s.privileged  = false
       s.args        = [var_domain_name, var_domain_mode, var_public_ip, var_public_dns1, var_public_dns2, var_default_password]
     end
-    cfg.vm.provision "shell", path: "../common/scripts/22_install_chocolatey.ps1", privileged: false
+ 
+    # Provision everything on the first run
+    cfg.vm.provision "shell", path: "scripts/01_config_ad-lab_part1.ps1", privileged: false
     
     # reboot server after AD role deploy
     cfg.vm.provision :reload
-    cfg.vm.provision "shell" do |s|
-      s.path        = "../common/scripts/23_config_ad.ps1"
-      s.privileged  = false
-      s.args        = [var_people_ou_name, var_groups_ou_name, var_company_name]
-    end
-
-    cfg.vm.provision "shell", path: "../common/scripts/24_config_dns.ps1", privileged: false
-    cfg.vm.provision "shell", path: "../common/scripts/25_config_ca.ps1", privileged: false
-    cfg.vm.provision "shell", path: "../common/scripts/26_install_tools.ps1", privileged: false
-    cfg.vm.provision "shell", path: "../common/scripts/27_config_cmu.ps1", privileged: false
+    cfg.vm.provision "shell", path: "scripts/02_config_ad-lab_part2.ps1", privileged: false
     cfg.vm.provision :reload
-    cfg.vm.provision "shell", path: "../common/scripts/28_config_misc.ps1", privileged: false
-    cfg.vm.provision "shell" do |s|
-      s.path        = "../common/scripts/29_sum_up_ad.ps1"
-      s.privileged  = false
-      s.args        = [var_domain_name]
-    end
+    cfg.vm.provision "shell", path: "scripts/03_config_ad-lab_part3.ps1", privileged: false
   end
 end
 # --- EOF -------------------------------------------------------------------
