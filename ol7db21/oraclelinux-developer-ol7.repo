@@ -1,0 +1,28 @@
+[ol7_developer]
+name=Oracle Linux $releasever Development Packages ($basearch)
+baseurl=https://yum$ociregion.oracle.com/repo/OracleLinux/OL7/developer/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol7_developer_kvm_utils]
+name=Oracle Linux $releasever KVM Utilities for Development and test ($basearch)
+baseurl=https://yum$ociregion.oracle.com/repo/OracleLinux/OL7/developer/kvm/utils/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol7_developer_UEKR5]
+name=Oracle Linux $releasever Unbreakable Enterprise Kernel Release 5  Packages for Development and test ($basearch)
+baseurl=http://yum$ociregion.oracle.com/repo/OracleLinux/OL7/developer_UEKR5/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol7_developer_UEKR6]
+name=Developer Preview of UEK Release 6 ($basearch)
+baseurl=http://yum$ociregion.oracle.com/repo/OracleLinux/OL7/developer/UEKR6/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
