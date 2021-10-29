@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------
-# Trivadis AG, Infrastructure Managed Services
+# Trivadis - Part of Accenture, Platform Factory - Transactional Data Platform
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
 # Name.......: reset_ad_users.ps1
@@ -12,8 +12,8 @@
 # Reference..: https://github.com/StefanScherer/adfs2
 #              http://technet.microsoft.com/de-de/library/dd378937%28v=ws.10%29.aspx
 #              http://blogs.technet.com/b/heyscriptingguy/archive/2013/10/29/powertip-create-an-organizational-unit-with-powershell.aspx
-# License....: Licensed under the Universal Permissive License v 1.0 as 
-#              shown at http://oss.oracle.com/licenses/upl.
+# License....: Apache License Version 2.0, January 2004 as shown
+#              at http://www.apache.org/licenses/
 # ---------------------------------------------------------------------------
 # Modified...:
 # see git revision history for more information on changes/updates

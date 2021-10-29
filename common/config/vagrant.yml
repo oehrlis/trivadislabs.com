@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------
-# Trivadis AG, Infrastructure Managed Services
+# Trivadis - Part of Accenture, Platform Factory - Transactional Data Platform
 # Saegereistrasse 29, 8152 Glattbrugg, Switzerland
 # ---------------------------------------------------------------------------
 # Name.......: vagrant.yml
@@ -10,8 +10,8 @@
 # Purpose....: YAML file to configure the vagrant files for trivadislabs.com
 # Notes......: 
 # Reference..: https://github.com/rgl/windows-domain-controller-vagrant
-# License....: Licensed under the Universal Permissive License v 1.0 as 
-#              shown at http://oss.oracle.com/licenses/upl.
+# License....: Apache License Version 2.0, January 2004 as shown
+#              at http://www.apache.org/licenses/
 # ---------------------------------------------------------------------------
 # oracle_sid_cdb    = Container DB to be created
 # ORACLE_HOME_NAME  = Name of the oracle home directory
@@ -23,8 +23,8 @@
 # Configuration valid for all VM's
 common:
   default_password: LAB01schulung
-  domain_name: example.com
-  company_name: 'Example-LAB' 
+  domain_name: trivadislabs.com
+  company_name: 'Trivadis-LAB'
   gateway: 10.0.0.1
   dns: 10.0.0.4
   public_dns1: 8.8.8.8
@@ -54,16 +54,6 @@ win2019ad:
   cpus: 1
   public_ip: 10.0.0.4
 
-# Configuration valid for Windows 2019 AD server
-win2019adtest:
-  box: StefanScherer/windows_2019
-  vm_name: win2019ad
-  domain_mode: default
-  people_ou_name: People
-  groups_ou_name: Groups
-  mem_size: 2048
-  cpus: 1
-  public_ip: 10.0.0.99
 # - EOF AD Config -------------------------------------------------------------
 
 # - OUD Config ----------------------------------------------------------------
@@ -84,7 +74,7 @@ ol7oud12:
   JAVA_PKG: p30425892_180241_Linux-x86-64.zip
 # - EOF OUD Config ------------------------------------------------------------
 
-# - 20c DB Config -------------------------------------------------------------
+# - 21c DB Config -------------------------------------------------------------
 # Configuration valid for Oracle 19c database server
 ol7db21:
   box: oraclelinux/7
@@ -95,7 +85,7 @@ ol7db21:
   public_ip: 10.0.0.21
   ssh_port: 21022
   tns_port: 21521
-  console_port: 20500
+  console_port: 21500
   oracle_sid_cdb: TDB210C
   CUSTOM_RSP: /vagrant/config
   ORADBA_DBC_FILE: dbca21.0.0.dbc.tmpl
@@ -110,6 +100,30 @@ ol7db21:
   DB_PERLPATCH_PKG: ''
 # - EOF 21c DB Config ---------------------------------------------------------
 
+# - 20c DB Config -------------------------------------------------------------
+# Configuration valid for Oracle 19c database server
+ol7db20:
+  box: oraclelinux/7
+  box_url: https://oracle.github.io/vagrant-projects/boxes/oraclelinux/7.json
+  vm_name: ol7db20
+  mem_size: 4096
+  cpus: 2
+  public_ip: 10.0.0.20
+  ssh_port: 20022
+  tns_port: 20521
+  console_port: 20500
+  oracle_sid_cdb: TDB200C
+  CUSTOM_RSP: /vagrant/config
+  ORADBA_DBC_FILE: dbca20.0.0.dbc.tmpl
+  ORADBA_RSP_FILE: dbca20.0.0.rsp.tmpl
+  ORACLE_HOME_NAME: 20.0.0.0
+  SETUP_DB: 10_setup_db.sh
+  DB_BASE_PKG: 'LINUX.X64_213000_db_home.zip'
+  DB_PATCH_PKG: ''
+  DB_OJVM_PKG: ''
+  DB_OPATCH_PKG: 'p6880880_210000_Linux-x86-64.zip'
+  DB_JDKPATCH_PKG: ''
+  DB_PERLPATCH_PKG: ''
 # - 19c DB Config -------------------------------------------------------------
 # Configuration valid for Oracle 19c database server
 ol7db19:

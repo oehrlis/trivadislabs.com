@@ -1,0 +1,30 @@
+oracle@ol7db20:/u00/app/oracle/admin/TDB200C/etc/ [TDB200C] dbnest list
+--------------------------------------------------------------------------------
+ Id : Nest             : Parent           : : Tag              :    State 
+--------------------------------------------------------------------------------
+  1 : TDB200C_TDB200C  :                  :  TDB200C_TDB200C  :     OPEN
+      Net State        : 
+      Namespace State  : (pid=0,cnid=4026531836,pnid=4026531836,no namespace,type=0x0)
+      Resources        : (cpu=0)
+      Property enabled : resources
+      Seccomp status   : (level=none)
+      FS Isolation     : (disabled)
+--------------------------------------------------------------------------------
+  2 : PDB00001         : TDB200C_TDB200C  :  PDB00001         :     OPEN
+      Net State        : 
+      Namespace State  : (pid=0,cnid=4026531836,pnid=4026531836,no namespace,type=0x0)
+      Resources        : (cpu=0)
+      Property enabled : resources
+      Seccomp status   : (level=none)
+      FS Isolation     : (disabled)
+--------------------------------------------------------------------------------
+  3 : PDB00002         : TDB200C_TDB200C  :  PDB$SEED (uid=4078000519) :     OPEN
+      Net State        : 
+      Namespace State  : (pid=0,cnid=4026531836,pnid=4026531836,no namespace,type=0x0)
+      Resources        : (cpu=0)
+      Property enabled : resources
+      Seccomp status   : (level=none)
+      FS Isolation     : (disabled)
+--------------------------------------------------------------------------------
+Number of active nest namespaces = 3
+--------------------------------------------------------------------------------

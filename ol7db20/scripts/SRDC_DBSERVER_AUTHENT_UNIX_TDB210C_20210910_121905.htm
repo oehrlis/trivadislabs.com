@@ -1,0 +1,592 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=US-ASCII"><meta name="generator" content="SQL*Plus 11.2.0">
+<style type='text/css'> body {font:10pt Arial,Helvetica,sans-serif; color:black; background:White;} p {font:10pt Arial,Helvetica,sans-serif; color:black; background:White;} table,tr,td {font:10pt Arial,Helvetica,sans-serif; color:Black; background:#f7f7e7; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;} th {font:bold 10pt Arial,Helvetica,sans-serif; color:#336699; background:#cccc99; padding:0px 0px 0px 0px;} h1 {font:16pt Arial,Helvetica,Geneva,sans-serif; color:#336699; background-color:White; border-bottom:1px solid #cccc99; margin-top:0pt; margin-bottom:0pt; padding:0px 0px 0px 0px;-
+} h2 {font:bold 10pt Arial,Helvetica,Geneva,sans-serif; color:#336699; background-color:White; margin-top:4pt; margin-bottom:0pt;} a {font:9pt Arial,Helvetica,sans-serif; color:#663300; background:#ffffff; margin-top:0pt; margin-bottom:0pt; vertical-align:top;}</style><title>SQL*Plus Report</title>
+</head><body>
+<table><tr><th>HEADER</th></tr>
+<tr><td>----------------------------------------------------</td></tr>
+<tr><td>Diagnostic-Name : DBSERVER_AUTHENT_UNIX</td></tr>
+<tr><td>Machine : ol7db21</td></tr>
+<tr><td>Timestamp : 2021-09-10 121905 UTC+00:00</td></tr>
+<tr><td>Database : TDB210C</td></tr>
+<tr><td>-----------------------------------------------------</td></tr>
+</table>
+<br>*** Failing connection ***
+<table>
+<tr>
+<th>
+ID
+</th>
+<th>
+FAILING_CONNECTION
+</th>
+<th>
+FAILING_USER
+</th>
+</tr>
+<tr>
+<td>
+1
+</td>
+<td>
+ sysdba OS authentication fails 
+</td>
+<td>
+SYS
+</td>
+</tr>
+</table>
+<br>==================================================
+<br>*** Environment Variables ***
+<table>
+<tr>
+<th>
+ENVIRONMENT_VAR
+</th>
+<th>
+UNAME
+</th>
+<th>
+TNSLSNR_PS
+</th>
+</tr>
+<tr>
+<td><pre>
+TVDPERL=ORACLE
+PS1BASH=\u@\h:\w/ [${ORACLE_SID}${BE_PDB:+.$BE_PDB}] 
+BESAVE_ALLBEDB_BE_ORA_DB_NAME=_BE_unDef_
+BE_ORA_DIAGNOSTIC_DEST=/u00/app/oracle
+ORACLE_PDB_SID=
+BE_ORA_DIAG_SID=/u00/app/oracle/diag/rdbms/tdb210c/TDB210C
+ORACLE_DOC=/u00/app/oracle/product/21.0.0.0/doc
+BE_CHANGE_ORAHOMETAB=1941:1631138460
+BE_CHANGE_ORATAB_MD5=3670a7846e0738f3841ad9332d63699f
+ORATAB=/u00/app/oracle/local/dba/oratab
+ORACLE_SID=TDB210C
+ORACLE_BASE=/u00/app/oracle
+BE_ORATAB=/u00/app/oracle/local/dba/oratab
+BE_ORA_DBID=916335607
+BE_CHANGE_ORAHOMETAB_MD5=c120e2e4c609dcdd0d690f9142196bed
+BESAVE_ALLBEDB_BE_ORA_DB_UNIQUE_NAME=_BE_unDef_
+ORACLE_TERM=hft
+BE_ORA_ADMIN=/u00/app/oracle/admin
+BE_ORACLE_REL2=210300
+BE_ORA_ADMIN_SID=/u00/app/oracle/admin/TDB210C
+ORADBA_BASE=/u00/app/oracle/local/oradba
+BE_ORA_DB_NAME=TDB210C
+ORA_MODULE=
+BESAVE_ALLBEDB_BE_ORA_DBID=_BE_unDef_
+BE_ORACLE_REL=2100
+BE_ORA_DB_UNIQUE_NAME=TDB210C
+BE_CHANGE_ORATAB=784:1631139161
+ORACLE_HOME=/u00/app/oracle/product/21.0.0.0
+TNS_ADMIN=/u00/app/oracle/network/admin
+MANPATH=/usr/share/man:/u00/app/oracle/local/tvdperl-all/man:/u00/app/oracle/local/dba/man
+CDPATH=.:..:/home/oracle
+LD_LIBRARY_PATH=/u00/app/oracle/product/21.0.0.0/lib
+PATH=/u00/app/oracle/local/tvdperl-all/bin:/u00/app/oracle/product/21.0.0.0/bin:/u00/app/oracle/product/21.0.0.0/ctx/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/u00/app/oracle/local/dba/bin:/u00/app/oracle/local/tvdusr/bin:/u00/app/oracle/local/tvdas/bin:/u00/app/oracle/local/oradba/bin:/bin:/usr/local/sbin
+SQLPATH=/u00/app/oracle/local/oradba/sql:/u00/app/oracle/local/tvdsql/oracle12:/u00/app/oracle/local/tvdsql/oracle11:/u00/app/oracle/local/tvdsql/oracle10:/u00/app/oracle/local/tvdsql/oracle9:/u00/app/oracle/local/tvdsql/oracle81:/u00/app/oracle/local/tvdsql/oracle80:/u00/app/oracle/product/21.0.0.0/rdbms/admin:.
+USER=oracle
+HOSTNAME=ol7db21
+BESAVE_ALLBEDB_BE_ORA_DB_NAME=_BE_unDef_
+BESAVE_ALLBEDB_BE_ORA_DB_UNIQUE_NAME=_BE_unDef_
+LOGNAME=oracle
+BE_ORA_DB_NAME=TDB210C
+BE_ORA_DB_UNIQUE_NAME=TDB210C
+</pre></td>
+<td><pre>
+uname -a
+Linux ol7db21 5.4.17-2102.204.4.4.el7uek.x86_64 #2 SMP Tue Aug 17 20:25:28 PDT 2021 x86_64 x86_64 x86_64 GNU/Linux
+</pre></td>
+<td><pre>
+oracle    3611     1  0 07:19 ?        00:00:00 /u00/app/oracle/product/21.0.0.0/bin/tnslsnr LISTENER -inherit
+</pre></td>
+</tr>
+</table>
+<br>==================================================
+<br>*** ORAPW File Details ***
+<table>
+<tr>
+<th>
+ORAPW_FILE_LIST
+</th>
+<th>
+ORAPW_FILE_FORMAT
+</th>
+</tr>
+<tr>
+<td><pre>
+ls -l /u00/app/oracle/dbs/orapwTDB210C
+-rw-r-----. 1 oracle oinstall 2048 Sep  8 22:03 /u00/app/oracle/dbs/orapwTDB210C
+</pre></td>
+<td><pre>
+</pre></td>
+</tr>
+</table>
+<br>==================================================
+<br>*** srvctl OS passwordfile location ***
+<table>
+<tr>
+<th>
+SRVCTL_CONFIG
+</th>
+<th>
+SRVCTL_PASSFILE_ASM
+</th>
+<th>
+SRVCTL_PASSFILE_OS
+</th>
+</tr>
+<tr>
+<td><pre>
+****Unable to retrieve Oracle Clusterware home.
+Start Oracle Clusterware stack and try again.
+--------
+****Unable to retrieve Oracle Clusterware home.
+Start Oracle Clusterware stack and try again.
+</pre></td>
+<td><pre>
+</pre></td>
+<td><pre>
+</pre></td>
+</tr>
+</table>
+<br>==================================================
+<br>*** ORATAB Entries ***
+<table>
+<tr>
+<th>
+ETC_ORATAB_ENTRY
+</th>
+<th>
+ORACLE_ORATAB_ENTRY
+</th>
+</tr>
+<tr>
+<td><pre>
+
+
+
+
+TDB210C:/u00/app/oracle/product/21.0.0.0:Y
+</pre></td>
+<td><pre>
+</pre></td>
+</tr>
+</table>
+<br>==================================================
+<br>*** Current User and Group IDs ***
+<table>
+<tr>
+<th>
+CURRENT_OS_USER
+</th>
+<th>
+CURRENT_OS_GROUP
+</th>
+<th>
+OS_GROUP_ELIGIBLE
+</th>
+</tr>
+<tr>
+<td><pre>
+id
+uid=1001(oracle) gid=1010(oinstall) groups=1010(oinstall),1000(vagrant),1020(osdba),1030(osoper),1040(osbackupdba),1050(oskmdba),1060(osdgdba),1070(osracdba) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+</pre></td>
+<td><pre>
+groups
+oinstall vagrant osdba osoper osbackupdba oskmdba osdgdba osracdba
+</pre></td>
+<td><pre>
+osdbagrp
+osdba</pre></td>
+</tr>
+</table>
+<br>==================================================
+<br>*** ORACLE File Details ***
+<table>
+<tr>
+<th>
+ORACLE_FILE_LS
+</th>
+</tr>
+<tr>
+<td><pre>
+ls -l /u00/app/oracle/product/21.0.0.0/bin/oracle
+-rwsr-s--x. 1 oracle oinstall 498812768 Sep  8 22:00 /u00/app/oracle/product/21.0.0.0/bin/oracle
+</pre></td>
+</tr>
+</table>
+<br>==================================================
+<br>*** CONFIG File Contents ***
+<table>
+<tr>
+<th>
+CONFIG_CS_FILE_CONTENT_LIST
+</th>
+<th>
+CONFIG_TIMESTAMP_CHECK
+</th>
+</tr>
+<tr>
+<td><pre>
+cat /u00/app/oracle/product/21.0.0.0/rdbms/lib/config.c
+
+/*  SS_DBA_GRP defines the UNIX group ID for sqldba adminstrative access.  */
+/*  Refer to the Installation and User's Guide for further information.  */
+
+/* IMPORTANT: this file needs to be in sync with
+              rdbms/src/server/osds/config.c, specifically regarding the
+              number of elements in the ss_dba_grp array.
+ */
+
+#if 0
+/*
+ * Linux x86_64 assembly code corresponding to C code below. This module
+ * can be compiled both as C and ASM module, when changing code here
+ * please keep both versions in sync.
+ */
+
+        .section .rodata.str1.4, "aMS",@progbits,1
+        .align 4
+.Ldba_string:     .string "osdba"
+.Loper_string:    .string "osoper"
+.Lasm_string:     .string ""
+.Lbkp_string:     .string "osbackupdba"
+.Ldgd_string:     .string "osdgdba"
+.Lkmt_string:     .string "oskmdba"
+.Lrac_string:     .string "osracdba"
+
+        .section        .rodata
+        .align 8
+        .globl ss_dba_grp
+ss_dba_grp:
+        .quad   .Ldba_string
+        .quad   .Loper_string
+        .quad   .Lasm_string
+        .quad   .Lbkp_string
+        .quad   .Ldgd_string
+        .quad   .Lkmt_string
+        .quad   .Lrac_string
+        .type   ss_dba_grp,@object
+        .size   ss_dba_grp,.-ss_dba_grp
+        .section .note.GNU-stack, ""
+        .end
+/*
+ * Assembler will not parse a file past the .end directive
+ */
+#endif
+
+#define SS_DBA_GRP "osdba"
+#define SS_OPER_GRP "osoper"
+#define SS_ASM_GRP ""
+#define SS_BKP_GRP "osbackupdba"
+#define SS_DGD_GRP "osdgdba"
+#define SS_KMT_GRP "oskmdba"
+#define SS_RAC_GRP "osracdba"
+
+const char * const ss_dba_grp[] = 
+     {SS_DBA_GRP, SS_OPER_GRP, SS_ASM_GRP,
+      SS_BKP_GRP, SS_DGD_GRP, SS_KMT_GRP,
+      SS_RAC_GRP};   
+
+--------
+ls -l /u00/app/oracle/product/21.0.0.0/rdbms/lib/config.c /u00/app/oracle/product/21.0.0.0/rdbms/lib/config.o
+-rw-r--r--. 1 oracle oinstall 1684 Sep  8 21:59 /u00/app/oracle/product/21.0.0.0/rdbms/lib/config.c
+-rw-r--r--. 1 oracle oinstall 1344 Sep  8 22:00 /u00/app/oracle/product/21.0.0.0/rdbms/lib/config.o
+</pre></td>
+<td><pre>
+/u00/app/oracle/product/21.0.0.0/rdbms/lib/config.o
+</pre></td>
+</tr>
+</table>
+<br>==================================================
+<br>*** SQLNET.ORA Contents ***
+<table>
+<tr>
+<th>
+ORACLE_HOME
+</th>
+<th>
+TNS_ADMIN
+</th>
+<th>
+SRVTCL_TNS_ADMIN
+</th>
+</tr>
+<tr>
+<td><pre>
+cat /u00/app/oracle/product/21.0.0.0/network/admin/sqlnet.ora
+</pre></td>
+<td><pre>
+cat /u00/app/oracle/network/admin/sqlnet.ora
+SQLNET.EXPIRE_TIME = 10
+
+NAMES.DEFAULT_DOMAIN=trivadislabs.com
+
+NAMES.DIRECTORY_PATH=(LDAP, TNSNAMES, EZCONNECT )
+
+DIAG_ADR_ENABLED=ON
+
+LOG_DIRECTORY_CLIENT= /u00/app/oracle/network/log
+LOG_FILE_CLIENT=sqlnet_client.log
+LOG_DIRECTORY_SERVER= /u00/app/oracle/network/log
+LOG_FILE_SERVER=sqlnet_server.log
+
+TRACE_LEVEL_CLIENT=OFF
+TRACE_DIRECTORY_CLIENT= /u00/app/oracle/network/trc
+TRACE_FILE_CLIENT=sqlnet_client.trc
+TRACE_LEVEL_SERVER=OFF
+TRACE_DIRECTORY_SERVER= /u00/app/oracle/network/trc
+TRACE_FILE_SERVER=sqlnet_server.trc
+
+
+
+
+
+SQLNET.AUTHENTICATION_SERVICES = (BEQ,NONE) 
+</pre></td>
+<td><pre>
+</pre></td>
+</tr>
+</table>
+<br>==================================================
+<br>*** Passwd, Group details ***
+<table>
+<tr>
+<th>
+ETC_PASSWD
+</th>
+<th>
+ETC_GROUPS
+</th>
+<th>
+YPCAT_GROUP
+</th>
+<th>
+GROUP_IN_NSSWITCH
+</th>
+<th>
+NSCD
+</th>
+</tr>
+<tr>
+<td><pre>
+-rw-r--r--. 1 root root 1331 Sep 10 06:36 /etc/passwd
+--------
+oracle:x:1001:1010::/home/oracle:/bin/bash
+</pre></td>
+<td><pre>
+-rw-r--r--. 1 root root 712 Sep 10 06:36 /etc/group
+--------
+oinstall:x:1010:oracle
+wheel:x:10:vagrant
+vagrant:x:1000:oracle
+osdba:x:1020:oracle
+osoper:x:1030:oracle
+osbackupdba:x:1040:oracle
+oskmdba:x:1050:oracle
+osdgdba:x:1060:oracle
+osracdba:x:1070:oracle
+</pre></td>
+<td><pre>
+</pre></td>
+<td><pre>
+group:      files sss
+netgroup:   nisplus sss
+</pre></td>
+<td><pre>
+nscd      3530     1  0 07:17 ?        00:00:00 /usr/sbin/nscd
+</pre></td>
+</tr>
+</table>
+<br>==================================================
+<br>*** Mount_nosuid, SQLPlus ***
+<table>
+<tr>
+<th>
+MOUNT_NOSUID
+</th>
+<th>
+SQLPLUS_VERSION
+</th>
+</tr>
+<tr>
+<td><pre>
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime,seclabel)
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+devtmpfs on /dev type devtmpfs (rw,nosuid,seclabel,size=1855072k,nr_inodes=463768,mode=755)
+securityfs on /sys/kernel/security type securityfs (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,seclabel)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,seclabel,gid=5,mode=620,ptmxmode=000)
+tmpfs on /run type tmpfs (rw,nosuid,nodev,seclabel,mode=755)
+tmpfs on /sys/fs/cgroup type tmpfs (ro,nosuid,nodev,noexec,seclabel,mode=755)
+cgroup on /sys/fs/cgroup/systemd type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd)
+pstore on /sys/fs/pstore type pstore (rw,nosuid,nodev,noexec,relatime,seclabel)
+cgroup on /sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,cpuset)
+cgroup on /sys/fs/cgroup/cpu,cpuacct type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,cpu,cpuacct)
+cgroup on /sys/fs/cgroup/net_cls,net_prio type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,net_cls,net_prio)
+cgroup on /sys/fs/cgroup/perf_event type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,perf_event)
+cgroup on /sys/fs/cgroup/devices type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,devices)
+cgroup on /sys/fs/cgroup/hugetlb type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,hugetlb)
+cgroup on /sys/fs/cgroup/pids type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,pids)
+cgroup on /sys/fs/cgroup/rdma type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,rdma)
+cgroup on /sys/fs/cgroup/blkio type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,blkio)
+cgroup on /sys/fs/cgroup/freezer type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,freezer)
+cgroup on /sys/fs/cgroup/memory type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,memory)
+tmpfs on /run/user/1000 type tmpfs (rw,nosuid,nodev,relatime,seclabel,size=373440k,mode=700,uid=1000,gid=1000)
+</pre></td>
+<td><pre>
+sqlplus is /u00/app/oracle/product/21.0.0.0/bin/sqlplus
+
+SQL*Plus: Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+</pre></td>
+</tr>
+</table>
+<br>==================================================
+<br>
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Fri Sep 10 12:19:06 2021
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+SQL>      ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+   <br>
+ <br>
+ <br>
+*** Database Version, Status, and Role ***
+<br>
+ <br>
+SP2-0640: Not connected
+<br>
+ <br>
+==================================================
+<br>
+ <br>
+ <br>
+ <br>
+*** DB Parameter List ***
+<br>
+ <br>
+SP2-0640: Not connected
+<br>
+<br>
+ <br>
+===================================================
+<br>
+ <br>
+ <br>
+ <br>
+*** List of Users from gv$pwfile_users ***
+<br>
+ <br>
+SP2-0640: Not connected
+<br>
+ <br>
+===================================================
+<br>
+ <br>
+ <br>
+*** Ignore below error in OS passwordfile of 11g DB and below***
+<br>
+ <br>
+SP2-0640: Not connected
+<br>
+ <br>
+ <br>
+ <br>
+==================================================
+<br>
+ <br>
+*** Value of _asmsid Hidden Parameter ***
+<br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+SP2-0640: Not connected
+<br>
+ <br>
+==================================================
+<br>
+ <br>
+ <br>
+ <br>
+ <br>
+*** List of DB users and their password version, account_status ***
+<br>
+ <br>
+*** For 11g DB non-CDB ***
+<br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+SP2-0640: Not connected
+<br>
+ <br>
+==================================================
+<br>
+ <br>
+ <br>
+ <br>
+ <br>
+*** Ignore below error in 11g DB ***
+<br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+SP2-0640: Not connected
+<br>
+ <br>
+==================================================
+<br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+*** List of DB users of read-only DB in locked status ***
+<br>
+ <br>
+*** For 11g DB ***
+<br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+SP2-0640: Not connected
+<br>
+ <br>
+==================================================
+<br>
+ <br>
+ <br>
+*** Ignore below error in 11g DB read-only DB ***
+<br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+SP2-0640: Not connected
+<br>
+ <br>
+==================================================
+<br>
+ <br>
+ </body></html>

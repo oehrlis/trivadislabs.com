@@ -1,0 +1,30 @@
+oracle@ol7db21:/u00/app/oracle/admin/TDB210C/etc/ [TDB210C] dbnest list
+--------------------------------------------------------------------------------
+ Id : Nest             : Parent           : : Tag              :    State 
+--------------------------------------------------------------------------------
+  1 : ORA_TDB210C_TDB210C :                  :  ORA_TDB210C_TDB210C :     OPEN
+      Net State        : 
+      Namespace State  : (pid=0,cnid=4026531836,pnid=4026531836,no namespace,type=0x0)
+      Resources        : (cpu=0)
+      Property enabled : resources
+      Seccomp status   : (level=none)
+      FS Isolation     : (disabled)
+--------------------------------------------------------------------------------
+  2 : PDB00002         : ORA_TDB210C_TDB210C :  PDB$SEED (uid=941032859) :     OPEN
+      Net State        : 
+      Namespace State  : (pid=0,cnid=4026531836,pnid=4026531836,no namespace,type=0x0)
+      Resources        : (cpu=0)
+      Property enabled : resources
+      Seccomp status   : (level=none)
+      FS Isolation     : (disabled)
+--------------------------------------------------------------------------------
+  3 : PDB00003         : ORA_TDB210C_TDB210C :  PDBHR (uid=841501552) :     OPEN
+      Net State        : 
+      Namespace State  : (pid=5221,cnid=4026532191,pnid=4026531836,type=0x7)
+      Resources        : (cpu=0)
+      Property enabled : namespaces,resources
+      Seccomp status   : (level=strict1)
+      FS Isolation     : (default-config)
+--------------------------------------------------------------------------------
+Number of active nest namespaces = 3
+--------------------------------------------------------------------------------

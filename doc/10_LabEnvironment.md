@@ -12,9 +12,9 @@ Für die praktischen Arbeiten im Rahmen des DOAG 2018 Schulungstages, steht pro 
 !["Training Environment"](images/training_env.png)
 *Abb. 2: Architektur Schulungsumgebung*
 
-Die Umgebung ist soweit vorbereitet, dass direkt mit den Übungen gestartet werden kann. 
+Die Umgebung ist soweit vorbereitet, dass direkt mit den Übungen gestartet werden kann.
 
-Die zentrale Benutzerverwaltung mit _Oracle Centrally Managed Users_ oder _Oracle Enterprise User Security_ sind komplexe Themen, welche nicht abschliessend am Schulungstag diskutiert werden können. Aus diesem Grund gibt es für das Selbststudium die Möglichkeit, eine Testumgebung analog dem Schulungstag aufzubauen. Diese Umgebung wird Skript gestützt mit [Vagrant](https://www.vagrantup.com) auf [Virtualbox](https://www.virtualbox.org/wiki/Downloads) aufgebaut. Man benötigt lediglich die entsprechenden Software Images für die Oracle Datenbank 12c R2 + 18c, Oracle Unified Directory sowie die Umgebungsscripte. Anschliessend lässt sich die Umgebung nahezu voll automatisch aufbauen. Eine entsprechende Anleitung für den Aufbau der Trivadis LAB Umgebung sowie die dazugehörigen _Vagrant Files_, _Skripte_ etc. findet man im GitHub Repository [oehrlis/trivadislabs.com](https://github.com/oehrlis/trivadislabs.com).
+Die zentrale Benutzerverwaltung mit _Oracle Centrally Managed Users_ oder _Oracle Enterprise User Security_ sind komplexe Themen, welche nicht abschliessend am Schulungstag diskutiert werden können. Aus diesem Grund gibt es für das Selbststudium die Möglichkeit, eine Testumgebung analog dem Schulungstag aufzubauen. Diese Umgebung wird Skript gestützt mit [Vagrant](<https://www.vagrantup.com>) auf [Virtualbox](https://www.virtualbox.org/wiki/Downloads) aufgebaut. Man benötigt lediglich die entsprechenden Software Images für die Oracle Datenbank 12c R2 + 18c, Oracle Unified Directory sowie die Umgebungsscripte. Anschliessend lässt sich die Umgebung nahezu voll automatisch aufbauen. Eine entsprechende Anleitung für den Aufbau der Trivadis LAB Umgebung sowie die dazugehörigen _Vagrant Files_, _Skripte_ etc. findet man im GitHub Repository [oehrlis/trivadislabs.com](https://github.com/oehrlis/trivadislabs.com).
 
 ## Oracle Datenbank Server
 
@@ -27,19 +27,19 @@ Der Oracle Datenbank Server ist wie folgt konfiguriert:
 * **Externe IP Adresse :** gemäss Liste
 * **Betriebssystem :** Oracle Enterprise Linux Server Release 7.5
 * **Oracle Datenbank Software :**
-    * Oracle 12c Release 2 Enterprise Edition (12.2.0.1) mit Release Update vom Oktober 2018
-    * Oracle 18c Enterprise Edition (18.4.0.0) mit Release Update vom Oktober 2018
+  * Oracle 12c Release 2 Enterprise Edition (12.2.0.1) mit Release Update vom Oktober 2018
+  * Oracle 18c Enterprise Edition (18.4.0.0) mit Release Update vom Oktober 2018
 * **Oracle Datenbanken :**
-    * **TDB122A** Oracle 12cR2 Enterprise Edition Single Instance für die Übungen mit EUS
-    * **TDB184A** Oracle 18c Enterprise Edition Single Instance für die Übungen mit CMU
-* **Betriebsystem Benutzer :** 
-    * oracle / PASSWORT
-    * root / PASSWORT
-* **Datenbank Benutzer :** 
-    * sys / manager
-    * system / manager
-    * scott / tiger
-    * tvd_hr / tvd_hr
+  * **TDB122A** Oracle 12cR2 Enterprise Edition Single Instance für die Übungen mit EUS
+  * **TDB184A** Oracle 18c Enterprise Edition Single Instance für die Übungen mit CMU
+* **Betriebsystem Benutzer :**
+  * oracle / PASSWORT
+  * root / PASSWORT
+* **Datenbank Benutzer :**
+  * sys / manager
+  * system / manager
+  * scott / tiger
+  * tvd_hr / tvd_hr
 
 ### Trivadis BasEnv
 
@@ -74,7 +74,7 @@ Die Installation ist nach dem OFA (Optimal Flexible Architecture) Standard vorge
 | ``/u00/app/oracle/local/dba``            | Environment Tools (TVD-Basenv)           |
 | ``/u00/app/oracle/network/admin``        | Oracle Net Konfigurationsdateien         |
 | ``/u00/app/oracle/product/12.2.0.1``     | Oracle 12.2.0.1 Home                     |
-| ``/u00/app/oracle/product/18.4.0.0 ``    | Oracle 18.4.0.0 Home                     |
+| ``/u00/app/oracle/product/18.4.0.0``    | Oracle 18.4.0.0 Home                     |
 | ``/u01/oradata/TDB122A``                 | Datenbank Dateien, Redo Log Files, CTL   |
 | ``/u02/fast_recovery_area/TDB122A``      | Fast Recovery Area                       |
 | ``/u02/oradata/TDB122A``                 | Redo Log Files, CTL                      |
@@ -107,17 +107,17 @@ Der Directory Server ist wie folgt konfiguriert:
 * **Betriebssystem :** Oracle Enterprise Linux Server Release 7.5
 * **Java :** Oracle JAVA Server JRE 1.8 u192
 * **Oracle Fusion Middleware Software :**
-    * Oracle Unified Directory (12.2.1.3) mit dem Bundle Patch vom Oktober 2018
-    * Oracle Fusion Middleware Infrastructure Directory (12.2.1.3) mit dem Bundle Patch vom Oktober 2018
+  * Oracle Unified Directory (12.2.1.3) mit dem Bundle Patch vom Oktober 2018
+  * Oracle Fusion Middleware Infrastructure Directory (12.2.1.3) mit dem Bundle Patch vom Oktober 2018
 * **Oracle Home oud12.2.1.3 :** Oracle Unified Directory *standalone* Installation.
 * **Oracle Home fmw12.2.1.3 :** Oracle Unified Directory *collocated* Installation mit Oracle Fusion Middleware Infrastructure.
-* **Betriebsystem Benutzer :** 
-    * oracle / PASSWORT
-    * root / PASSWORT
+* **Betriebsystem Benutzer :**
+  * oracle / PASSWORT
+  * root / PASSWORT
   
 ### Trivadis OUD Base
 
-Analog zu der Datenbank Umgebung, gibt es auch für Oracle Unified Directory entsprechende Umgebungsscripte. Diese Umgebungsscripte, kurz auch OUD Base genannt, werden unteranderem in [OUD Docker images](https://github.com/oracle/docker-images/tree/master/OracleUnifiedDirectory) verwendet. Aus diesem Grund ist OUD Base etwas "leichter" aufgebaut als TVD-Basenv und basiert zu 100% auf Bash. OUD Base ist via GitHub Projekt [oehrlis/oudbase](https://github.com/oehrlis/oudbase) als Open Source verfügbar. 
+Analog zu der Datenbank Umgebung, gibt es auch für Oracle Unified Directory entsprechende Umgebungsscripte. Diese Umgebungsscripte, kurz auch OUD Base genannt, werden unteranderem in [OUD Docker images](https://github.com/oracle/docker-images/tree/master/OracleUnifiedDirectory) verwendet. Aus diesem Grund ist OUD Base etwas "leichter" aufgebaut als TVD-Basenv und basiert zu 100% auf Bash. OUD Base ist via GitHub Projekt [oehrlis/oudbase](https://github.com/oehrlis/oudbase) als Open Source verfügbar.
 
  In der folgenden Tabelle sind die Aliases für den OS Benutzer *oracle* aufgelistet, welche am häufigsten verwendet werden.
 
@@ -161,21 +161,21 @@ Der Active Directory Server basiert auf einer Windows Server 2012 R2 Umgebung (W
 * **Externe IP Adresse :** gemäss Liste
 * **Betriebssystem :** MS Windows Server 2012 R2
 * **Installiere Server Roles :**
-    * Active Directory Server
-    * DNS Server mit Active Directory Integration
-    * Certification Autority
+  * Active Directory Server
+  * DNS Server mit Active Directory Integration
+  * Certification Autority
 * **Zusatz Software :** nur auf der Cloud VM
-    * Putty für SSH Verbindungen mit dem OUD und DB Server
-    * MobaXTerm für SSH Verbindungen mit dem OUD und DB Server
-    * WinSCP für den File Transfer DB Server <=> AD Server
-    * SQL Developer
-    * Oracle 12c R2 und 18c Clients 
-    * MS Visual Studio Code als universellen Texteditor
-    * Predefined SSH Keys für den OUD und DB Server
-* **Betriebsystem Benutzer :** 
-    * Administrator / PASSWORT
-    * root / PASSWORT
-    * Trivadis LAB User / LAB01schulung
+  * Putty für SSH Verbindungen mit dem OUD und DB Server
+  * MobaXTerm für SSH Verbindungen mit dem OUD und DB Server
+  * WinSCP für den File Transfer DB Server <=> AD Server
+  * SQL Developer
+  * Oracle 12c R2 und 18c Clients
+  * MS Visual Studio Code als universellen Texteditor
+  * Predefined SSH Keys für den OUD und DB Server
+* **Betriebsystem Benutzer :**
+  * Administrator / PASSWORT
+  * root / PASSWORT
+  * Trivadis LAB User / LAB01schulung
 
 ### AD Domain TRIVADISLAB
 
